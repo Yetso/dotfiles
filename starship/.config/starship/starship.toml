@@ -1,0 +1,79 @@
+add_newline = true
+palette = "moonfly"
+
+format = """╭── $directory\
+$git_branch\
+$git_status
+╰─$character"""
+
+right_format = """$all"""
+
+[c]
+style = "green"
+
+[lua]
+symbol = "󰢱 "
+
+[character]
+success_symbol = "[](blue)"
+error_symbol = "[](red)"
+
+[cmd_duration]
+disabled = true
+
+[custom.neovim]
+description = "module for neovim, activate when it detect the directory ~/.config/nvim"
+when = "test $XDG_CONFIG_HOME/nvim = $PWD"
+symbol = ""
+style = "bold green"
+format = 'via [$symbol Neovim]($style)'
+
+[directory]
+# truncation_length = 1
+fish_style_pwd_dir_length = 1
+truncation_symbol = "…/"
+truncate_to_repo = false
+
+[directory.substitutions]
+'~/.config/nvim' = "Neovim config"
+
+[git_branch]
+style = "lavender"
+
+[nix_shell]
+disabled = true
+
+[gradle]
+symbol = ' '
+
+[kotlin]
+symbol = ' '
+disabled = true
+
+[package]
+style = "orange"
+
+[terraform]
+disabled = true
+style = "purple"
+
+[palettes.moonfly]
+black = "#323437" #black (grey0)
+red = "#ff5454" #red
+green = "#8cc85f" #green
+yellow = "#e3c78a" #yellow
+blue = "#80a0ff" #blue
+violet = "#cf87e8" #purple (violet)
+cyan = "#79dac8" #cyan (turquoise)
+white = "#c6c6c6" #white
+brightblack = "#949494" #black (grey58)
+crimson = "#ff5189" #red (crimson)
+emerald = "#36c692" #green (emerald)
+khaki = "#c6c684" #yellow (khaki)
+sky = "#74b2ff" #blue (sky)
+purple = "#ae81ff" #purple
+lime = "#85dc85" #cyan (lime)
+brightwhite = "#e4e4e4" #white (grey89)
+fern = "#87d787"
+lavender = "#adadf3"
+orange = "#f09479"

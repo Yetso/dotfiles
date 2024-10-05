@@ -1,0 +1,96 @@
+{
+    "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+    "logo": {
+        "padding": {
+            "right": 2,
+			"left": 1
+        }
+    },
+    "display": {
+        "separator": ">  ",
+        "color": {
+            "separator": "red"
+        },
+        "constants": [
+            "══════════════════════════════════════════════════════",
+            "║\u001b[54C║\u001b[54D"
+        ]
+    },
+    "modules": [
+		"break",
+        {
+            "format": "{#1}{#keys}╔{$1}╗\u001b[55D {user-name-colored}{at-symbol-colored}{host-name-colored} 💻 ",
+            "type": "title"
+        },
+        {
+            "key": "{$2}{#green}{icon} distro   ",
+            "type": "os"
+        },
+        {
+            "key": "{$2}{#green} kernel   ",
+            "type": "kernel"
+        },
+        {
+            "key": "{$2}{#green}󰅐 uptime   ",
+            "type": "uptime"
+        },
+		{
+			"key": "{$2}{#green}󰏖 package  ",
+			"type": "packages"
+		},
+        {
+            "key": "{$2}{#yellow} term     ",
+            "type": "terminal"
+        },
+        {
+            "key": "{$2}{#yellow} shell    ",
+            "type": "shell"
+        },
+        {
+            "key": "{$2}{#red}󰍛 cpu      ",
+            "type": "cpu",
+            "showPeCoreCount": true,
+            "temp": true
+        },
+        {
+            "key": "{$2}{#red}󰍛 gpu      ",
+			"format": "{2} ({5}) @ {frequency}",
+            "type": "gpu"
+        },
+        {
+            "key": "{$2}{#red}󰉉 disk     ",
+			"format": "{1} / {2} {9} ({3})",
+            "type": "disk",
+            "folders": "/"
+        },
+        {
+            "key": "{$2}{#red} memory   ",
+            "type": "memory"
+        },
+        {
+            "key": "{$2}{#magenta}󰩟 network  ",
+            "type": "localip",
+            "format": "{ipv4} ({ifname})"
+        },
+        {
+            "format": "{#1}{#keys}╠{$1}╣",
+            "type": "custom"
+        },
+        {
+            "key": "{$2}{#blue} ainsi    ",
+            "type": "colors",
+			"block": {"range": [0,7]}
+            // "symbol": "circle"
+        },
+        {
+            "key": "{$2}{#blue} bright   ",
+            "type": "colors",
+			"block": {"range": [8,15]}
+            // "symbol": "circle"
+        },
+        {
+            "format": "{#1}{#keys}╚{$1}╝",
+            "type": "custom"
+        }
+    ]
+}
