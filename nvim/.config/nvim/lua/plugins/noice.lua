@@ -38,7 +38,6 @@ return {
 			{
 				filter = {
 					event = "msg_show",
-					kind = "lua_error",
 					any = {
 						{ find = "; after #%d+" },
 						{ find = "; before #%d+" },
