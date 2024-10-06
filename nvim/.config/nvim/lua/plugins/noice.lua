@@ -31,8 +31,7 @@ return {
 			{
 				filter = {
 					event = "msg_show",
-					kind = "",
-					find = "B written",
+					find = "%d+L, %d+B written",
 				},
 				opts = { skip = true },
 			},
@@ -40,55 +39,15 @@ return {
 				filter = {
 					event = "msg_show",
 					kind = "lua_error",
-					find = "more line",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = "fewer lines",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = "lines yanked",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = "line less; ",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = " change; after #",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = "change; before #",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
-					kind = "lua_error",
-					find = "/",
+					any = {
+						{ find = "; after #%d+" },
+						{ find = "; before #%d+" },
+						{ find = "%d fewer lines" },
+						{ find = "%d more lines" },
+						{ find = "line less;" },
+						{ find = "lines yanked" },
+						{ find = "/" },
+					},
 				},
 				opts = { skip = true },
 			},
