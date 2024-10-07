@@ -31,14 +31,8 @@ return {
 			{
 				filter = {
 					event = "msg_show",
-					find = "%d+L, %d+B written",
-				},
-				opts = { skip = true },
-			},
-			{
-				filter = {
-					event = "msg_show",
 					any = {
+						{ find = "%d+L, %d+B written" },
 						{ find = "; after #%d+" },
 						{ find = "; before #%d+" },
 						{ find = "%d fewer lines" },
