@@ -58,6 +58,17 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
+-- Tabs for nix files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "nix",
+  callback = function()
+    vim.opt_local.expandtab = true     -- Use spaces instead of tabs
+    vim.opt_local.tabstop = 2          -- Number of spaces a <Tab> counts for
+    vim.opt_local.shiftwidth = 2       -- Number of spaces to use for (auto)indent
+    vim.opt_local.softtabstop = 2      -- Number of spaces a <Tab> counts for while editing
+  end,
+})
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
