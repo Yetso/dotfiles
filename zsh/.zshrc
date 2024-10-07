@@ -1,4 +1,5 @@
 export XDG_CONFIG_HOME="$HOME/.config"
+export EDITOR=$(brew --prefix)/bin/nvim
 
 #############################################################################
 #                       brew configuration 
@@ -46,16 +47,23 @@ fi
 #############################################################################
 if command -v eza &>/dev/null; then
 	alias ls="eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes"
+	alias lt="eza --long --tree --level=2 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes"
 fi
 
+#############################################################################
+#                       fastfetch 
+#############################################################################
 if command -v fastfetch &>/dev/null; then
 	alias fastfetch='clear;fastfetch'
 	fastfetch
 fi
 
+
+#############################################################################
+#                       replace cd to zoxide 
+#############################################################################
 if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init zsh --cmd cd)"
-	# alias cd='z'
 fi
 
 alias update='open /Applications/Latest.app;brew update;brew upgrade;brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest'
