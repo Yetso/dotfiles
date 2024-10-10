@@ -2,11 +2,13 @@ add_newline = true
 palette = "moonfly"
 
 format = """╭── $directory\
+$custom\
 $git_branch\
-$git_status
+$git_status\
+$all\
 ╰─$character"""
 
-right_format = """$all"""
+# right_format = """$all"""
 
 [c]
 style = "green"
@@ -21,21 +23,22 @@ error_symbol = "[](red)"
 [cmd_duration]
 disabled = true
 
-[custom.neovim]
-description = "module for neovim, activate when it detect the directory ~/.config/nvim"
-when = "test $XDG_CONFIG_HOME/nvim = $PWD"
-symbol = ""
+
+[custom.dotfiles]
+description = "Starship modules for dotfiles repo"
+when = "echo $PWD | grep -q '/dotfiles'"
+symbol = ""
 style = "bold green"
-format = 'via [$symbol Neovim]($style)'
+format = "[$symbol dotfiles ]($style)"
 
 [directory]
-# truncation_length = 1
 fish_style_pwd_dir_length = 1
 truncation_symbol = "…/"
 truncate_to_repo = false
 
 [directory.substitutions]
-'~/.config/nvim' = "Neovim config"
+"~/dotfiles/nvim/.config/nvim" = " Neovim config"
+"~/dotfiles" = " dofiles"
 
 [git_branch]
 style = "lavender"
