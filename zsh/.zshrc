@@ -1,5 +1,13 @@
 export XDG_CONFIG_HOME="$HOME/.config"
 export EDITOR=$(brew --prefix)/bin/nvim
+export _ZO_RESOLVE_SYMLINKS='1'
+
+alias update='open /Applications/Latest.app;brew update;brew upgrade;brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest'
+alias v='nvim'
+alias lg="lazygit"
+
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+bindkey -e
 
 #############################################################################
 #                       brew configuration 
@@ -17,7 +25,6 @@ if command -v brew &>/dev/null; then
 fi
 
 
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 #############################################################################
 #                       starship 
@@ -66,5 +73,4 @@ if command -v zoxide &>/dev/null; then
 	eval "$(zoxide init zsh --cmd cd)"
 fi
 
-alias update='open /Applications/Latest.app;brew update;brew upgrade;brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest'
-alias vim='nvim'
+
