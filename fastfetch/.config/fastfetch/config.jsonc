@@ -36,7 +36,7 @@
         },
 		{
 			"key": "{$2}{#green}󰏖 package  ",
-			// "format": "󱄅:{nix-system}/{nix-default}, :{brew}/{brew-cask}",
+			"format": "󱄅 {nix-system} (system) {nix-default} (default),  {brew-cask} (brew)",
 			"type": "packages"
 		},
         {
