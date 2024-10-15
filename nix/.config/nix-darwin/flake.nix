@@ -31,7 +31,13 @@
           pkgs.wget
           pkgs.zoxide
           pkgs.zulu
+          pkgs.discord
+          pkgs.appcleaner
+          pkgs.bruno
+          pkgs.qbittorrent
+          pkgs.unnaturalscrollwheels
         ];
+
         environment.variables = {
           EDITOR = "nvim";
           LANG = "en_US.UTF-8";
@@ -43,25 +49,23 @@
 
         homebrew = {
           enable = true;
+          onActivation.cleanup = "zap";
           casks = [
-            "appcleaner"
             "bitwarden"
             "brave-browser"
-            "bruno"
+            # "bruno"
             "coteditor"
             "cyberghost-vpn"
-            "discord"
             "firefox"
             "foxitreader"
             "latest"
             { name = "logi-options+"; }
             "onlyoffice"
-            "qbittorrent"
-            "unnaturalscrollwheels"
+            # "qbittorrent"
+            # "unnaturalscrollwheels"
             "vlc"
             { name = "wezterm@nightly"; }
           ];
-          onActivation.cleanup = "zap";
         };
 
         system.defaults = {
@@ -127,9 +131,12 @@
         system.configurationRevision = self.rev or self.dirtyRev or null;
         nixpkgs.hostPlatform = "aarch64-darwin";
 
-        # nixpkgs.config.allowUnfree = true; # allow non open source application
+        nixpkgs.config.allowUnfree = true; # allow non open source application
 
         system.stateVersion = 5;
+        # nix.extraOptions = ''
+        #   extra-platforms = x86_64-darwin aarch64-darwin
+        # '';
 
         # Just to add JDK
         system.activationScripts.extraActivation.text = "ln -sf '${pkgs.zulu}/zulu-21.jdk' '/Library/Java/JavaVirtualMachines/'";
