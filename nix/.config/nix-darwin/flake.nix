@@ -31,11 +31,6 @@
           pkgs.wget
           pkgs.zoxide
           pkgs.zulu
-          pkgs.discord
-          pkgs.appcleaner
-          pkgs.bruno
-          pkgs.qbittorrent
-          pkgs.unnaturalscrollwheels
         ];
 
         environment.variables = {
@@ -51,18 +46,20 @@
           enable = true;
           onActivation.cleanup = "zap";
           casks = [
+            "appcleaner"
             "bitwarden"
             "brave-browser"
-            # "bruno"
+            "bruno"
             "coteditor"
             "cyberghost-vpn"
+            "discord"
             "firefox"
             "foxitreader"
             "latest"
             { name = "logi-options+"; }
             "onlyoffice"
-            # "qbittorrent"
-            # "unnaturalscrollwheels"
+            "qbittorrent"
+            "unnaturalscrollwheels"
             "vlc"
             { name = "wezterm@nightly"; }
           ];
