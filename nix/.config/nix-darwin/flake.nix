@@ -92,7 +92,7 @@
             autohide-delay = 0.0;
             autohide-time-modifier = 0.1;
             expose-animation-duration = 0.3;
-            magnification = true;
+            magnification = false;
             mineffect = "scale";
             minimize-to-application = true;
             persistent-apps = [
@@ -103,7 +103,7 @@
             ];
             show-recents = false;
             tilesize = 48;
-            wvous-bl-corner = 11;
+            wvous-bl-corner = 11; #add launchpad shortcut on hotCorner
           };
           finder.AppleShowAllExtensions = true;
           finder.FXDefaultSearchScope = "SCcf";
