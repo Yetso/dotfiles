@@ -45,6 +45,8 @@
         homebrew = {
           enable = true;
           onActivation.cleanup = "zap";
+          onActivation.autoUpdate = true;
+          onActivation.upgrade = true;
           casks = [
             "appcleaner"
             "bitwarden"
@@ -56,7 +58,7 @@
             "firefox"
             "foxitreader"
             "latest"
-            { name = "logi-options+"; }
+            # { name = "logi-options+"; }
             "onlyoffice"
             "qbittorrent"
             "unnaturalscrollwheels"
