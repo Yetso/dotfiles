@@ -10,6 +10,7 @@ return {
 						"lua_ls",
 						"jdtls",
 						"pylsp",
+						"nil_ls",
 					},
 				},
 			},
