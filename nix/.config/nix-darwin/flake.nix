@@ -58,7 +58,6 @@
             "firefox"
             "foxitreader"
             "latest"
-            # { name = "logi-options+"; }
             "onlyoffice"
             "qbittorrent"
             "unnaturalscrollwheels"
