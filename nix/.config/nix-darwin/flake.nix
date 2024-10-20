@@ -6,9 +6,13 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nix-darwin, nixpkgs, nix-homebrew }:
+  outputs = { self, nix-darwin, nixpkgs, nix-homebrew, home-manager }:
     let
       configuration = { pkgs, config, lib, ... }: {
         # List packages installed in system profile. To search by name, run:
@@ -65,6 +69,10 @@
             { name = "wezterm@nightly"; }
           ];
         };
+
+        users.users.yetso.home = "/Users/yetso";
+        nix.configureBuildUsers = true;
+
 
         system.defaults = {
           ".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
@@ -148,8 +156,12 @@
       darwinConfigurations."Yetso-laptop" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          nix-homebrew.darwinModules.nix-homebrew
-          {
+          home-manager.darwinModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.users.yetso = import ./home.nix;
+          }
+          nix-homebrew.darwinModules.nix-homebrew {
             nix-homebrew = {
               # Install Homebrew under the default prefix
               enable = true;
