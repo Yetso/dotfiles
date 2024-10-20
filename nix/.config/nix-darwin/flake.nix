@@ -17,24 +17,24 @@
       configuration = { pkgs, config, lib, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
-        environment.systemPackages = [
-          pkgs.bat
-          pkgs.cargo
-          pkgs.duti
-          pkgs.eza
-          pkgs.fastfetch
-          pkgs.fzf
-          pkgs.git
-          pkgs.gradle
-          pkgs.lazygit
-          pkgs.lua
-          pkgs.neovim
-          pkgs.python3
-          pkgs.starship
-          pkgs.stow
-          pkgs.wget
-          pkgs.zoxide
-          pkgs.zulu
+        environment.systemPackages = with pkgs; [
+          bat
+          cargo
+          duti
+          eza
+          fastfetch
+          fzf
+          git
+          gradle
+          lazygit
+          lua
+          neovim
+          python3
+          starship
+          stow
+          wget
+          zoxide
+          zulu
         ];
 
         environment.variables = {
