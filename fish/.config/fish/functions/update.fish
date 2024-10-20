@@ -3,7 +3,7 @@ function update --wraps='open /Applications/Latest.app;brew update;brew upgrade;
   brew update
   brew upgrade
   brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
-  cd ~/.config/nix-darwin/
+  cd ~/dotfiles/nix/.config/nix-darwin/
   nix flake update --commit-lock-file
-  darwin-rebuild switch
+  darwin-rebuild switch --flake . --impure
 end
