@@ -6,12 +6,13 @@
   home.stateVersion = "24.05";
 
   home.file = {
-    ".config/starship".source = "~/dotfiles/starship";
-    ".config/bat".source = "~/dotfiles/bat";
-    ".config/fastfetch".source = "~/dotfiles/fastfetch";
-    ".config/wezterm".source = "~/dotfiles/wezterm/.config";
-    ".wezterm-completion.sh".source = "~/dotfiles/wezterm";
-    ".terminfo".source = "~/dotfiles/wezterm/.terminfo";
+    ".config/starship.toml".source = ~/dotfiles/starship/starship.toml;
+    ".config/bat".source = ~/dotfiles/bat;
+    ".config/fastfetch".source = ~/dotfiles/fastfetch;
+    ".config/wezterm".source = ~/dotfiles/wezterm/.config;
+    ".wezterm-completion.sh".source = ~/dotfiles/wezterm/.wezterm-completion.sh;
+    ".terminfo".source = ~/dotfiles/wezterm/.terminfo;
+    ".ssh/config".source = ~/dotfiles/ssh/config;
   };
 
   home.packages = [
