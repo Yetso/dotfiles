@@ -112,6 +112,7 @@
               "/System/Applications/Mail.app"
               "/Applications/WezTerm.app"
               "/System/Applications/Music.app"
+              "/Applications/Discord.app"
             ];
             show-recents = false;
             tilesize = 48;
