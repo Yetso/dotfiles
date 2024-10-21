@@ -30,7 +30,7 @@
           lua
           neovim
           python3
-          starship
+          # starship
           stow
           wget
           zoxide
@@ -40,6 +40,10 @@
         environment.variables = {
           EDITOR = "nvim";
           LANG = "en_US.UTF-8";
+          HOMEBREW_NO_ANALYTICS = "1";
+          HOMEBREW_NO_ENV_HINTS = "1";
+          XDG_CONFIG_HOME = "/Users/yetso/.config";
+          _ZO_RESOLVE_SYMLINKS = "1";
         };
 
         fonts.packages = with pkgs; [
@@ -163,10 +167,9 @@
           }
           nix-homebrew.darwinModules.nix-homebrew {
             nix-homebrew = {
-              # Install Homebrew under the default prefix
               enable = true;
               # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-              enableRosetta = true;
+              # enableRosetta = true;
               # User owning the Homebrew prefix
               user = "yetso";
               # Automatically migrate existing Homebrew installations
