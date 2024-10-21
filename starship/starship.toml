@@ -1,14 +1,84 @@
 add_newline = true
 palette = "moonfly"
 
-format = """╭── $directory\
-$custom\
+format = """\
+${custom.apple}\
+${custom.linux}\
+$time\
+[](fg:#1C3A5E bg:#3B76F0)\
+$directory\
 $git_branch\
 $git_status\
+$git_metrics\
+[ ](fg:#FCF392 bg:#030B16)\
 $all\
-╰─$character"""
+$character
+"""
+
+[custom.apple]
+format = "[](bg:#000000 fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:#1C3A5E)"
+style = "bg:bright-cyan fg:#000000"
+symbol = "󰀵 "
+when = true
+os = "macos"
+
+[custom.linux]
+format = "[](bg:#000000 fg:'bold bright-cyan')[$symbol]($style)[](fg:'bold bright-cyan' bg:#1C3A5E)"
+style = "bg:'bold bright-cyan' fg:#000000"
+symbol = " "
+when = true
+os = "linux"
+
+[directory]
+truncation_length = 0
+format = "[  $path ]($style)"
+style = "fg:#E4E4E4 bg:#3B76F0"
+
+[git_branch]
+format = '[](fg:#3B76F0 bg:#FCF392)[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = "  "
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_status]
+format = '[$all_status]($style)'
+style = "fg:#1C3A5E bg:#FCF392"
+
+[git_metrics]
+disabled = false
+format = "([+$added]($added_style))[]($added_style)"
+added_style = "fg:#1C3A5E bg:#FCF392"
+deleted_style = "fg:bright-red bg:235"
+
+[character]
+success_symbol = '[ ➜](bold green) '
+error_symbol = '[ ✗](#e84d44) '
+
+[time]
+disabled = false
+time_format = "%R" # Hour:Minute Format
+style = "bg:#1d2230"
+format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+
+# format = """╭── $directory\
+# $custom\
+# $git_branch\
+# $git_status\
+# $all\
+# ╰─$character"""
 
 # right_format = """$all"""
+
+# [directory]
+# fish_style_pwd_dir_length = 1
+# truncation_symbol = "…/"
+# truncate_to_repo = false
+
+# [git_branch]
+# style = "lavender"
+
+# [character]
+# success_symbol = "[](blue)"
+# error_symbol = "[](red)"
 
 [c]
 style = "green"
@@ -16,32 +86,19 @@ style = "green"
 [lua]
 symbol = "󰢱 "
 
-[character]
-success_symbol = "[](blue)"
-error_symbol = "[](red)"
-
 [cmd_duration]
 disabled = true
 
+# [custom.dotfiles]
+# description = "Starship modules for dotfiles repo"
+# when = "echo $PWD | grep -q '/dotfiles'"
+# symbol = ""
+# style = "bold green"
+# format = "[$symbol dotfiles ]($style)"
 
-[custom.dotfiles]
-description = "Starship modules for dotfiles repo"
-when = "echo $PWD | grep -q '/dotfiles'"
-symbol = ""
-style = "bold green"
-format = "[$symbol dotfiles ]($style)"
-
-[directory]
-fish_style_pwd_dir_length = 1
-truncation_symbol = "…/"
-truncate_to_repo = false
-
-[directory.substitutions]
-"~/dotfiles/nvim/.config/nvim" = " Neovim config"
-"~/dotfiles" = " dofiles"
-
-[git_branch]
-style = "lavender"
+# [directory.substitutions]
+# 	"~/dotfiles/nvim/.config/nvim" = " Neovim config"
+# 	"~/dotfiles" = " dofiles"
 
 [nix_shell]
 disabled = true
