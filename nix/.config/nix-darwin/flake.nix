@@ -31,7 +31,6 @@
           neovim
           python3
           # starship
-          stow
           wget
           zoxide
           zulu
