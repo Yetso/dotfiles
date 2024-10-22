@@ -9,7 +9,6 @@ in {
   home.stateVersion = "24.05";
 
   home.file = {
-    ".config/starship.toml".source = "${dotfiles}/starship/starship.toml";
     ".config/bat".source = "${dotfiles}/bat";
     ".config/fastfetch".source = "${dotfiles}/fastfetch";
     ".config/wezterm".source = "${dotfiles}/wezterm/.config";
@@ -54,6 +53,7 @@ in {
     enableZshIntegration = false;
     enableIonIntegration = false;
     enableNushellIntegration = false;
+    settings = pkgs.lib.importTOML ./starship.toml;
   };
 
   programs.zoxide = {
