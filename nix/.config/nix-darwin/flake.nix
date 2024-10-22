@@ -93,6 +93,7 @@
             NSScrollAnimationEnabled = false;
             NSWindowResizeTime = 0.0;
             "com.apple.keyboard.fnState" = true;
+            "com.apple.sound.beep.feedback" = 1;
             "com.apple.springing.enabled" = false;
             "com.apple.trackpad.forceClick" = false;
           };
