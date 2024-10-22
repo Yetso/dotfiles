@@ -96,7 +96,7 @@ disabled = true
 [palettes.moonfly]
 background = "#000000"
 black = "#323437" #black (grey0)
-red = "#ff5454" #red
+red = "#f07496" #red
 green = "#8cc85f" #green
 yellow = "#e3c78a" #yellow
 blue = "#80a0ff" #blue
@@ -104,7 +104,6 @@ violet = "#cf87e8" #purple (violet)
 cyan = "#79dac8" #cyan (turquoise)
 white = "#c6c6c6" #white
 brightblack = "#949494" #black (grey58)
-crimson = "#ff5189" #red (crimson)
 emerald = "#36c692" #green (emerald)
 khaki = "#c6c684" #yellow (khaki)
 sky = "#74b2ff" #blue (sky)
