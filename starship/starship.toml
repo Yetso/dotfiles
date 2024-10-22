@@ -5,38 +5,38 @@ format = """\
 ${custom.apple}\
 ${custom.linux}\
 $time\
-[](fg:#1C3A5E bg:#3B76F0)\
 $directory\
 $git_branch\
 $git_status\
-$git_metrics\
-[ ](fg:#FCF392 bg:#030B16)\
+$git_metrics \
 $all\
 $character
 """
 
 [custom.apple]
-format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:#1C3A5E)"
+format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:background)"
 style = "bg:bright-cyan fg:background"
 symbol = "󰀵 "
 when = true
 os = "macos"
 
 [custom.linux]
-format = "[](bg:background fg:'bold bright-cyan')[$symbol]($style)[](fg:'bold bright-cyan' bg:#1C3A5E)"
-style = "bg:'bold bright-cyan' fg:background"
+format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:background)"
+style = "bg:bright-cyan fg:background"
 symbol = " "
 when = true
 os = "linux"
 
 [directory]
+read_only = " 󰌾"
 truncation_length = 0
-format = "[  $path ]($style)"
+format = "[](bg:background fg:#3B76F0)[  $path ]($style)[](fg:#3B76F0 bg:background)"
 style = "fg:brightwhite bg:#3B76F0"
 
+
 [git_branch]
-format = '[](fg:#3B76F0 bg:#FCF392)[ $symbol$branch(:$remote_branch) ]($style)'
-symbol = "  "
+format = '[](bg:background fg:#FCF392)[ $symbol$branch(:$remote_branch) ]($style)'
+symbol = " "
 style = "fg:#1C3A5E bg:#FCF392"
 
 [git_status]
@@ -45,7 +45,7 @@ style = "fg:#1C3A5E bg:#FCF392"
 
 [git_metrics]
 disabled = false
-format = "([+$added]($added_style))[]($added_style)"
+format = "([+$added]($added_style))[](fg:#FCF392 bg:background)"
 added_style = "fg:#1C3A5E bg:#FCF392"
 deleted_style = "fg:bright-red bg:#262626"
 
@@ -56,8 +56,7 @@ error_symbol = '[ ✗](#e84d44) '
 [time]
 disabled = false
 time_format = "%R" # Hour:Minute Format
-style = "bg:#1d2230"
-format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
+format = '[](bg:background fg:#1C3A5E)[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)[](fg:#1C3A5E bg:background)'
 
 # format = """╭── $directory\
 # $custom\
@@ -80,12 +79,6 @@ format = '[[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)]($style)'
 # success_symbol = "[](blue)"
 # error_symbol = "[](red)"
 
-[c]
-style = "green"
-
-[lua]
-symbol = "󰢱 "
-
 [cmd_duration]
 disabled = true
 
@@ -99,23 +92,6 @@ disabled = true
 # [directory.substitutions]
 # 	"~/dotfiles/nvim/.config/nvim" = " Neovim config"
 # 	"~/dotfiles" = " dofiles"
-
-[nix_shell]
-disabled = true
-
-[gradle]
-symbol = ' '
-
-[kotlin]
-symbol = ' '
-disabled = true
-
-[package]
-style = "orange"
-
-[terraform]
-disabled = true
-style = "purple"
 
 [palettes.moonfly]
 background = "#000000"
@@ -138,3 +114,174 @@ brightwhite = "#e4e4e4" #white (grey89)
 fern = "#87d787"
 lavender = "#adadf3"
 orange = "#f09479"
+
+
+#add all nerd font icon for programming language
+[aws]
+symbol = "  "
+
+[buf]
+symbol = " "
+
+[c]
+symbol = " "
+
+[conda]
+symbol = " "
+
+[crystal]
+symbol = " "
+
+[dart]
+symbol = " "
+
+[docker_context]
+symbol = " "
+
+[elixir]
+symbol = " "
+
+[elm]
+symbol = " "
+
+[fennel]
+symbol = " "
+
+[fossil_branch]
+symbol = " "
+
+[git_commit]
+tag_symbol = '  '
+
+[golang]
+symbol = " "
+
+[guix_shell]
+symbol = " "
+
+[haskell]
+symbol = " "
+
+[haxe]
+symbol = " "
+
+[hg_branch]
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
+
+[java]
+symbol = " "
+
+[julia]
+symbol = " "
+
+[kotlin]
+symbol = " "
+disabled = true
+
+[lua]
+symbol = " "
+
+[memory_usage]
+symbol = "󰍛 "
+
+[meson]
+symbol = "󰔷 "
+
+[nim]
+symbol = "󰆥 "
+
+[nix_shell]
+symbol = " "
+disabled = true
+
+[nodejs]
+symbol = " "
+
+[ocaml]
+symbol = " "
+
+[os.symbols]
+Alpaquita = " "
+Alpine = " "
+AlmaLinux = " "
+Amazon = " "
+Android = " "
+Arch = " "
+Artix = " "
+CentOS = " "
+Debian = " "
+DragonFly = " "
+Emscripten = " "
+EndeavourOS = " "
+Fedora = " "
+FreeBSD = " "
+Garuda = "󰛓 "
+Gentoo = " "
+HardenedBSD = "󰞌 "
+Illumos = "󰈸 "
+Kali = " "
+Linux = " "
+Mabox = " "
+Macos = " "
+Manjaro = " "
+Mariner = " "
+MidnightBSD = " "
+Mint = " "
+NetBSD = " "
+NixOS = " "
+OpenBSD = "󰈺 "
+openSUSE = " "
+OracleLinux = "󰌷 "
+Pop = " "
+Raspbian = " "
+Redhat = " "
+RedHatEnterprise = " "
+RockyLinux = " "
+Redox = "󰀘 "
+Solus = "󰠳 "
+SUSE = " "
+Ubuntu = " "
+Unknown = " "
+Void = " "
+Windows = "󰍲 "
+
+[package]
+symbol = "󰏗 "
+disabled = true
+
+[perl]
+symbol = " "
+
+[php]
+symbol = " "
+
+[pijul_channel]
+symbol = " "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = "󱘗 "
+
+[scala]
+symbol = " "
+
+[swift]
+symbol = " "
+
+[zig]
+symbol = " "
+
+[gradle]
+symbol = " "
+
