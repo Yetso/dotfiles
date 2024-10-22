@@ -16,15 +16,15 @@ $character
 """
 
 [custom.apple]
-format = "[](bg:#000000 fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:#1C3A5E)"
-style = "bg:bright-cyan fg:#000000"
+format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:#1C3A5E)"
+style = "bg:bright-cyan fg:background"
 symbol = "󰀵 "
 when = true
 os = "macos"
 
 [custom.linux]
-format = "[](bg:#000000 fg:'bold bright-cyan')[$symbol]($style)[](fg:'bold bright-cyan' bg:#1C3A5E)"
-style = "bg:'bold bright-cyan' fg:#000000"
+format = "[](bg:background fg:'bold bright-cyan')[$symbol]($style)[](fg:'bold bright-cyan' bg:#1C3A5E)"
+style = "bg:'bold bright-cyan' fg:background"
 symbol = " "
 when = true
 os = "linux"
@@ -32,7 +32,7 @@ os = "linux"
 [directory]
 truncation_length = 0
 format = "[  $path ]($style)"
-style = "fg:#E4E4E4 bg:#3B76F0"
+style = "fg:brightwhite bg:#3B76F0"
 
 [git_branch]
 format = '[](fg:#3B76F0 bg:#FCF392)[ $symbol$branch(:$remote_branch) ]($style)'
@@ -47,7 +47,7 @@ style = "fg:#1C3A5E bg:#FCF392"
 disabled = false
 format = "([+$added]($added_style))[]($added_style)"
 added_style = "fg:#1C3A5E bg:#FCF392"
-deleted_style = "fg:bright-red bg:235"
+deleted_style = "fg:bright-red bg:#262626"
 
 [character]
 success_symbol = '[ ➜](bold green) '
@@ -118,6 +118,7 @@ disabled = true
 style = "purple"
 
 [palettes.moonfly]
+background = "#000000"
 black = "#323437" #black (grey0)
 red = "#ff5454" #red
 green = "#8cc85f" #green
