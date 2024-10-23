@@ -80,14 +80,14 @@
         {
             "key": "{$2}{#blue} ainsi    ",
             "type": "colors",
-			"block": {"range": [0,7]}
-            // "symbol": "circle"
+			"block": {"range": [0,7]},
+            "symbol": "block"
         },
         {
             "key": "{$2}{#blue} bright   ",
             "type": "colors",
-			"block": {"range": [8,15]}
-            // "symbol": "circle"
+			"block": {"range": [8,15]},
+            "symbol": "block"
         },
         {
             "format": "{#1}{#keys}╚{$1}╝",
