@@ -18,6 +18,12 @@ in {
     ".config/nvim".source = "${dotfiles}/nvim";
     ".config/lazygit".source = "${dotfiles}/lazygit";
   };
+  home.sessionVariables = {
+    HOMEBREW_NO_ANALYTICS = "1";
+    HOMEBREW_NO_ENV_HINTS = "true";
+    XDG_CONFIG_HOME = "/Users/yetso/.config";
+    _ZO_RESOLVE_SYMLINKS = "1";
+  };
 
   programs.fish = {
     enable = true;
