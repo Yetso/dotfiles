@@ -64,6 +64,7 @@
             "discord"
             "firefox"
             "foxitreader"
+            "karabiner-elements"
             "latest"
             "onlyoffice"
             "qbittorrent"
@@ -161,12 +162,14 @@
       darwinConfigurations."Yetso-laptop" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
-          home-manager.darwinModules.home-manager {
+          home-manager.darwinModules.home-manager
+          {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.yetso = import ./home.nix;
           }
-          nix-homebrew.darwinModules.nix-homebrew {
+          nix-homebrew.darwinModules.nix-homebrew
+          {
             nix-homebrew = {
               enable = true;
               # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
