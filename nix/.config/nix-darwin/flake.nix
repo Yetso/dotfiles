@@ -68,6 +68,7 @@
             "latest"
             "onlyoffice"
             "qbittorrent"
+            "skim"
             "unnaturalscrollwheels"
             "vlc"
             { name = "wezterm@nightly"; }
