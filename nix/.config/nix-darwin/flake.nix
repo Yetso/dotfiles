@@ -29,7 +29,8 @@
           lazygit
           lua
           neovim
-          python3
+          python312
+          python312Packages.pip
           # starship
           wget
           zoxide
@@ -64,7 +65,6 @@
             "discord"
             "firefox"
             "foxitreader"
-            "karabiner-elements"
             "latest"
             "onlyoffice"
             "qbittorrent"
