@@ -47,6 +47,7 @@
           XDG_CONFIG_HOME = "/Users/yetso/.config";
           _ZO_RESOLVE_SYMLINKS = "1";
         };
+        environment.shells = [ pkgs.zsh ];
 
         fonts.packages = with pkgs; [
           (nerdfonts.override { fonts = [ "CommitMono" ]; })
@@ -144,8 +145,13 @@
 
         # Create /etc/zshrc that loads the nix-darwin environment.
         programs.bash.enable = false;
-        programs.zsh.enable = false;
-        programs.fish.enable = true;
+        programs.zsh = {
+          enable = true;
+          enableSyntaxHighlighting = true;
+          enableBashCompletion = false;
+          promptInit = "autoload -Uz promptinit && promptinit";
+        };
+        programs.fish.enable = false;
 
         # Set Git commit hash for darwin-version.
         system.configurationRevision = self.rev or self.dirtyRev or null;

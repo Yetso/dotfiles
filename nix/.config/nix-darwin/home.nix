@@ -24,10 +24,42 @@ in {
       _ZO_RESOLVE_SYMLINKS = "1";
     };
   };
+
+  programs.zsh = {
+    enable = true;
+    autosuggestion.enable = true;
+    # autosuggestion.stategy = [        # not available yet
+    #   "completion"
+    # ];
+    # syntaxHighlighting.enable = true;     #activated with flake.nix on a system level
+    enableCompletion = false;   # disabled because already there for system shell
+    loginExtra = "fastfetch";
+    shellAliases = {
+      # cat = "bat --paging=never --theme='fly16'";
+      # ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes";
+      # lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes";
+      fastfetch = "clear;command fastfetch";
+      lg = "lazygit";
+      v = "nvim";
+      update = "
+        open /Applications/Latest.app
+        brew update
+        brew upgrade
+        brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
+        cd ~/dotfiles/nix/.config/nix-darwin/
+        nix flake update --commit-lock-file
+        darwin-rebuild switch --flake . --impure
+      ";
+    };
   };
 
   programs.fish = {
-    enable = true;
+    enable = false;
+    shellAbbrs = {
+      lg = "lazygit";
+      v = "nvim";
+      darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
+    };
     functions = {
       cat = "bat --paging=never --theme='fly16' $argv";
       ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
@@ -46,20 +78,13 @@ in {
         cd $original_dir
       ";
     };
-
-    shellAbbrs = {
-      lg = "lazygit";
-      v = "nvim";
-      darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
-    };
-
   };
 
   programs.starship = {
     enable = true;
     enableBashIntegration = false;
-    enableFishIntegration = true;
-    enableZshIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = true;
     enableIonIntegration = false;
     enableNushellIntegration = false;
     settings = pkgs.lib.importTOML ./starship.toml;
@@ -68,8 +93,8 @@ in {
   programs.zoxide = {
     enable = true;
     enableBashIntegration = false;
-    enableFishIntegration = true;
-    enableZshIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = true;
     enableNushellIntegration = false;
     options = ["--cmd cd"];
   };
