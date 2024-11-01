@@ -37,6 +37,7 @@ in {
     loginExtra = "fastfetch";
     shellAliases = {
       # cat = "bat --paging=never --theme='fly16'";
+      cat = "bat";
       lt = "ls --long --tree --level=3 --ignore-glob='.git'";
       # ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes";
       # lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes";
@@ -63,7 +64,8 @@ in {
       darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
     };
     functions = {
-      cat = "bat --paging=never --theme='fly16' $argv";
+      # cat = "bat --paging=never --theme='fly16' $argv";
+      cat = "bat $argv";
       ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
       lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes $argv";
       fastfetch = "clear;command fastfetch $argv";
