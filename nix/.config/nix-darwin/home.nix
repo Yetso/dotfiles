@@ -108,6 +108,11 @@ in {
     };
   };
 
+  programs.fastfetch = {
+    enable = true;
+    settings = pkgs.lib.importJSON ./fastfetchConfig.jsonc;
+  };
+
   programs.bat = {
     enable = true;
     config.theme = "fly16";

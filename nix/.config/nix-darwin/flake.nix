@@ -24,7 +24,7 @@
           cargo
           duti
           eza
-          fastfetch
+          # fastfetch
           fzf
           git
           gradle
