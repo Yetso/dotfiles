@@ -23,7 +23,7 @@
           # bat
           cargo
           duti
-          eza
+          # eza
           # fastfetch
           fzf
           git

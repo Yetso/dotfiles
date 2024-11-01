@@ -37,6 +37,7 @@ in {
     loginExtra = "fastfetch";
     shellAliases = {
       # cat = "bat --paging=never --theme='fly16'";
+      lt = "ls --long --tree --level=3 --ignore-glob='.git'";
       # ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes";
       # lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes";
       fastfetch = "clear;command fastfetch";
@@ -111,6 +112,21 @@ in {
   programs.fastfetch = {
     enable = true;
     settings = pkgs.lib.importJSON ./fastfetchConfig.jsonc;
+  };
+
+  programs.eza = {
+    enable = true;
+    icons = "always";
+    extraOptions = [
+      "--binary"
+      "--group-directories-first"
+      "--header"
+      "--no-quotes"
+      "--all"
+      "--color=always"
+      "--ignore-glob=.DS_Store"
+      # lt = "eza --long --tree --level=3 --ignore-glob='.DS_Store|.git'";
+    ];
   };
 
   programs.bat = {
