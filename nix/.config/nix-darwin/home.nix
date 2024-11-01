@@ -4,6 +4,7 @@ let
   homeDirectory = "${builtins.getEnv "HOME"}";
   dotfiles = "${homeDirectory}/dotfiles";
 in {
+  xdg.enable = true;
   home = {
     username = "yetso";
     homeDirectory = "${homeDirectory}";
@@ -99,6 +100,13 @@ in {
     options = ["--cmd cd"];
   };
 
+  programs.lazygit = {
+    enable = true;
+    settings.gui = {
+      theme.selectedLineBgColor = [ "#1c1c1c" ];
+      nerdFontsVersion = 3;
+    };
+  };
 
   programs.bat = {
     enable = true;

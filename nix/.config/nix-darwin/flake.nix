@@ -28,7 +28,7 @@
           fzf
           git
           gradle
-          lazygit
+          # lazygit
           lua
           neovim
           python312
