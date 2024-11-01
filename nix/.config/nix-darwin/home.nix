@@ -76,6 +76,21 @@ in {
   home.packages = [
 
   ];
+  programs.bat = {
+    enable = true;
+    config.theme = "fly16";
+    themes = {
+      fly16 = {
+        src = pkgs.fetchFromGitHub {
+          owner = "bluz71";
+          repo = "fly16-bat"; # Bat uses sublime syntax for its themes
+          rev = "d13c2c2a03e84819b2df2c50bc824b74604b9844";
+          hash = "sha256-QtZurXK6wNnyWiiQWfyAMFsV5ZWyi84jJNkTgZYoMCE=";
+        };
+        file = "fly16.tmTheme";
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
