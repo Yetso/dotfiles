@@ -4,25 +4,26 @@ let
   homeDirectory = "${builtins.getEnv "HOME"}";
   dotfiles = "${homeDirectory}/dotfiles";
 in {
-  home.username = "yetso";
-  home.homeDirectory = "${homeDirectory}";
-  home.stateVersion = "24.05";
-
-  home.file = {
-    ".config/bat".source = "${dotfiles}/bat";
-    ".config/fastfetch".source = "${dotfiles}/fastfetch";
-    ".config/wezterm".source = "${dotfiles}/wezterm/.config";
-    ".wezterm-completion.sh".source = "${dotfiles}/wezterm/.wezterm-completion.sh";
-    ".terminfo".source = "${dotfiles}/wezterm/.terminfo";
-    ".ssh/config".source = "${dotfiles}/ssh/config";
-    ".config/nvim".source = "${dotfiles}/nvim";
-    ".config/lazygit".source = "${dotfiles}/lazygit";
+  home = {
+    username = "yetso";
+    homeDirectory = "${homeDirectory}";
+    stateVersion = "24.11";
+    file = {
+      # ".config/fastfetch".source = "${dotfiles}/fastfetch";
+      ".config/wezterm".source = "${dotfiles}/wezterm/.config";
+      ".wezterm-completion.sh".source = "${dotfiles}/wezterm/.wezterm-completion.sh";
+      ".terminfo".source = "${dotfiles}/wezterm/.terminfo";
+      ".ssh/config".source = "${dotfiles}/ssh/config";
+      ".config/nvim".source = "${dotfiles}/nvim";
+      # ".config/lazygit".source = "${dotfiles}/lazygit";
+    };
+    sessionVariables = {
+      HOMEBREW_NO_ANALYTICS = "1";
+      HOMEBREW_NO_ENV_HINTS = "true";
+      XDG_CONFIG_HOME = "/Users/yetso/.config";
+      _ZO_RESOLVE_SYMLINKS = "1";
+    };
   };
-  home.sessionVariables = {
-    HOMEBREW_NO_ANALYTICS = "1";
-    HOMEBREW_NO_ENV_HINTS = "true";
-    XDG_CONFIG_HOME = "/Users/yetso/.config";
-    _ZO_RESOLVE_SYMLINKS = "1";
   };
 
   programs.fish = {
@@ -73,9 +74,7 @@ in {
     options = ["--cmd cd"];
   };
 
-  home.packages = [
 
-  ];
   programs.bat = {
     enable = true;
     config.theme = "fly16";
@@ -92,9 +91,12 @@ in {
     };
   };
 
+  # home.packages = [
+  
+  # ];
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
 
 
   programs.git = {
@@ -102,5 +104,4 @@ in {
     userName = "Yetso";
     userEmail = "dav.catoul@gmail.com";
   };
-
 }
