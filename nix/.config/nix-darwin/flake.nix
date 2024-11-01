@@ -121,10 +121,13 @@
             tilesize = 48;
             wvous-bl-corner = 11; #add launchpad shortcut on hotCorner
           };
-          finder.AppleShowAllExtensions = true;
-          finder.FXDefaultSearchScope = "SCcf";
-          finder.FXPreferredViewStyle = "Nlsv";
-          finder.ShowPathbar = true;
+          finder = {
+            AppleShowAllExtensions = true;
+            FXDefaultSearchScope = "SCcf";
+            FXPreferredViewStyle = "Nlsv";
+            _FXSortFoldersFirst = true;
+            ShowPathbar = true;
+          };
         };
         system.startup.chime = false;
 
