@@ -46,12 +46,14 @@ in {
       v = "nvim";
       update = "
         open /Applications/Latest.app
-        brew update
-        brew upgrade
-        brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
-        cd ~/dotfiles/nix/.config/nix-darwin/
-        nix flake update --commit-lock-file
-        darwin-rebuild switch --flake . --impure
+        brew update --quiet
+        brew upgrade --quiet
+        brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
+        echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
+        (cd ~/dotfiles/nix/.config/nix-darwin &&
+        nix flake update --commit-lock-file > /dev/null)
+        echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
+        darwin-rebuild switch --flake ~/dotfiles/nix/.config/nix-darwin --impure > /dev/null
       ";
     };
   };
