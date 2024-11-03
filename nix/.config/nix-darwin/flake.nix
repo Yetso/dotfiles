@@ -96,6 +96,7 @@
             NSAutomaticCapitalizationEnabled = false;
             NSDisableAutomaticTermination = false;
             NSScrollAnimationEnabled = false;
+            NSTableViewDefaultSizeMode = 1;
             NSWindowResizeTime = 0.0;
             "com.apple.keyboard.fnState" = true;
             "com.apple.sound.beep.feedback" = 1;
