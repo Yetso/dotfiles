@@ -62,7 +62,6 @@
             "appcleaner"
             "bitwarden"
             "brave-browser"
-            "bruno"
             "coteditor"
             "cyberghost-vpn"
             "discord"
@@ -72,6 +71,7 @@
             "onlyoffice"
             "qbittorrent"
             "skim"
+            "spotify"
             "unnaturalscrollwheels"
             "vlc"
             { name = "wezterm@nightly"; }
@@ -119,7 +119,7 @@
               "/System/Applications/Mail.app"
               "/Applications/WezTerm.app"
               "/System/Applications/Music.app"
-              "/Applications/Discord.app"
+              "/Applications/Discord(Vesktop).app"
             ];
             show-recents = false;
             tilesize = 48;
