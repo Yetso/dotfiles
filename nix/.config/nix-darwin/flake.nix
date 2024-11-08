@@ -20,20 +20,15 @@
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         environment.systemPackages = with pkgs; [
-          # bat
           cargo
           duti
-          # eza
-          # fastfetch
           fzf
           git
           gradle
-          # lazygit
           lua
           neovim
           python312
           python312Packages.pip
-          # starship
           wget
           zoxide
           zulu
