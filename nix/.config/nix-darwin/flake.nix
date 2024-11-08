@@ -84,8 +84,10 @@
 
         system.defaults = {
           ".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
+          hitoolbox.AppleFnUsageType = "Do Nothing";
           LaunchServices.LSQuarantine = false;
           NSGlobalDomain = {
+            AppleEnableSwipeNavigateWithScrolls = true;
             AppleInterfaceStyle = "Dark";
             AppleMeasurementUnits = "Centimeters";
             AppleMetricUnits = 1;
@@ -132,7 +134,11 @@
             _FXSortFoldersFirst = true;
             ShowPathbar = true;
           };
+          trackpad.ActuationStrength = 1;
+          trackpad.TrackpadRightClick = false;
+          universalaccess.mouseDriverCursorSize = 0.5;
         };
+        time.timeZone = "Europe/Brussels";
         system.startup.chime = false;
 
         security.pam.enableSudoTouchIdAuth = true;
