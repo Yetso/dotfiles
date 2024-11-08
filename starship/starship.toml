@@ -51,7 +51,7 @@ deleted_style = "fg:bright-red bg:#262626"
 
 [character]
 success_symbol = '[ ➜](bold green) '
-error_symbol = '[ ✗](#e84d44) '
+error_symbol = '[ ➜](#e84d44) '
 
 [time]
 disabled = false
