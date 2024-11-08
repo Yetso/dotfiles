@@ -26,6 +26,7 @@ config.front_end = "WebGpu"
 config.window_background_opacity = 0.95
 
 config.animation_fps = 1
+config.max_fps = 120
 config.use_resize_increments = true
 
 config.use_fancy_tab_bar = false
