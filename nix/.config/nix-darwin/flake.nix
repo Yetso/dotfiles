@@ -21,6 +21,8 @@
         # $ nix-env -qaP | grep wget
         environment.systemPackages = with pkgs; [
           cargo
+          # colima
+          # docker
           podman
           duti
           fzf

@@ -44,6 +44,7 @@ in {
       fastfetch = "clear;command fastfetch";
       lg = "lazygit";
       v = "nvim";
+      docker = "podman";
       update = "
         open /Applications/Latest.app
         brew update --quiet
