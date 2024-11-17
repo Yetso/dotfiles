@@ -133,7 +133,7 @@
             ShowPathbar = true;
           };
           trackpad.ActuationStrength = 1;
-          trackpad.TrackpadRightClick = false;
+          trackpad.TrackpadRightClick = true;
           universalaccess.mouseDriverCursorSize = 0.5;
         };
         time.timeZone = "Europe/Brussels";
