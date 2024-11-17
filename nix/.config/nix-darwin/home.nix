@@ -15,7 +15,7 @@ in {
       ".wezterm-completion.sh".source = "${dotfiles}/wezterm/.wezterm-completion.sh";
       ".terminfo".source = "${dotfiles}/wezterm/.terminfo";
       ".ssh/config".source = "${dotfiles}/ssh/config";
-      ".config/nvim".source = "${dotfiles}/nvim";
+      # ".config/nvim".source = "${dotfiles}/nvim";
       # ".config/lazygit".source = "${dotfiles}/lazygit";
     };
     sessionVariables = {
