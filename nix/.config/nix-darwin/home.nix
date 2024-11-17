@@ -8,7 +8,7 @@ in {
   home = {
     username = "yetso";
     homeDirectory = "${homeDirectory}";
-    stateVersion = "24.11";
+    stateVersion = "24.05";
     file = {
       # ".config/fastfetch".source = "${dotfiles}/fastfetch";
       ".config/wezterm".source = "${dotfiles}/wezterm/.config";
