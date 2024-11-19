@@ -24,7 +24,7 @@
           # colima
           # docker
           podman
-          duti
+          # duti
           fzf
           git
           gradle
