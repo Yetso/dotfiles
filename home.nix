@@ -1,22 +1,22 @@
 { config, pkgs, ... }:
 
 let
-  homeDirectory = "${builtins.getEnv "HOME"}";
+  homeDirectory = "/Users/yetso";
   dotfiles = "${homeDirectory}/dotfiles";
 in {
   xdg.enable = true;
   home = {
     username = "yetso";
     homeDirectory = "${homeDirectory}";
-    stateVersion = "24.05";
+    stateVersion = "25.05";
     file = {
-      # ".config/fastfetch".source = "${dotfiles}/fastfetch";
-      ".config/wezterm".source = "${dotfiles}/wezterm/.config";
-      ".wezterm-completion.sh".source = "${dotfiles}/wezterm/.wezterm-completion.sh";
-      ".terminfo".source = "${dotfiles}/wezterm/.terminfo";
-      ".ssh/config".source = "${dotfiles}/ssh/config";
-      # ".config/nvim".source = "${dotfiles}/nvim";
-      # ".config/lazygit".source = "${dotfiles}/lazygit";
+      ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/fastfetch";
+      ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
+      ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
+      ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
+      ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
+      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
+      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
     };
     sessionVariables = {
       HOMEBREW_NO_ANALYTICS = "1";
@@ -36,25 +36,21 @@ in {
     enableCompletion = false;   # disabled because already there for system shell
     loginExtra = "fastfetch";
     shellAliases = {
-      # cat = "bat --paging=never --theme='fly16'";
       cat = "bat";
       lt = "ls --long --tree --level=3 --ignore-glob='.git'";
-      # ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes";
-      # lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes";
       fastfetch = "clear;command fastfetch";
       lg = "lazygit";
       v = "nvim";
       docker = "podman";
-      update = "
+      update = "\
         open /Applications/Latest.app
         brew update --quiet
         brew upgrade --quiet
         brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
         echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
-        (cd ~/dotfiles/nix/.config/nix-darwin &&
-        nix flake update --commit-lock-file > /dev/null)
+        (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
-        darwin-rebuild switch --flake ~/dotfiles/nix/.config/nix-darwin --impure > /dev/null
+        darwin-rebuild switch --flake ~/dotfiles --impure > /dev/null
       ";
     };
   };
@@ -67,7 +63,6 @@ in {
       darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
     };
     functions = {
-      # cat = "bat --paging=never --theme='fly16' $argv";
       cat = "bat $argv";
       ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
       lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes $argv";
@@ -94,7 +89,7 @@ in {
     enableZshIntegration = true;
     enableIonIntegration = false;
     enableNushellIntegration = false;
-    settings = pkgs.lib.importTOML ./starship.toml;
+    # settings = pkgs.lib.importTOML config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/starship/starship.toml";
   };
 
   programs.zoxide = {
@@ -116,7 +111,7 @@ in {
 
   programs.fastfetch = {
     enable = true;
-    settings = pkgs.lib.importJSON ./fastfetchConfig.jsonc;
+    # settings = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/fastfetch/fastfetchConfig.jsonc";
   };
 
   programs.eza = {
