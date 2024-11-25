@@ -11,12 +11,12 @@ in {
     stateVersion = "25.05";
     file = {
       ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/fastfetch";
+      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
+      ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
+      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
       ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
       ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
       ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
-      ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
-      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
-      ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
     };
     sessionVariables = {
       HOMEBREW_NO_ANALYTICS = "1";
@@ -89,7 +89,6 @@ in {
     enableZshIntegration = true;
     enableIonIntegration = false;
     enableNushellIntegration = false;
-    # settings = pkgs.lib.importTOML config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/starship/starship.toml";
   };
 
   programs.zoxide = {
@@ -109,10 +108,7 @@ in {
     };
   };
 
-  programs.fastfetch = {
-    enable = true;
-    # settings = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/fastfetch/fastfetchConfig.jsonc";
-  };
+  programs.fastfetch.enable = true;
 
   programs.eza = {
     enable = true;
