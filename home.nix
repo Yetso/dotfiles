@@ -50,7 +50,7 @@ in {
         echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
         (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
-        darwin-rebuild switch --flake ~/dotfiles --impure > /dev/null
+        darwin-rebuild switch --flake ~/dotfiles > /dev/null
       ";
     };
   };
