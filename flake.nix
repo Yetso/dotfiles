@@ -19,6 +19,10 @@
       configuration = { pkgs, config, lib, ... }: {
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
+        nix.settings.trusted-users = [
+          "root"
+          "@admin"
+        ];
         environment.systemPackages = with pkgs; [
           cargo
           # colima
