@@ -53,7 +53,7 @@
         environment.shells = [ pkgs.zsh ];
 
         fonts.packages = with pkgs; [
-          (nerdfonts.override { fonts = [ "CommitMono" ]; })
+          nerd-fonts.commit-mono
         ];
 
         homebrew = {
