@@ -24,6 +24,7 @@
           "@admin"
         ];
         environment.systemPackages = with pkgs; [
+          aerospace
           cargo
           # colima
           # docker
