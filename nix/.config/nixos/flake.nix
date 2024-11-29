@@ -56,7 +56,7 @@
 
           prime = {
             sync.enable = true;
-            intelBusId = "PCI:0:0:0";
+            amdgpuBusId = "PCI:0:0:0";
             nvidiaBusId = "PCI:8:0:0";
           };
 
