@@ -22,7 +22,7 @@ in {
     sessionVariables = {
       HOMEBREW_NO_ANALYTICS = "1";
       HOMEBREW_NO_ENV_HINTS = "true";
-      XDG_CONFIG_HOME = "/Users/yetso/.config";
+      XDG_CONFIG_HOME = "${homeDirectory}/.config";
       _ZO_RESOLVE_SYMLINKS = "1";
     };
   };
@@ -53,6 +53,38 @@ in {
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
         darwin-rebuild switch --flake ~/dotfiles > /dev/null
       ";
+    };
+  };
+
+  programs.nushell = {
+    enable = true;
+    extraLogin = "^fastfetch;fastfetch";
+    configFile.text = "$env.config = {
+        show_banner: false,
+      }
+      def upgrade [] {
+        ^open /Applications/Latest.app
+        brew update --quiet
+        brew upgrade --quiet
+        brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
+        # echo ([ansi blue] '==>' [ansi reset] ' ' [ansi bold] 'updating flake lock...' [ansi reset])
+        (cd ~/dotfiles ; nix flake update --commit-lock-file)
+        # echo ([ansi blue] '==>' [ansi reset] ' ' [ansi bold] 'rebuilding nix-darwin...' [ansi reset])
+        darwin-rebuild switch --flake ~/dotfiles
+      }
+      def fastfetch [] {
+        clear;^fastfetch
+      }
+      ";
+    envFile.text = "$env.PATH = (
+      $env.PATH | split row (char esep) | append /opt/homebrew/bin | append /opt/homebrew/sbin | append /Users/yetso/.nix-profile/bin | append /etc/profiles/per-user/yetso/bin | append /run/current-system/sw/bin | append /nix/var/nix/profiles/default/bin | uniq
+    )";
+    shellAliases = {
+      # cat = "bat";
+      # lt = "ls --long --tree --level=3 --ignore-glob='.git'";
+      lg = "lazygit";
+      v = "nvim";
+      docker = "podman";
     };
   };
 
@@ -87,17 +119,17 @@ in {
     enable = true;
     enableBashIntegration = false;
     enableFishIntegration = false;
-    enableZshIntegration = true;
+    enableZshIntegration = false;
     enableIonIntegration = false;
-    enableNushellIntegration = false;
+    enableNushellIntegration = true;
   };
 
   programs.zoxide = {
     enable = true;
     enableBashIntegration = false;
     enableFishIntegration = false;
-    enableZshIntegration = true;
-    enableNushellIntegration = false;
+    enableZshIntegration = false;
+    enableNushellIntegration = true;
     options = ["--cmd cd"];
   };
 

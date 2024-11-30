@@ -35,6 +35,7 @@
           gradle
           lua
           neovim
+          nushell
           python312
           python312Packages.pip
           wget
@@ -50,7 +51,7 @@
           XDG_CONFIG_HOME = "/Users/yetso/.config";
           _ZO_RESOLVE_SYMLINKS = "1";
         };
-        environment.shells = [ pkgs.zsh ];
+        environment.shells = [ pkgs.zsh pkgs.nushell];
 
         fonts.packages = with pkgs; [
           nerd-fonts.commit-mono
