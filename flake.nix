@@ -62,6 +62,7 @@
           onActivation.cleanup = "zap";
           onActivation.autoUpdate = true;
           onActivation.upgrade = true;
+          brews = [ "curl" ];
           casks = [
             "appcleaner"
             "bitwarden"

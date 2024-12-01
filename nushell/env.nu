@@ -9,7 +9,7 @@ $env.PATH = (
 	| append /nix/var/nix/profiles/default/bin
 	| uniq
 )
-load-env { "HOMEBREW_NO_AUTO_UPDATE": 1, "HOMEBREW_NO_ANALYTICS": 1 }
+load-env { "HOMEBREW_NO_AUTO_UPDATE": 1, "HOMEBREW_NO_ANALYTICS": 1, "HOMEBREW_FORCE_BREWED_CURL": 1 }
 
 let zoxide_cache = "/Users/yetso/.cache/zoxide"
 if not ($zoxide_cache | path exists) {
