@@ -1,12 +1,12 @@
 $env.PATH = (
 	$env.PATH
 	| split row (char esep)
-	| append /opt/homebrew/bin
-	| append /opt/homebrew/sbin
-	| append /Users/yetso/.nix-profile/bin
-	| append /etc/profiles/per-user/yetso/bin
-	| append /run/current-system/sw/bin
-	| append /nix/var/nix/profiles/default/bin
+	| prepend /opt/homebrew/bin
+	| prepend /opt/homebrew/sbin
+	| prepend /Users/yetso/.nix-profile/bin
+	| prepend /etc/profiles/per-user/yetso/bin
+	| prepend /run/current-system/sw/bin
+	| prepend /nix/var/nix/profiles/default/bin
 	| uniq
 )
 load-env { "HOMEBREW_NO_AUTO_UPDATE": 1, "HOMEBREW_NO_ANALYTICS": 1, "HOMEBREW_FORCE_BREWED_CURL": 1 }
