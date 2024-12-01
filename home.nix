@@ -12,6 +12,7 @@ in {
     file = {
       ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/aerospace/aerospace.toml";
       ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/fastfetch";
+      ".config/nushell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nushell";
       ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
       ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
       ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
