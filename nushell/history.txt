@@ -1,5 +1,0 @@
-zsh
-exit
-ls
-cd dot
-lg 
