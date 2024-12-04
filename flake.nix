@@ -38,6 +38,7 @@
           nushell
           python312
           python312Packages.pip
+          typst
           wget
           zoxide
           zulu
@@ -69,7 +70,6 @@
             "brave-browser"
             "coteditor"
             "cyberghost-vpn"
-            "discord"
             "firefox"
             "foxitreader"
             "latest"
@@ -78,6 +78,7 @@
             "skim"
             "spotify"
             "unnaturalscrollwheels"
+            "zirixcz/vesktop/vesktop"
             "vlc"
             { name = "wezterm@nightly"; }
           ];
