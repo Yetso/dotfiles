@@ -23,6 +23,8 @@ in {
     sessionVariables = {
       HOMEBREW_NO_ANALYTICS = "1";
       HOMEBREW_NO_ENV_HINTS = "true";
+      HOMEBREW_NO_AUTO_UPDATE = "1";
+      HOMEBREW_FORCE_BREWED_CURL = "1";
       XDG_CONFIG_HOME = "${homeDirectory}/.config";
       _ZO_RESOLVE_SYMLINKS = "1";
     };
