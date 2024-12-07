@@ -90,17 +90,17 @@ in {
     enable = true;
     enableBashIntegration = false;
     enableFishIntegration = false;
-    enableZshIntegration = false;
+    enableZshIntegration = true;
     enableIonIntegration = false;
-    enableNushellIntegration = true;
+    enableNushellIntegration = false;
   };
 
   programs.zoxide = {
     enable = true;
     enableBashIntegration = false;
     enableFishIntegration = false;
-    enableZshIntegration = false;
-    enableNushellIntegration = true;
+    enableZshIntegration = true;
+    enableNushellIntegration = false;
     options = ["--cmd cd"];
   };
 
