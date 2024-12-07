@@ -78,10 +78,14 @@
             "skim"
             "spotify"
             "unnaturalscrollwheels"
-            "zirixcz/vesktop/vesktop"
+            {
+              name = "yetso/vesktop/vesktop";
+              greedy = true;
+            }
             "vlc"
             { name = "wezterm@nightly"; }
           ];
+          taps = ["yetso/vesktop"];
         };
 
         users.users.yetso.home = "/Users/yetso";
@@ -127,7 +131,7 @@
               "/System/Applications/Mail.app"
               "/Applications/WezTerm.app"
               "/System/Applications/Music.app"
-              "/Applications/Discord(Vesktop).app"
+              "/Applications/Vesktop.app"
             ];
             show-recents = false;
             tilesize = 48;
