@@ -119,7 +119,6 @@ in {
     icons = "always";
     extraOptions = [
       "--binary"
-      "--total-size"
       "--group-directories-first"
       "--header"
       "--no-quotes"
