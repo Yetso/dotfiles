@@ -5,15 +5,15 @@ return {
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-path",
-
 		"hrsh7th/cmp-cmdline",
+
 		"L3MON4D3/luasnip",
 		"saadparwaiz1/cmp_luasnip",
 	},
 	opts = function()
 		local cmp = require("cmp")
 		-- local defaults = require("cmp.config.default")()
-		local auto_select = true
+		local auto_select = false
 		return {
 			auto_brackets = {},
 			completion = {
@@ -21,7 +21,7 @@ return {
 			},
 			preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
 			mapping = cmp.mapping.preset.insert({
-				["<C-CR>"] = cmp.mapping.confirm({
+				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,
 					select = true,
 				}),
