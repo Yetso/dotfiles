@@ -12,6 +12,7 @@ return {
 	},
 	opts = function()
 		local cmp = require("cmp")
+		local luasnip = require("luasnip")
 		-- local defaults = require("cmp.config.default")()
 		local auto_select = false
 		return {
@@ -20,14 +21,21 @@ return {
 				completeopt = "menu,menuone,noinsert" .. (auto_select and "" or ",noselect"),
 			},
 			preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+			snippet = {
+				expand = function(args)
+					luasnip.lsp_expand(args.body)
+				end,
+			},
 			mapping = cmp.mapping.preset.insert({
 				["<CR>"] = cmp.mapping.confirm({
 					behavior = cmp.ConfirmBehavior.Replace,
-					select = true,
+					select = false,
 				}),
 				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_next_item()
+					elseif luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump()
 					else
 						fallback()
 					end
@@ -35,6 +43,8 @@ return {
 				["<S-Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						cmp.select_prev_item()
+					elseif luasnip.jumpable(-1) then
+						luasnip.jump(-1)
 					else
 						fallback()
 					end
