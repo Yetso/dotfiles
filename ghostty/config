@@ -1,0 +1,39 @@
+# Fonts
+font-family = "CommitMono Nerd Font Mono"
+font-size = 14
+font-thicken = true
+# adjust-underline-position = 4
+
+# Mouse
+mouse-hide-while-typing = true
+# mouse-scroll-multiplier = 1
+
+shell-integration = zsh
+
+theme = moonfly
+
+background-opacity = 0.95
+
+minimum-contrast = 1
+
+window-vsync = false
+
+quit-after-last-window-closed = true
+
+window-save-state = always
+window-width = 1000
+window-height = 100
+
+quick-terminal-position = center
+quick-terminal-screen = macos-menu-bar
+
+macos-non-native-fullscreen = visible-menu
+
+macos-titlebar-style = native
+
+
+# Keybinds
+keybind = ctrl+h=goto_split:left
+keybind = ctrl+j=goto_split:bottom
+keybind = ctrl+k=goto_split:top
+keybind = ctrl+l=goto_split:right
