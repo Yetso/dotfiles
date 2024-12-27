@@ -44,6 +44,10 @@
           zulu
         ];
 
+        environment.systemPath = [
+          "/Applications/Ghostty.app/Contents/MacOS/"
+        ];
+
         environment.variables = {
           EDITOR = "nvim";
           LANG = "en_US.UTF-8";
@@ -129,7 +133,7 @@
             persistent-apps = [
               "/Applications/Firefox.app"
               "/System/Applications/Mail.app"
-              "/Applications/WezTerm.app"
+              "/Applications/Ghostty.app"
               "/System/Applications/Music.app"
               "/Applications/Vesktop.app"
             ];

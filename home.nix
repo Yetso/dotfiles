@@ -19,6 +19,7 @@ in {
       ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
       ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
       ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
+      ".config/ghostty/".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ghostty/";
     };
     sessionVariables = {
       HOMEBREW_NO_ANALYTICS = "1";

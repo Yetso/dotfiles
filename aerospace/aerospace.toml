@@ -49,6 +49,7 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
 if.app-name-regex-substring = 'finder'
+if.app-id="com.mitchellh.ghostty"
 run = 'layout floating'
 
 # Possible values: (qwerty|dvorak)
