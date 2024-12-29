@@ -3,6 +3,7 @@ font-family = "CommitMono Nerd Font Mono"
 font-size = 14
 font-thicken = true
 # adjust-underline-position = 4
+bold-is-bright = true
 
 # Mouse
 mouse-hide-while-typing = true
@@ -17,6 +18,7 @@ background-opacity = 0.95
 minimum-contrast = 1
 
 window-vsync = false
+window-colorspace = display-p3
 
 quit-after-last-window-closed = true
 
