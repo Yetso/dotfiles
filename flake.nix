@@ -76,6 +76,7 @@
             "cyberghost-vpn"
             "firefox"
             "foxitreader"
+            "ghostty"
             "latest"
             "onlyoffice"
             "qbittorrent"
