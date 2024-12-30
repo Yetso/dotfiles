@@ -7,7 +7,7 @@ bold-is-bright = true
 
 # Mouse
 mouse-hide-while-typing = true
-# mouse-scroll-multiplier = 1
+mouse-scroll-multiplier = 0.4
 
 shell-integration = zsh
 
