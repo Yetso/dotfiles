@@ -48,9 +48,16 @@ automatically-unhide-macos-hidden-apps = true
 # run = ['layout floating', 'move-node-to-workspace S']  # The callback itself
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'finder'
 if.app-id="com.mitchellh.ghostty"
 run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id="com.apple.finder"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id="org.mozilla.firefox"
+run = 'move-node-to-workspace 2'
 
 # Possible values: (qwerty|dvorak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
