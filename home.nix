@@ -16,9 +16,9 @@ in {
       ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
       ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
       ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
-      ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
-      ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
-      ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
+      # ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
+      # ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
+      # ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
       ".config/ghostty/".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ghostty/";
     };
     sessionVariables = {
@@ -51,41 +51,50 @@ in {
         open /Applications/Latest.app
         brew update --quiet
         brew upgrade --quiet
-        brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
         echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
         (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
         darwin-rebuild switch --flake ~/dotfiles > /dev/null
       ";
+      # update = "\
+      #   open /Applications/Latest.app
+      #   brew update --quiet
+      #   brew upgrade --quiet
+      #   brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
+      #   echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
+      #   (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
+      #   echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
+      #   darwin-rebuild switch --flake ~/dotfiles > /dev/null
+      # ";
     };
   };
 
-  programs.fish = {
-    enable = false;
-    shellAbbrs = {
-      lg = "lazygit";
-      v = "nvim";
-      darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
-    };
-    functions = {
-      cat = "bat $argv";
-      ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
-      lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes $argv";
-      fastfetch = "clear;command fastfetch $argv";
-      fish_greeting = "fastfetch";
-      update = "
-        set -l original_dir (pwd)
-        open /Applications/Latest.app
-        brew update
-        brew upgrade
-        brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
-        cd ~/dotfiles/nix/.config/nix-darwin/
-        nix flake update --commit-lock-file
-        darwin-rebuild switch --flake . --impure
-        cd $original_dir
-      ";
-    };
-  };
+  # programs.fish = {
+  #   enable = false;
+  #   shellAbbrs = {
+  #     lg = "lazygit";
+  #     v = "nvim";
+  #     darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
+  #   };
+  #   functions = {
+  #     cat = "bat $argv";
+  #     ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
+  #     lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes $argv";
+  #     fastfetch = "clear;command fastfetch $argv";
+  #     fish_greeting = "fastfetch";
+  #     update = "
+  #       set -l original_dir (pwd)
+  #       open /Applications/Latest.app
+  #       brew update
+  #       brew upgrade
+  #       brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
+  #       cd ~/dotfiles/nix/.config/nix-darwin/
+  #       nix flake update --commit-lock-file
+  #       darwin-rebuild switch --flake . --impure
+  #       cd $original_dir
+  #     ";
+  #   };
+  # };
 
   programs.starship = {
     enable = true;
@@ -158,5 +167,13 @@ in {
     enable = true;
     userName = "Yetso";
     userEmail = "dav.catoul@gmail.com";
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableBashIntegration = false;
+    enableFishIntegration = false;
+    enableZshIntegration = true;
+    enableNushellIntegration = false;
   };
 }
