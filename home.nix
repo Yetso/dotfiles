@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  homeDirectory = "/Users/yetso";
+  homeDirectory = "/home/yetso";
   dotfiles = "${homeDirectory}/dotfiles";
 in {
   xdg.enable = true;
@@ -10,22 +10,22 @@ in {
     homeDirectory = "${homeDirectory}";
     stateVersion = "24.11";
     file = {
-      ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/aerospace/aerospace.toml";
+      # ".config/aerospace/aerospace.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/aerospace/aerospace.toml";
       ".config/fastfetch".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/fastfetch";
-      ".config/nushell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nushell";
+      # ".config/nushell".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nushell";
       ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
       ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
-      ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
-      ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
-      ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
+      # ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
+      # ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
+      # ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
       ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
       ".config/ghostty/".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ghostty/";
     };
     sessionVariables = {
-      HOMEBREW_NO_ANALYTICS = "1";
-      HOMEBREW_NO_ENV_HINTS = "true";
-      HOMEBREW_NO_AUTO_UPDATE = "1";
-      HOMEBREW_FORCE_BREWED_CURL = "1";
+      # HOMEBREW_NO_ANALYTICS = "1";
+      # HOMEBREW_NO_ENV_HINTS = "true";
+      # HOMEBREW_NO_AUTO_UPDATE = "1";
+      # HOMEBREW_FORCE_BREWED_CURL = "1";
       XDG_CONFIG_HOME = "${homeDirectory}/.config";
       _ZO_RESOLVE_SYMLINKS = "1";
     };
@@ -48,14 +48,10 @@ in {
       v = "nvim";
       docker = "podman";
       update = "\
-        open /Applications/Latest.app
-        brew update --quiet
-        brew upgrade --quiet
-        brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
         echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
-        (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
+        (cd ~/dotfiles && sudo nix flake update --commit-lock-file > /dev/null)
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
-        darwin-rebuild switch --flake ~/dotfiles > /dev/null
+        sudo nixos-rebuild switch --flake ~/dotfiles > /dev/null
       ";
     };
   };

@@ -1,223 +1,240 @@
 {
-  description = "Yetso Darwin system flake";
+  description = "Yetso nixos system flake";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nix-darwin, nixpkgs, nix-homebrew, home-manager }:
+  outputs = { self, nixpkgs, home-manager }:
     let
       configuration = { pkgs, config, lib, ... }: {
+        imports = [
+          # Include the results of the hardware scan.
+          ./hardware-configuration.nix
+        ];
+
+        ##### NIXOS config
+        # Bootloader.
+        boot.loader.systemd-boot.enable = true;
+        boot.loader.efi.canTouchEfiVariables = true;
+
+        networking.hostName = "nixos"; # Define your hostname.
+        # Enable networking
+        networking.networkmanager.enable = true;
+
+        # Set your time zone.
+        time.timeZone = "Europe/Brussels";
+
+        # Select internationalisation properties.
+        i18n.defaultLocale = "en_US.UTF-8";
+        nix.gc = {
+          automatic = true;
+          randomizedDelaySec = "14m";
+          options = "--delete-older-than 5d";
+        };
+        # Enable OpenGL
+        hardware.graphics = {
+          enable = true;
+          enable32Bit = true;
+        };
+
+        # Enable the X11 windowing system.
+        services.xserver.enable = true;
+        services.xserver.videoDrivers = [ "nvidia" ];
+
+        hardware.nvidia = {
+          # Modesetting is required.
+          modesetting.enable = true;
+
+          prime = {
+            sync.enable = true;
+            amdgpuBusId = "PCI:0:0:0";
+            nvidiaBusId = "PCI:8:0:0";
+          };
+
+          # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+          # Enable this if you have graphical corruption issues or application crashes after waking
+          # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
+          # of just the bare essentials.
+          powerManagement.enable = false;
+
+          # Fine-grained power management. Turns off GPU when not in use.
+          # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+          powerManagement.finegrained = false;
+
+          # Use the NVidia open source kernel module (not to be confused with the
+          # independent third-party "nouveau" open source driver).
+          # Support is limited to the Turing and later architectures. Full list of supported GPUs is at:
+          # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+          # Only available from driver 515.43.04+
+          # Currently alpha-quality/buggy, so false is currently the recommended setting.
+          open = false;
+
+          # Enable the Nvidia settings menu,
+          # accessible via `nvidia-settings`.
+          nvidiaSettings = true;
+
+          # Optionally, you may need to select the appropriate driver version for your specific GPU.
+          package = config.boot.kernelPackages.nvidiaPackages.stable;
+        };
+
+        # Enable the KDE Plasma Desktop Environment.
+        services.displayManager.sddm.enable = true;
+        services.desktopManager.plasma6.enable = true;
+
+        # Configure keymap in X11
+        services.xserver.xkb = {
+          layout = "us";
+          variant = "";
+        };
+        # Enable sound with pipewire.
+        services.pulseaudio.enable = false;
+        security.rtkit.enable = true;
+        services.pipewire = {
+          enable = true;
+          alsa.enable = true;
+          alsa.support32Bit = true;
+          pulse.enable = true;
+          # If you want to use JACK applications, uncomment this
+          #jack.enable = true;
+
+          # use the example session manager (no others are packaged yet so this is enabled by default,
+          # no need to redefine it in your config for now)
+          #media-session.enable = true;
+        };
+        users.users.yetso = {
+          shell = pkgs.zsh;
+          isNormalUser = true;
+          description = "yetso";
+          extraGroups = [ "networkmanager" "wheel" ];
+          packages = with pkgs; [
+            #  thunderbird
+          ];
+        };
+        ##################
+
+
         # List packages installed in system profile. To search by name, run:
         # $ nix-env -qaP | grep wget
         nix.settings.trusted-users = [
           "root"
           "@admin"
         ];
+
+        # Allow unfree packages
+        nixpkgs.config.allowUnfree = true;
+
+        # Install firefox.
+        programs.firefox.enable = true;
+        # Install steam.
+        programs.steam.enable = true;
+        programs.steam.gamescopeSession.enable = true;
+        environment.variables = {
+          STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/yetso/.steam/root/compatibilitytools.d";
+        };
+        programs.gamemode.enable = true;
+        programs.neovim.enable = true;
+        programs.neovim.defaultEditor = true;
         environment.systemPackages = with pkgs; [
-          aerospace
+          bat
+          bottles
           cargo
-          # colima
-          # docker
+          curl
+          discord
+          eza
+          fastfetch
           podman
-          # duti
           fzf
+          gcc
           git
+          glibc
+          gnumake
+          ghostty
           gradle
+          heroic
+          lazygit
           lua
-          neovim
-          nushell
-          python312
-          python312Packages.pip
-          typst
+          lutris
           wget
+          xsel
           zoxide
           zulu
         ];
 
-        environment.systemPath = [
-          "/Applications/Ghostty.app/Contents/MacOS/"
-        ];
 
-        environment.variables = {
-          EDITOR = "nvim";
-          LANG = "en_US.UTF-8";
-          HOMEBREW_NO_ANALYTICS = "1";
-          HOMEBREW_NO_ENV_HINTS = "1";
-          XDG_CONFIG_HOME = "/Users/yetso/.config";
-          _ZO_RESOLVE_SYMLINKS = "1";
-        };
-        environment.shells = [ pkgs.zsh pkgs.nushell];
+        environment.shells = [ pkgs.zsh ];
 
         fonts.packages = with pkgs; [
           nerd-fonts.commit-mono
         ];
 
-        homebrew = {
-          enable = true;
-          onActivation.cleanup = "zap";
-          onActivation.autoUpdate = true;
-          onActivation.upgrade = true;
-          brews = [ "curl" ];
-          casks = [
-            "appcleaner"
-            "bitwarden"
-            "brave-browser"
-            "coteditor"
-            "cyberghost-vpn"
-            "firefox"
-            "foxitreader"
-            "ghostty"
-            "latest"
-            "onlyoffice"
-            "qbittorrent"
-            "skim"
-            "spotify"
-            "unnaturalscrollwheels"
-            {
-              name = "yetso/vesktop/vesktop";
-              greedy = true;
-            }
-            "vlc"
-            { name = "wezterm@nightly"; }
-          ];
-          taps = ["yetso/vesktop"];
-        };
-
-        users.users.yetso.home = "/Users/yetso";
-        nix.configureBuildUsers = true;
-
-
-        system.defaults = {
-          ".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
-          hitoolbox.AppleFnUsageType = "Do Nothing";
-          LaunchServices.LSQuarantine = false;
-          NSGlobalDomain = {
-            AppleEnableSwipeNavigateWithScrolls = true;
-            AppleInterfaceStyle = "Dark";
-            AppleMeasurementUnits = "Centimeters";
-            AppleMetricUnits = 1;
-            AppleShowAllExtensions = true;
-            AppleTemperatureUnit = "Celsius";
-            InitialKeyRepeat = 15;
-            KeyRepeat = 2;
-            NSAutomaticCapitalizationEnabled = false;
-            NSDisableAutomaticTermination = false;
-            NSScrollAnimationEnabled = false;
-            NSTableViewDefaultSizeMode = 1;
-            NSWindowResizeTime = 0.0;
-            "com.apple.keyboard.fnState" = true;
-            "com.apple.sound.beep.feedback" = 1;
-            "com.apple.springing.enabled" = false;
-            "com.apple.trackpad.forceClick" = false;
-          };
-          WindowManager.AppWindowGroupingBehavior = true;
-          WindowManager.EnableStandardClickToShowDesktop = false;
-          WindowManager.StandardHideDesktopIcons = false;
-          dock = {
-            autohide = true;
-            autohide-delay = 0.0;
-            autohide-time-modifier = 0.1;
-            expose-animation-duration = 0.3;
-            magnification = false;
-            mineffect = "scale";
-            minimize-to-application = true;
-            persistent-apps = [
-              "/Applications/Firefox.app"
-              "/System/Applications/Mail.app"
-              "/Applications/Ghostty.app"
-              "/System/Applications/Music.app"
-              "/Applications/Vesktop.app"
-            ];
-            show-recents = false;
-            tilesize = 48;
-            wvous-bl-corner = 11; #add launchpad shortcut on hotCorner
-          };
-          finder = {
-            AppleShowAllExtensions = true;
-            FXDefaultSearchScope = "SCcf";
-            FXPreferredViewStyle = "Nlsv";
-            _FXSortFoldersFirst = true;
-            ShowPathbar = true;
-          };
-          trackpad.ActuationStrength = 1;
-          trackpad.TrackpadRightClick = true;
-          universalaccess.mouseDriverCursorSize = 0.5;
-        };
-        time.timeZone = "Europe/Brussels";
-        system.startup.chime = false;
-
-        security.pam.enableSudoTouchIdAuth = true;
-
-        # Auto upgrade nix package and the daemon service.
-        services.nix-daemon.enable = true;
-        nix.package = pkgs.nix;
+        # homebrew = {
+        #   enable = true;
+        #   onActivation.cleanup = "zap";
+        #   onActivation.autoUpdate = true;
+        #   onActivation.upgrade = true;
+        #   brews = [ "curl" ];
+        #   casks = [
+        #     "appcleaner"
+        #     "bitwarden"
+        #     "brave-browser"
+        #     "coteditor"
+        #     "cyberghost-vpn"
+        #     "firefox"
+        #     "foxitreader"
+        #     "ghostty"
+        #     "latest"
+        #     "onlyoffice"
+        #     "qbittorrent"
+        #     "skim"
+        #     "spotify"
+        #     "unnaturalscrollwheels"
+        #     {
+        #       name = "yetso/vesktop/vesktop";
+        #       greedy = true;
+        #     }
+        #     "vlc"
+        #     { name = "wezterm@nightly"; }
+        #   ];
+        #   taps = ["yetso/vesktop"];
+        # };
 
         # Necessary for using flakes on this system.
         nix.settings.experimental-features = "nix-command flakes";
 
         # Create /etc/zshrc that loads the nix-darwin environment.
-        programs.bash.enable = false;
         programs.zsh = {
           enable = true;
-          enableSyntaxHighlighting = true;
+          syntaxHighlighting.enable = true;
           enableBashCompletion = false;
           promptInit = "autoload -Uz promptinit && promptinit";
         };
         programs.fish.enable = false;
 
-        # Set Git commit hash for darwin-version.
-        system.configurationRevision = self.rev or self.dirtyRev or null;
-        nixpkgs.hostPlatform = "aarch64-darwin";
-
-        nixpkgs.config.allowUnfree = true; # allow non open source application
-
-        system.stateVersion = 5;
+        system.stateVersion = "24.05";
         # nix.extraOptions = ''
         #   extra-platforms = x86_64-darwin aarch64-darwin
         # '';
 
-        # Just to add JDK
-        system.activationScripts.extraActivation.text = "ln -sf '${pkgs.zulu}/zulu-21.jdk' '/Library/Java/JavaVirtualMachines/'";
       };
     in
     {
-      # Build darwin flake using:
-      # $ darwin-rebuild build --flake .#Yetso-laptop
-      darwinConfigurations."Yetso-laptop" = nix-darwin.lib.darwinSystem {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
           configuration
-          home-manager.darwinModules.home-manager
+          home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.yetso = import ./home.nix;
           }
-          nix-homebrew.darwinModules.nix-homebrew
-          {
-            nix-homebrew = {
-              enable = true;
-              # Apple Silicon Only: Also install Homebrew under the default Intel prefix for Rosetta 2
-              # enableRosetta = true;
-              # User owning the Homebrew prefix
-              user = "yetso";
-              # Automatically migrate existing Homebrew installations
-              # autoMigrate = true;
-            };
-          }
         ];
       };
 
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Yetso-laptop".pkgs;
     };
 }
