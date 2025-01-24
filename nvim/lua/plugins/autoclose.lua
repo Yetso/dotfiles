@@ -4,7 +4,7 @@ return {
 	-- config = true,
 	opts = {
 		options = {
-			disabled_filetypes = { "text", "markdown" },
+			disabled_filetypes = { "text", "markdown", "typst" },
 		},
 	},
 }
