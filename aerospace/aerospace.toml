@@ -49,10 +49,14 @@ automatically-unhide-macos-hidden-apps = true
 
 [[on-window-detected]]
 if.app-id="com.mitchellh.ghostty"
-run = 'layout floating'
+run = ['layout floating', 'move-node-to-workspace 1']
 
 [[on-window-detected]]
 if.app-id="com.apple.finder"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.azul.zulu.java'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -156,7 +160,6 @@ alt-shift-0 = 'move-node-to-workspace 0 --focus-follows-window'
 alt-enter = 'fullscreen'
 alt-m = 'macos-native-minimize'
 alt-e = 'close'
-# alt-ctrl-f = 'layout floating'
 
 # alt-shift-left = 'join-with left'
 # alt-shift-down = 'join-with down'
