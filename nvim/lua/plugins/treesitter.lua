@@ -34,6 +34,7 @@ return {
 			"bash",
 			"regex",
 			"toml",
+			"typst",
 			"xml",
 			"yaml",
 			"diff",
