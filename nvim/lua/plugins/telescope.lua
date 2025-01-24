@@ -36,9 +36,11 @@ return {
 				pickers = {
 					lsp_references = {
 						show_line = false,
+						initial_mode = "normal",
 					},
 					lsp_definitions = {
 						show_line = false,
+						initial_mode = "normal",
 					},
 				},
 			}
