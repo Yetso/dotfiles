@@ -9,6 +9,8 @@ bold-is-bright = true
 mouse-hide-while-typing = true
 mouse-scroll-multiplier = 0.4
 
+scrollback-limit = 100000000
+
 shell-integration = zsh
 
 theme = moonfly
@@ -31,7 +33,7 @@ quick-terminal-screen = macos-menu-bar
 
 macos-non-native-fullscreen = visible-menu
 
-macos-titlebar-style = native
+macos-titlebar-style = transparent
 
 
 # Keybinds
