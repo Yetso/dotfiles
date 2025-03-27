@@ -94,7 +94,6 @@
         };
 
         users.users.yetso.home = "/Users/yetso";
-        nix.configureBuildUsers = true;
 
 
         system.defaults = {
@@ -156,10 +155,9 @@
         time.timeZone = "Europe/Brussels";
         system.startup.chime = false;
 
-        security.pam.enableSudoTouchIdAuth = true;
+        security.pam.services.sudo_local.touchIdAuth = true;
 
         # Auto upgrade nix package and the daemon service.
-        services.nix-daemon.enable = true;
         nix.package = pkgs.nix;
 
         # Necessary for using flakes on this system.
