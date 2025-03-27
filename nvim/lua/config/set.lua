@@ -10,16 +10,16 @@ vim.opt.mouse = 'a'
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+-- Case-insensitive searching (if smartcase) UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
-vim.opt.smartcase = true
+-- vim.opt.smartcase = true
 
 -- Enable break indent
 vim.opt.breakindent = true
 vim.opt.wrap = false
 
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+-- vim.opt.signcolumn = 'yes'
 
 vim.opt.iskeyword:append("-")
 
@@ -33,8 +33,8 @@ vim.opt.timeoutlen = 500
 vim.opt.inccommand = 'split'
 
 -- disable netrw at the very start of your init.lua
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 vim.o.hlsearch = true
 vim.o.cursorline = true
@@ -74,7 +74,7 @@ vim.opt.relativenumber = true
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undodir"
 vim.opt.undofile = true
 
 vim.opt.incsearch = true
@@ -83,9 +83,7 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 12
 
-vim.opt.confirm = true
+-- vim.opt.confirm = true
+vim.diagnostic.config({ virtual_text = true})
 
-vim.opt.smoothscroll = true
-vim.opt.foldexpr = "v:lua.require'lazyvim.util'.ui.foldexpr()"
-vim.opt.foldmethod = "expr"
-vim.opt.foldtext = ""
+vim.opt.guicursor = "n-v-c:block-Cursor,i:ver25-Cursor,r:hor20-Cursor"
