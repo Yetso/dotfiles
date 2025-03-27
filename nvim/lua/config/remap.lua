@@ -11,9 +11,21 @@ vim.keymap.set({ 'n', 't' }, '<C-l>', '<Cmd>wincmd l<CR>', { desc = 'Move focus 
 vim.keymap.set({ 'n', 't' }, '<C-j>', '<Cmd>wincmd j<CR>', { desc = 'Move focus to the lower window' })
 vim.keymap.set({ 'n', 't' }, '<C-k>', '<Cmd>wincmd k<CR>', { desc = 'Move focus to the upper window' })
 
+-- copy to system clipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { silent = true })
 
-vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- dont move the cursor after a yanking
+vim.keymap.set('v', 'y', 'ygv<Esc>', { noremap = true, silent = true })
+
+-- dont move the cursor after an indent
+vim.keymap.set('v', '>', '>gv<Esc>', { noremap = true, silent = true })
+vim.keymap.set('v', '<', '<gv<Esc>', { noremap = true, silent = true })
+
+-- delete without copying to buffer "
+vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { noremap = true, silent = true })
+vim.keymap.set('x', '<leader>p', '"_dP', { noremap = true, silent = true })
+
+-- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 -- Fonction pour vérifier si la fenêtre actuelle est flottante
 local function is_floating_window()
