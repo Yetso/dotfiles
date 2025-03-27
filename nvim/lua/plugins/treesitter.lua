@@ -2,11 +2,8 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	version = false,
 	build = ":TSUpdate",
-	event = { "VeryLazy" },
+	event = {"BufReadPre", "VeryLazy" },
 	lazy = vim.fn.argc(-1) == 0, --load treesitter early when opening a file from the CMDline
-	dependencies = {
-		'nvim-treesitter/nvim-treesitter-textobjects',
-	},
 	init = function(plugin)
 		require("lazy.core.loader").add_to_rtp(plugin)
 		require("nvim-treesitter.query_predicates")
@@ -19,43 +16,27 @@ return {
 		highlight = { enable = true },
 		indent = { enable = true },
 		ensure_installed = {
+			"bash",
 			"c",
+			"c_sharp",
+			"diff",
+			"java",
+			"json",
 			"lua",
-			"luap",
 			"luadoc",
-			"regex",
-			"vim",
-			"vimdoc",
-			"query",
+			"luap",
 			"markdown",
 			"markdown_inline",
-			"java",
+			"nix",
 			"python",
-			"bash",
+			"query",
 			"regex",
 			"toml",
 			"typst",
+			"vim",
+			"vimdoc",
 			"xml",
 			"yaml",
-			"diff",
-			"json",
-			"nix",
-		},
-		textobjects = {
-			select = {
-				enable = true,
-				lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-				keymaps = {
-					-- You can use the capture groups defined in textobjects.scm
-					['af'] = '@function.outer',
-					['if'] = '@function.inner',
-					['ac'] = '@class.outer',
-					['ic'] = '@class.inner',
-					['il'] = '@loop.inner',
-					['al'] = '@loop.outer',
-					['at'] = '@comment.outer',
-				},
-			},
 		},
 	},
 	---@param opts TSConfig
