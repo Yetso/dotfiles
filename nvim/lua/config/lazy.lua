@@ -15,6 +15,9 @@ require("lazy").setup({
 			"lazy",
 		},
 	},
+	rocks = {
+		enabled = false,
+	},
 	install = {
 		colorscheme = { "moonfly" }
 	},
@@ -23,4 +26,13 @@ require("lazy").setup({
 		notify = false,
 	},
 	checker = { enabled = true, notify = false, },
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip", "netrwPlugin",
+				"tarPlugin", "tohtml",
+				"tutor", "zipPlugin",
+			},
+		},
+	},
 })
