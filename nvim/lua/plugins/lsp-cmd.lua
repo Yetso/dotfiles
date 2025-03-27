@@ -15,6 +15,7 @@ return {
 		local luasnip = require("luasnip")
 		-- local defaults = require("cmp.config.default")()
 		local auto_select = false
+		luasnip.config.set_config({ updateevents = "TextChanged,TextChangedI" })
 		return {
 			auto_brackets = {},
 			completion = {
@@ -53,15 +54,45 @@ return {
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				{ name = "luasnip" },
+				-- { name = "path" },
 			}, {
 				{ name = "buffer" },
 			}),
 			formatting = {
 				format = function(entry, item)
-					-- local icons = vim.config.icons.kinds
-					-- if icons[item.kind] then
-					-- 	item.kind = icons[item.kind] .. item.kind
-					-- end
+					local kind_icons = {
+						Text = "",
+						Method = "󰆧",
+						Function = "󰊕",
+						Constructor = "",
+						Field = "",
+						Variable = "󰀫",
+						Class = "",
+						Interface = "",
+						Module = "",
+						Property = "",
+						Unit = "",
+						Value = "󰎠",
+						Enum = "",
+						Keyword = "󰌋",
+						Snippet = "",
+						Color = "󰏘",
+						File = "󰈙",
+						Reference = "󰈇",
+						Folder = "󰉋",
+						EnumMember = "",
+						Constant = "󰏿",
+						Struct = "",
+						Event = "",
+						Operator = "󰆕",
+						TypeParameter = "󰅲",
+					}
+
+					item.kind = string.format("%s %s", kind_icons[item.kind] or "", item.kind)
+
+					-- -- Ajout de padding pour lisibilité
+					-- item.abbr = " " .. item.abbr
+					-- item.menu = " (" .. (entry.source.name) .. ")"
 
 					local widths = {
 						abbr = vim.g.cmp_widths and vim.g.cmp_widths.abbr or 40,

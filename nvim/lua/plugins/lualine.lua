@@ -3,8 +3,6 @@ return {
 	lazy = false,
 	dependencies = {
 		"nvim-tree/nvim-web-devicons",
-		"folke/noice.nvim",
-		-- "linrongbin16/lsp-progress.nvim",
 	},
 	opts = {
 		options = {
@@ -12,10 +10,7 @@ return {
 			globalstatus = true,
 		},
 		extensions = {
-			"nvim-tree",
 			"lazy",
-			"toggleterm",
-			"fugitive",
 		},
 		sections = {
 			lualine_c = {
@@ -24,7 +19,7 @@ return {
 					'filename',
 					file_status = true, -- Displays file status (readonly status, modified status)
 					newfile_status = false, -- Display new file status (new file means no write after created)
-					path = 4, -- 0: Just the filename
+					path = 1, -- 0: Just the filename
 					-- 1: Relative path
 					-- 2: Absolute path
 					-- 3: Absolute path, with tilde as the home directory
@@ -42,10 +37,13 @@ return {
 					color = {fg = "#ff0000"}
 				},
 				{
----@diagnostic disable-next-line: undefined-field
-					require("noice").api.status.mode.get,
----@diagnostic disable-next-line: undefined-field
-					cond = require("noice").api.status.mode.has,
+					function()
+						return "recording @ " .. vim.fn.reg_recording()
+					end,
+					cond = function ()
+						if vim.fn.reg_recording() == "" then return false end
+						return true
+					end,
 					color = { fg = "#ff9e64" },
 				},
 				{ "encoding" },
