@@ -116,9 +116,17 @@ in {
 
   programs.lazygit = {
     enable = true;
-    settings.gui = {
-      theme.selectedLineBgColor = [ "#1c1c1c" ];
-      nerdFontsVersion = 3;
+    settings = {
+      git = {
+        paging = {
+          colorArg = "always";
+          pager = "delta --dark --paging=never --line-numbers --blame-code-style=syntax --tabs=4";
+        };
+      };
+      gui = {
+        theme.selectedLineBgColor = [ "#1c1c1c" ];
+        nerdFontsVersion = 3;
+      };
     };
   };
 

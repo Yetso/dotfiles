@@ -28,6 +28,7 @@
           cargo
           # colima
           # docker
+          delta
           podman
           # duti
           fzf
