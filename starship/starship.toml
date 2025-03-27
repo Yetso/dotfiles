@@ -30,12 +30,12 @@ os = "linux"
 [directory]
 read_only = " 󰌾"
 truncation_length = 0
-format = "[](bg:background fg:#3B76F0)[  $path ]($style)[](fg:#3B76F0 bg:background)"
+format = "[](bg:#3B76F0 fg:background)[  $path ]($style)[](fg:#3B76F0 bg:background)"
 style = "fg:brightwhite bg:#3B76F0"
 
 
 [git_branch]
-format = '[](bg:background fg:#FCF392)[ $symbol$branch(:$remote_branch) ]($style)'
+format = '[](bg:#FCF392 fg:background)[ $symbol$branch(:$remote_branch) ]($style)'
 symbol = " "
 style = "fg:#1C3A5E bg:#FCF392"
 
