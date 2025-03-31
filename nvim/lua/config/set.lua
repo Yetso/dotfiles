@@ -84,6 +84,6 @@ vim.opt.termguicolors = true
 vim.opt.scrolloff = 12
 
 -- vim.opt.confirm = true
-vim.diagnostic.config({ virtual_text = true})
+vim.diagnostic.config({ virtual_lines = { current_line = true }})
 
 vim.opt.guicursor = "n-v-c:block-Cursor,i:ver25-Cursor,r:hor20-Cursor"
