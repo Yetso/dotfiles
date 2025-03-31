@@ -16,6 +16,7 @@ in {
       ".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/nvim";
       ".ssh/config".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/ssh/config";
       ".config/starship.toml".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/starship/starship.toml";
+      ".config/lazygit".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/lazygit";
       # ".config/wezterm".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.config";
       # ".wezterm-completion.sh".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.wezterm-completion.sh";
       # ".terminfo".source = config.lib.file.mkOutOfStoreSymlink "${dotfiles}/wezterm/.terminfo";
@@ -114,21 +115,7 @@ in {
     options = ["--cmd cd"];
   };
 
-  programs.lazygit = {
-    enable = true;
-    settings = {
-      git = {
-        paging = {
-          colorArg = "always";
-          pager = "delta --dark --paging=never --line-numbers --blame-code-style=syntax --tabs=4";
-        };
-      };
-      gui = {
-        theme.selectedLineBgColor = [ "#1c1c1c" ];
-        nerdFontsVersion = 3;
-      };
-    };
-  };
+  programs.lazygit = { enable = true; };
 
   programs.fastfetch.enable = true;
 
