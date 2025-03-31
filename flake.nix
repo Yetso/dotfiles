@@ -26,19 +26,19 @@
         environment.systemPackages = with pkgs; [
           aerospace
           cargo
-          # colima
-          # docker
           delta
-          podman
           # duti
+          fd
           fzf
           git
           gradle
           lua
           neovim
           nushell
+          podman
           python312
           python312Packages.pip
+          ripgrep
           typst
           wget
           zoxide
@@ -73,7 +73,6 @@
             "appcleaner"
             "bitwarden"
             "brave-browser"
-            "coteditor"
             "cyberghost-vpn"
             "firefox"
             "foxitreader"
