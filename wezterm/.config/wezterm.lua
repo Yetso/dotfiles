@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 config.check_for_updates = false
 
 config.font = wezterm.font('CommitMono Nerd Font Mono')
-config.font_size = 14
+config.font_size = 12
 
 config.color_scheme = "moonfly"
 
@@ -20,7 +20,8 @@ config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.enable_scroll_bar = false
 
 config.audible_bell = "Disabled"
-config.term = "wezterm"
+-- config.term = "wezterm"
+config.term = "xterm-256color"
 config.front_end = "WebGpu"
 
 config.window_background_opacity = 0.95
@@ -52,6 +53,52 @@ config.window_padding = {
 	top = 0,
 	bottom = 0,
 }
+config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe', '-NoLogo' }
 
+config.keys = {
+	{key="1", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="!", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="!", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="2", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="@", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="@", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="3", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="#", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="#", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="4", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="$", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="$", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="5", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="%", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="%", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="6", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="^", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="^", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="7", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="&", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="&", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="8", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="*", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="*", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="9", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="(", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key="(", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="0", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key=")", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
+	{key=")", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
+	{key="1", mods="ALT", action=wezterm.action.ActivateTab(0)},
+    {key="2", mods="ALT", action=wezterm.action.ActivateTab(1)},
+    {key="3", mods="ALT", action=wezterm.action.ActivateTab(2)},
+    {key="4", mods="ALT", action=wezterm.action.ActivateTab(3)},
+    {key="5", mods="ALT", action=wezterm.action.ActivateTab(4)},
+    {key="6", mods="ALT", action=wezterm.action.ActivateTab(5)},
+    {key="7", mods="ALT", action=wezterm.action.ActivateTab(6)},
+    {key="8", mods="ALT", action=wezterm.action.ActivateTab(7)},
+    {key="9", mods="ALT", action=wezterm.action.ActivateTab(8)},
+    {key="0", mods="ALT", action=wezterm.action.ActivateTab(9)},
+	{key="t", mods="ALT", action=wezterm.action.SpawnTab("CurrentPaneDomain")},
+	{key="n", mods="ALT", action=wezterm.action.SpawnWindow},
+}
 
 return config
+
