@@ -69,7 +69,7 @@ return {
 		git = { enabled = false },
 		lazygit = {
 			enabled = true,
-			-- configure = false,
+			configure = false,
 		},
 		quickfile = { enabled = true },
 		dashboard = { enabled = true },
@@ -97,6 +97,11 @@ return {
 				},
 			},
 			win = {
+				input = {
+					keys = {
+						["l"] = "confirm",
+					},
+				},
 				list = {
 					keys = {
 						["<C-p>"] = false,
@@ -106,10 +111,8 @@ return {
 			},
 		},
 
-		trouble = { enabled = true },
-
-		scope = { enabled = false },
 		scroll = { enabled = false },
+		scope = { enabled = false },
 		words = { enabled = false },
 		bigfile = { enabled = false },
 	},

@@ -3,7 +3,8 @@ return {
 	version = false,
 	build = ":TSUpdate",
 	event = {"BufReadPre", "VeryLazy" },
-	lazy = vim.fn.argc(-1) == 0, --load treesitter early when opening a file from the CMDline
+---@diagnostic disable-next-line: param-type-mismatch
+	lazy = vim.fn.argc(-1) == 0 or vim.fn.isdirectory(vim.fn.argv(0)) == 1, --load treesitter early when opening a file from the CMDline
 	init = function(plugin)
 		require("lazy.core.loader").add_to_rtp(plugin)
 		require("nvim-treesitter.query_predicates")
