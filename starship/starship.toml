@@ -1,17 +1,29 @@
-add_newline = true
-palette = "moonfly"
-
 format = """\
 ${custom.apple}\
 ${custom.linux}\
-$time\
+${custom.windows}\
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
 $git_metrics \
 $all\
-$character
+$character\
 """
+command_timeout = 1000
+add_newline = true
+palette = "moonfly"
+
+[username]
+show_always = true
+format = '[](bg:#1C3A5E fg:background)[  $user ](bg:#1C3A5E fg:#8DFBD2)[](fg:#1C3A5E bg:background)'
+
+[hostname]
+ssh_only = true
+ssh_symbol = "󰌘 "
+format = '[](bg:#88C0D0 fg:background)[$hostname ](fg:background bg:#88C0D0)[](fg:#88C0D0 bg:background)'
+style = "fg:brightwhite bg:#88C0D0"
 
 [custom.apple]
 format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:background)"
@@ -27,8 +39,15 @@ symbol = " "
 when = true
 os = "linux"
 
+[custom.windows]
+format = "[](bg:background fg:bright-cyan)[$symbol]($style)[](fg:bright-cyan bg:background)"
+style = "bg:bright-cyan fg:background"
+symbol = " "
+when = true
+os = "windows"
+
 [time]
-disabled = false
+disabled = true
 time_format = "%R" # Hour:Minute Format
 format = '[](bg:#1C3A5E fg:background)[ 󱑍 $time ](bg:#1C3A5E fg:#8DFBD2)[](fg:#1C3A5E bg:background)'
 
@@ -44,53 +63,31 @@ symbol = " "
 style = "fg:#1C3A5E bg:#FCF392"
 
 [git_status]
-format = '[$all_status]($style)'
+format = '[$ahead_behind$up_to_date $untracked$modified$staged$renamed$deleted$diverged$conflicted ]($style)[](fg:#FCF392 bg:background)'
 style = "fg:#1C3A5E bg:#FCF392"
+ahead = ""
+behind = ""
+up_to_date = ""
+untracked = "?"
+modified = "○"
+staged = "●"
+renamed = ""
+deleted = ""
+diverged = ""
+stashed = "󰄠"
 
 [git_metrics]
-disabled = false
-format = "([+$added]($added_style))[](fg:#FCF392 bg:background)"
-added_style = "fg:#1C3A5E bg:#FCF392"
-deleted_style = "fg:bright-red bg:#262626"
+disabled = true
+format = "([ $added ]($added_style))([$deleted ]($deleted_style))[](fg:#FCF392 bg:background)"
+added_style = "fg:emerald bg:#FCF392"
+deleted_style = "fg:red bg:#FCF392"
 
 [character]
-success_symbol = '[ ➜](bold green) '
-error_symbol = '[ ➜](#e84d44) '
-
-# format = """╭── $directory\
-# $custom\
-# $git_branch\
-# $git_status\
-# $all\
-# ╰─$character"""
-
-# right_format = """$all"""
-
-# [directory]
-# fish_style_pwd_dir_length = 1
-# truncation_symbol = "…/"
-# truncate_to_repo = false
-
-# [git_branch]
-# style = "lavender"
-
-# [character]
-# success_symbol = "[](blue)"
-# error_symbol = "[](red)"
+success_symbol = '[ 󱞩](bold green) '
+error_symbol = '[ 󱞩](bold red) '
 
 [cmd_duration]
 disabled = true
-
-# [custom.dotfiles]
-# description = "Starship modules for dotfiles repo"
-# when = "echo $PWD | grep -q '/dotfiles'"
-# symbol = ""
-# style = "bold green"
-# format = "[$symbol dotfiles ]($style)"
-
-# [directory.substitutions]
-# 	"~/dotfiles/nvim/.config/nvim" = " Neovim config"
-# 	"~/dotfiles" = " dofiles"
 
 [palettes.moonfly]
 background = "#000000"
@@ -167,8 +164,8 @@ symbol = " "
 [hg_branch]
 symbol = " "
 
-[hostname]
-ssh_symbol = " "
+# [hostname]
+# ssh_symbol = " "
 
 [java]
 symbol = " "
@@ -283,4 +280,5 @@ symbol = " "
 
 [gradle]
 symbol = " "
+
 
