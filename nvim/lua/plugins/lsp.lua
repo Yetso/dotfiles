@@ -17,7 +17,7 @@ return {
 			},
 		},
 		config = function()
-			local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 			local lsp_attach = function(_, bufnr)
 				-- Create your keybindings here
 				local bufopts = { noremap = true, silent = true, buffer = bufnr }
@@ -43,7 +43,7 @@ return {
 				function(server_name) -- default handler (optional)
 					require("lspconfig")[server_name].setup({
 						on_attach = lsp_attach,
-						capabilities = lsp_capabilities,
+						-- capabilities = lsp_capabilities,
 						flags = {
 							debounce_text_changes = 150,
 						},
@@ -66,7 +66,7 @@ return {
 						cmd = { omnisharp_path }, -- Chemin vers l'exécutable d'OmniSharp
 						enable_roslyn_analyzers = true,
 						on_attach = lsp_attach,
-						capabilities = lsp_capabilities,
+						-- capabilities = lsp_capabilities,
 					})
 				end,
 			})
