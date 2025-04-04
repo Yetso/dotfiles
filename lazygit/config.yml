@@ -1,8 +1,4 @@
 gui:
-  theme:
-    selectedLineBgColor:
-      - '#404040'
-
   switchTabsWithPanelJumpKeys: true
   # Fraction of the total screen width to use for the left side section. You may want to pick a small number (e.g. 0.2) if you're using a narrow screen, so that you can see more of the main section.
 
@@ -41,6 +37,19 @@ gui:
       - '◟'
     # The "speed" of the spinner in milliseconds.
     rate: 75
+
+  # Config relating to colors and styles.
+  # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
+  theme:
+    # Border color of focused window
+    activeBorderColor:
+      - blue
+      - bold
+    # Background color of selected line.
+    # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#highlighting-the-selected-line
+    selectedLineBgColor:
+      - black
+
 # Keybindings
 keybinding:
   universal:
