@@ -1,17 +1,19 @@
+---@diagnostic disable: undefined-global
 return {
 	{
 		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
+		event = { "BufReadPre", "BufNewFile" },
 		dependencies = {
-			{ "williamboman/mason.nvim", config = true }, --NOTE : must be loaded before dependants
+			-- { "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
 			{
-				"williamboman/mason-lspconfig.nvim",
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
 				opts = {
-					ensure_installed = {
-						"lua_ls",
-						-- "jdtls",
-						-- "pylsp",
-						-- "nil_ls",
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "luvit-meta/library", words = { "vim%.uv" } },
 					},
 				},
 			},
@@ -24,6 +26,7 @@ return {
 				-- local telescopeUi = require("telescope.builtin")
 
 				-- Raccourci pour LSP
+				vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, bufopts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 				vim.keymap.set("n", "<leader>gr", function() Snacks.picker.lsp_references({ focus = 'list' }) end,
 					bufopts)
@@ -43,21 +46,8 @@ return {
 				function(server_name) -- default handler (optional)
 					require("lspconfig")[server_name].setup({
 						on_attach = lsp_attach,
-						-- capabilities = lsp_capabilities,
-						flags = {
-							debounce_text_changes = 150,
-						},
 					})
 				end,
-				-- ["jdtls"] = function()
-				-- 	require("lspconfig").jdtls.setup({
-				-- 		on_attach = lsp_attach,
-				-- 		capabilities = lsp_capabilities,
-				-- 		handlers = {
-				-- 			["$/progress"] = function(_, result, ctx) end,
-				-- 		},
-				-- 	})
-				-- end,
 				["omnisharp"] = function()
 					local mason_registry = require("mason-registry")
 					local omnisharp_path = mason_registry.get_package("omnisharp"):get_install_path() .. "/omnisharp"
@@ -66,10 +56,44 @@ return {
 						cmd = { omnisharp_path }, -- Chemin vers l'exécutable d'OmniSharp
 						enable_roslyn_analyzers = true,
 						on_attach = lsp_attach,
-						-- capabilities = lsp_capabilities,
 					})
 				end,
 			})
+		end,
+	},
+	{
+
+		"williamboman/mason.nvim",
+		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
+		build = ":MasonUpdate",
+		opts = {
+			ensure_installed = {
+				"stylua",
+				-- "shfmt",
+			},
+		},
+
+		config = function(_, opts)
+			require("mason").setup(opts)
+			local mr = require("mason-registry")
+			mr:on("package:install:success", function()
+				vim.defer_fn(function()
+					-- trigger FileType event to possibly load this newly installed LSP server
+					require("lazy.core.handler.event").trigger({
+						event = "FileType",
+						buf = vim.api.nvim_get_current_buf(),
+					})
+				end, 100)
+			end)
+
+			mr.refresh(function()
+				for _, tool in ipairs(opts.ensure_installed) do
+					local p = mr.get_package(tool)
+					if not p:is_installed() then
+						p:install()
+					end
+				end
+			end)
 		end,
 	},
 }
