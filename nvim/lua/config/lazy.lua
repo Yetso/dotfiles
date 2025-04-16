@@ -19,7 +19,11 @@ require("lazy").setup({
 		enabled = false,
 	},
 	install = {
+		missing = false,
 		colorscheme = { "moonfly" }
+	},
+	ui = {
+		border = "rounded",
 	},
 	change_detection = {
 		enabled = true,
