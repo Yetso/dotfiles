@@ -2,8 +2,8 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	version = false,
 	build = ":TSUpdate",
-	event = {"BufReadPre", "VeryLazy" },
----@diagnostic disable-next-line: param-type-mismatch
+	event = { "BufReadPre", "VeryLazy" },
+	---@diagnostic disable-next-line: param-type-mismatch
 	lazy = vim.fn.argc(-1) == 0 or vim.fn.isdirectory(vim.fn.argv(0)) == 1, --load treesitter early when opening a file from the CMDline
 	init = function(plugin)
 		require("lazy.core.loader").add_to_rtp(plugin)
@@ -11,7 +11,6 @@ return {
 	end,
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	opts_extend = { "ensure_installed" },
-	---@type TSConfig
 	---@diagnostic disable-next-line: missing-fields
 	opts = {
 		highlight = { enable = true },
@@ -40,7 +39,6 @@ return {
 			"yaml",
 		},
 	},
-	---@param opts TSConfig
 	config = function(_, opts)
 		vim.filetype.add({
 			extension = {
