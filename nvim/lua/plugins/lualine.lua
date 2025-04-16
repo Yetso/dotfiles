@@ -1,19 +1,23 @@
 return {
 	"nvim-lualine/lualine.nvim",
-	lazy = false,
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
+	-- enabled = false,
+	event = "VeryLazy",
+	-- dependencies = {
+	-- 	"nvim-tree/nvim-web-devicons",
+	-- },
 	opts = {
 		options = {
 			theme = "moonfly",
 			globalstatus = true,
+			always_show_tabline = false,
 		},
 		extensions = {
 			"lazy",
+			"mason"
 		},
 		sections = {
-			lualine_c = {
+			lualine_a = { 'mode' },
+			lualine_b = {
 				{
 					-- Customize the filename part of lualine to be parent/filename
 					'filename',
@@ -24,23 +28,27 @@ return {
 					-- 2: Absolute path
 					-- 3: Absolute path, with tilde as the home directory
 					-- 4: Filename and parent dir, with tilde as the home directory
-					symbols = {
-						modified = '[+]', -- Text to show when the file is modified.
-						readonly = '[-]', -- Text to show when the file is non-modifiable or readonly.
-					}
-				}
+				},
+				{ 'diff' },
+				{
+					'diagnostics',
+					symbols = { error = '', warn = '', info = '', hint = '' },
+				},
 			},
+			lualine_c = {
+			},
+
 			lualine_x = {
 				{
 					require("lazy.status").updates,
 					cond = require("lazy.status").has_updates,
-					color = {fg = "#ff0000"}
+					color = { fg = "#ff0000" }
 				},
 				{
 					function()
 						return "recording @ " .. vim.fn.reg_recording()
 					end,
-					cond = function ()
+					cond = function()
 						if vim.fn.reg_recording() == "" then return false end
 						return true
 					end,
@@ -50,6 +58,8 @@ return {
 				{ "fileformat" },
 				{ "filetype" },
 			},
+			lualine_y = { 'progress' },
+			lualine_z = { 'location' }
 		},
 	},
 }
