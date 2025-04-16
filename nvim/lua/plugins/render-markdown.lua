@@ -5,7 +5,6 @@ return {
 		'echasnovski/mini.icons'
 	},
 	---@module 'render-markdown'
-	---@type render.md.UserConfig
 	opts = {},
 	ft = { "markdown", "norg", "rmd", "org", "codecompanion" }
 }

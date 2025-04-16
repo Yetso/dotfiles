@@ -5,6 +5,5 @@ return {
 		prompt = {
 			enabled = false,
 		},
-
 	},
 }
