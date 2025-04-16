@@ -51,7 +51,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 	pattern = '*',
 })
 
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.opt.showcmd = false
 
 vim.opt.tabstop = 4
@@ -81,9 +81,24 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
+vim.opt.sidescroll = 5
 vim.opt.scrolloff = 12
 
 -- vim.opt.confirm = true
-vim.diagnostic.config({ virtual_lines = { current_line = true }})
+
+vim.diagnostic.config({
+	virtual_lines = { current_line = true },
+	signs = { text = {
+		[vim.diagnostic.severity.ERROR] = '',
+		[vim.diagnostic.severity.WARN] = '',
+		[vim.diagnostic.severity.INFO] = '',
+		[vim.diagnostic.severity.HINT] = '',
+	} }
+})
 
 vim.opt.guicursor = "n-v-c:block-Cursor,i:ver25-Cursor,r:hor20-Cursor"
+
+-- print checkhealth with float window
+vim.g.health = { style = 'float' }
+
+vim.opt.winborder = "rounded"
