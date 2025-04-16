@@ -90,6 +90,7 @@ return {
 		},
 		picker = {
 			enabled = true,
+			focus = "list",
 			sources = {
 				explorer = {
 					git_status_open = true,
@@ -117,7 +118,7 @@ return {
 		bigfile = { enabled = false },
 	},
 	keys = {
-		{ "<leader>lg", function() Snacks.lazygit() end,     desc = "Lazygit" },
+		{ "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
 		{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit [G]it [L]og" },
 		{
 			"<leader>n",
@@ -136,18 +137,18 @@ return {
 			"<C-p>",
 			function()
 				if is_git_repo() then
-					Snacks.picker.git_files()
+					Snacks.picker.git_files({ focus = "input" })
 				else
-					Snacks.picker.files()
+					Snacks.picker.files({ focus = "input" })
 				end
 			end,
 			desc = "Find Git Files"
 		},
-		{ "<leader>h",  function() Snacks.notifier.show_history() end,                       desc = "[H]istory" },
-		{ "<leader>ff", function() Snacks.picker.files() end,                                desc = "[F]ind [F]iles" },
-		{ "<leader>fg", function() Snacks.picker.grep() end,                                 desc = "[F]ind in code" },
-		{ "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,     desc = "[G]o to [R]eferences" },
-		{ "<leader>gd", function() Snacks.picker.lsp_definitions() end,                      desc = "[G]o to [D]efinitions" },
+		{ "<leader>h",  function() Snacks.notifier.show_history() end,desc = "[H]istory" },
+		{ "<leader>ff", function() Snacks.picker.files({ focus = "input" }) end,desc = "[F]ind [F]iles" },
+		{ "<leader>fg", function() Snacks.picker.grep({ focus = "input" }) end,desc = "[F]ind in code" },
+		-- { "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,desc = "[G]o to [R]eferences" },
+		-- { "<leader>gd", function() Snacks.picker.lsp_definitions() end,desc = "[G]o to [D]efinitions" },
 		{ "<leader>d",  function() Snacks.picker.diagnostics_buffer({ focus = "list" }) end, desc = "[G]o to [D]efinitions" },
 	},
 }
