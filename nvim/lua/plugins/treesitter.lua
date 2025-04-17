@@ -19,6 +19,7 @@ return {
 			"bash",
 			"c",
 			"c_sharp",
+			"csv",
 			"diff",
 			"java",
 			"json",
