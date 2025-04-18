@@ -3,15 +3,15 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
   };
 
   outputs = { self, nix-darwin, nixpkgs, nix-homebrew, home-manager }:
@@ -30,16 +30,18 @@
           # duti
           fd
           fzf
+          gh
           git
+          go
           gradle
           lua
           neovim
-          nushell
+          # nushell
           podman
           python312
           python312Packages.pip
           ripgrep
-          typst
+          # typst
           wget
           zoxide
           zulu
@@ -57,7 +59,7 @@
           XDG_CONFIG_HOME = "/Users/yetso/.config";
           _ZO_RESOLVE_SYMLINKS = "1";
         };
-        environment.shells = [ pkgs.zsh pkgs.nushell];
+        environment.shells = [ pkgs.zsh ];
 
         fonts.packages = with pkgs; [
           nerd-fonts.commit-mono
@@ -74,8 +76,9 @@
             "bitwarden"
             "brave-browser"
             "cyberghost-vpn"
-            "firefox"
-            "foxitreader"
+            # "firefox"
+            "floorp"
+            # "foxitreader"
             "ghostty"
             "latest"
             "onlyoffice"
@@ -88,7 +91,7 @@
               greedy = true;
             }
             "vlc"
-            { name = "wezterm@nightly"; }
+            # { name = "wezterm@nightly"; }
           ];
           taps = ["yetso/vesktop"];
         };
@@ -97,7 +100,7 @@
 
 
         system.defaults = {
-          ".GlobalPreferences"."com.apple.mouse.scaling" = 0.6875;
+          ".GlobalPreferences"."com.apple.mouse.scaling" = 0.875;
           hitoolbox.AppleFnUsageType = "Do Nothing";
           LaunchServices.LSQuarantine = false;
           NSGlobalDomain = {
@@ -131,7 +134,8 @@
             mineffect = "scale";
             minimize-to-application = true;
             persistent-apps = [
-              "/Applications/Firefox.app"
+              # "/Applications/Firefox.app"
+              "/Applications/Floorp.app"
               "/System/Applications/Mail.app"
               "/Applications/Ghostty.app"
               "/System/Applications/Music.app"
@@ -191,7 +195,7 @@
     {
       # Build darwin flake using:
       # $ darwin-rebuild build --flake .#Yetso-laptop
-      darwinConfigurations."Yetso-laptop" = nix-darwin.lib.darwinSystem {
+      darwinConfigurations."yetsos-MacBook-Pro" = nix-darwin.lib.darwinSystem {
         modules = [
           configuration
           home-manager.darwinModules.home-manager
@@ -216,6 +220,6 @@
       };
 
       # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."Yetso-laptop".pkgs;
+      darwinPackages = self.darwinConfigurations."yetsos-MacBook-Pro".pkgs;
     };
 }

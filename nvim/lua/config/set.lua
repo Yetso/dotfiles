@@ -81,7 +81,7 @@ vim.opt.incsearch = true
 
 vim.opt.termguicolors = true
 
-vim.opt.sidescroll = 5
+vim.opt.sidescrolloff = 12
 vim.opt.scrolloff = 12
 
 -- vim.opt.confirm = true

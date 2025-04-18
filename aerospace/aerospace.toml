@@ -113,6 +113,8 @@ outer.right =      0
 # end tell'
 # '''
 
+alt-shift-f = 'layout floating tiling'
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#layout
 alt-slash = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'

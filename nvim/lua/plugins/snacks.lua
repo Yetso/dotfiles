@@ -36,13 +36,14 @@ vim.api.nvim_create_autocmd("LspProgress", {
 			return table.insert(msg, v.msg) or not v.done
 		end, p)
 
-		local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+		-- local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
+		local spinner = { '◜', '◝', '◞', '◟' }
 		vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
 			id = "lsp_progress",
 			title = client.name,
 			opts = function(notif)
 				notif.icon = #progress[client.id] == 0 and " "
-					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+					or spinner[math.floor(vim.uv.hrtime() / (1e6 * 150)) % #spinner + 1]
 			end,
 		})
 	end,
@@ -92,7 +93,11 @@ return {
 			enabled = true,
 			focus = "list",
 			sources = {
+				files = {
+					exclude = { "*.meta" },
+				},
 				explorer = {
+					exclude = { "*.meta" },
 					git_status_open = true,
 					-- diagnostic_open = true,
 				},

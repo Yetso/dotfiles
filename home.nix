@@ -41,6 +41,7 @@ in {
     # syntaxHighlighting.enable = true;     #activated with flake.nix on a system level
     enableCompletion = false;   # disabled because already there for system shell
     loginExtra = "fastfetch";
+    initExtra = "bindkey '^[[H' beginning-of-line\nbindkey '^[[F' end-of-line\nbindkey '^[[3~' delete-char";
     shellAliases = {
       cat = "bat";
       lt = "ls --long --tree --level=3 --ignore-glob='.git'";
@@ -57,45 +58,9 @@ in {
         echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
         darwin-rebuild switch --flake ~/dotfiles > /dev/null
       ";
-      # update = "\
-      #   open /Applications/Latest.app
-      #   brew update --quiet
-      #   brew upgrade --quiet
-      #   brew upgrade --quiet --cask wezterm@nightly --no-quarantine --greedy-latest
-      #   echo -e '\\e[34m==>\\e[0m \\e[1mupdating flake lock...\\e[0m'
-      #   (cd ~/dotfiles && nix flake update --commit-lock-file > /dev/null)
-      #   echo -e '\\e[34m==>\\e[0m \\e[1m rebuilding nix-darwin...\\e[0m'
-      #   darwin-rebuild switch --flake ~/dotfiles > /dev/null
-      # ";
     };
   };
 
-  # programs.fish = {
-  #   enable = false;
-  #   shellAbbrs = {
-  #     lg = "lazygit";
-  #     v = "nvim";
-  #     darwin-rebuild = "darwin-rebuild switch --flake $(readlink -f ~/.config/nix-darwin)";
-  #   };
-  #   functions = {
-  #     cat = "bat $argv";
-  #     ls = "eza --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store' --no-quotes $argv";
-  #     lt = "eza --long --tree --level=3 --all --header --binary --color=always --group-directories-first --icons=always --ignore-glob='.DS_Store|.git' --no-quotes $argv";
-  #     fastfetch = "clear;command fastfetch $argv";
-  #     fish_greeting = "fastfetch";
-  #     update = "
-  #       set -l original_dir (pwd)
-  #       open /Applications/Latest.app
-  #       brew update
-  #       brew upgrade
-  #       brew upgrade --cask wezterm@nightly --no-quarantine --greedy-latest
-  #       cd ~/dotfiles/nix/.config/nix-darwin/
-  #       nix flake update --commit-lock-file
-  #       darwin-rebuild switch --flake . --impure
-  #       cd $original_dir
-  #     ";
-  #   };
-  # };
 
   programs.starship = {
     enable = true;
@@ -130,7 +95,6 @@ in {
       "--all"
       "--color=always"
       "--ignore-glob=.DS_Store"
-      # lt = "eza --long --tree --level=3 --ignore-glob='.DS_Store|.git'";
     ];
   };
 

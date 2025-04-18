@@ -63,7 +63,7 @@ symbol = " "
 style = "fg:#1C3A5E bg:#FCF392"
 
 [git_status]
-format = '[$ahead_behind$up_to_date $untracked$modified$staged$renamed$deleted$diverged$conflicted ]($style)[](fg:#FCF392 bg:background)'
+format = '[$ahead_behind $untracked$modified$staged$renamed$deleted$diverged$conflicted ]($style)[](fg:#FCF392 bg:background)'
 style = "fg:#1C3A5E bg:#FCF392"
 ahead = ""
 behind = ""
