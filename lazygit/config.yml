@@ -26,17 +26,17 @@ gui:
   # If empty, do not show icons.
   nerdFontsVersion: "3"
   # Length of commit hash in commits view. 0 shows '*' if NF icons aren't on.
-  commitHashLength: 6
+  commitHashLength: 7
   # Config relating to the spinner.
   spinner:
     # The frames of the spinner animation.
     frames:
-      - '◜'
       - '◝'
       - '◞'
       - '◟'
+      - '◜'
     # The "speed" of the spinner in milliseconds.
-    rate: 75
+    rate: 150
 
   # Config relating to colors and styles.
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
