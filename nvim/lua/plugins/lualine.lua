@@ -40,11 +40,6 @@ return {
 
 			lualine_x = {
 				{
-					require("lazy.status").updates,
-					cond = require("lazy.status").has_updates,
-					color = { fg = "#ff0000" }
-				},
-				{
 					function()
 						return "recording @ " .. vim.fn.reg_recording()
 					end,
@@ -53,6 +48,11 @@ return {
 						return true
 					end,
 					color = { fg = "#ff9e64" },
+				},
+				{
+					require("lazy.status").updates,
+					cond = require("lazy.status").has_updates,
+					color = { fg = "#ff0000" }
 				},
 				{ "encoding" },
 				{ "fileformat" },
