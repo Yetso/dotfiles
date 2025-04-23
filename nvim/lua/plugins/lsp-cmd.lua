@@ -20,7 +20,12 @@ return {
 				selection = { preselect = false, auto_insert = true }
 			},
 		},
-
+		cmdline = {
+			completion = {
+				list = { selection = { preselect = false, auto_insert = true } },
+				menu = { auto_show = true }
+			},
+		},
 	},
 	opts_extend = { "sources.default" }
 }
