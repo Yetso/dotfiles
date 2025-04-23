@@ -32,10 +32,6 @@ vim.opt.timeoutlen = 500
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
--- disable netrw at the very start of your init.lua
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
-
 vim.o.hlsearch = true
 vim.o.cursorline = true
 
@@ -84,7 +80,9 @@ vim.opt.termguicolors = true
 vim.opt.sidescrolloff = 12
 vim.opt.scrolloff = 12
 
--- vim.opt.confirm = true
+vim.opt.confirm = true
+
+vim.opt.matchpairs:append("<:>")
 
 vim.diagnostic.config({
 	virtual_lines = { current_line = true },
