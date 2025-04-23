@@ -105,13 +105,16 @@ return {
 			win = {
 				input = {
 					keys = {
+						["<CR>"] = {"toggle_focus", mode = { "i", "n" }},
 						["l"] = "confirm",
+						["/"] = false,
 					},
 				},
 				list = {
 					keys = {
 						["<C-p>"] = false,
 						["f"] = false,
+						["i"] = false,
 					},
 				},
 			},
