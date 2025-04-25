@@ -11,7 +11,8 @@ for i = 1, 9 do
 		desc = "Buffer " .. i,
 	})
 end
-table.insert(buffer_keys, { "<leader>bc", function() Snacks.bufdelete() end, desc = "[B]uffer [C]lose" })
+table.insert(buffer_keys, { "<S-q>", function() Snacks.bufdelete() end, desc = "[B]uffer [C]lose" })
+table.insert(buffer_keys, { "<leader>bac", function() Snacks.bufdelete.other() end, desc = "[B]uffer [A]ll [C]lose" })
 table.insert(buffer_keys, { "<S-h>", "<cmd>bprevious<cr>", desc = "Prev Buffer" })
 table.insert(buffer_keys, { "<S-l>", "<cmd>bnext<cr>", desc = "Next Buffer" })
 
@@ -76,7 +77,7 @@ return {
 				local prefix = nil
 				for i, b in ipairs(buflist) do
 					if b.bufnr == buf_id then
-						prefix = i
+						prefix = i .. '.'
 						break
 					end
 				end
