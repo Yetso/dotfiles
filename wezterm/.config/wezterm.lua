@@ -18,6 +18,7 @@ config.initial_cols = 140
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 
 config.enable_scroll_bar = false
+-- config.scrollback_lines = 3500
 
 config.audible_bell = "Disabled"
 -- config.term = "wezterm"
@@ -55,50 +56,72 @@ config.window_padding = {
 }
 config.default_prog = { 'C:/Program Files/PowerShell/7/pwsh.exe', '-NoLogo' }
 
+
 config.keys = {
-	{key="1", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="!", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="!", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="2", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="@", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="@", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="3", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="#", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="#", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="4", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="$", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="$", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="5", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="%", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="%", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="6", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="^", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="^", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="7", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="&", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="&", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="8", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="*", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="*", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="9", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="(", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key="(", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="0", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key=")", mods="CTRL", action=wezterm.action.DisableDefaultAssignment},
-	{key=")", mods="CTRL|SHIFT", action=wezterm.action.DisableDefaultAssignment},
-	{key="1", mods="ALT", action=wezterm.action.ActivateTab(0)},
-    {key="2", mods="ALT", action=wezterm.action.ActivateTab(1)},
-    {key="3", mods="ALT", action=wezterm.action.ActivateTab(2)},
-    {key="4", mods="ALT", action=wezterm.action.ActivateTab(3)},
-    {key="5", mods="ALT", action=wezterm.action.ActivateTab(4)},
-    {key="6", mods="ALT", action=wezterm.action.ActivateTab(5)},
-    {key="7", mods="ALT", action=wezterm.action.ActivateTab(6)},
-    {key="8", mods="ALT", action=wezterm.action.ActivateTab(7)},
-    {key="9", mods="ALT", action=wezterm.action.ActivateTab(8)},
-    {key="0", mods="ALT", action=wezterm.action.ActivateTab(9)},
-	{key="t", mods="ALT", action=wezterm.action.SpawnTab("CurrentPaneDomain")},
-	{key="n", mods="ALT", action=wezterm.action.SpawnWindow},
+	{ key = "1", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "!", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "!", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "2", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "@", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "@", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "3", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "#", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "#", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "4", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "$", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "$", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "5", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "%", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "%", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "6", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "^", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "^", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "7", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "&", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "&", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "8", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "*", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "*", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "9", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "(", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = "(", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "0", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = ")", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+	{ key = ")", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+	{ key = "1", mods = "ALT",        action = wezterm.action.ActivateTab(0) },
+	{ key = "2", mods = "ALT",        action = wezterm.action.ActivateTab(1) },
+	{ key = "3", mods = "ALT",        action = wezterm.action.ActivateTab(2) },
+	{ key = "4", mods = "ALT",        action = wezterm.action.ActivateTab(3) },
+	{ key = "5", mods = "ALT",        action = wezterm.action.ActivateTab(4) },
+	{ key = "6", mods = "ALT",        action = wezterm.action.ActivateTab(5) },
+	{ key = "7", mods = "ALT",        action = wezterm.action.ActivateTab(6) },
+	{ key = "8", mods = "ALT",        action = wezterm.action.ActivateTab(7) },
+	{ key = "9", mods = "ALT",        action = wezterm.action.ActivateTab(8) },
+	{ key = "0", mods = "ALT",        action = wezterm.action.ActivateTab(9) },
+	{ key = "t", mods = "ALT",        action = wezterm.action.SpawnTab("CurrentPaneDomain") },
+	{ key = "c", mods = "ALT",        action = wezterm.action.CopyTo 'Clipboard' },
+	{ key = "v", mods = "ALT",        action = wezterm.action.PasteFrom 'Clipboard' },
+	{ key = "n", mods = "ALT",        action = wezterm.action.SpawnWindow },
+	{
+		key = "l",
+		mods = "ALT",
+		action = wezterm.action_callback(function(window, pane)
+			-- scroll to bottom in case you aren't already
+			window:perform_action(wezterm.action.ScrollToBottom, pane)
+
+			-- get the current height of the viewport
+			local height = pane:get_dimensions().viewport_rows
+
+			-- build a string of new lines equal to the viewport height
+			local blank_viewport = string.rep('\r\n', height)
+
+			-- inject those new lines to push the viewport contents into the scrollback
+			pane:inject_output(blank_viewport)
+
+			-- send an escape sequence to clear the viewport (CTRL-L)
+			pane:send_text('\x0c')
+		end)
+	},
 }
 
 return config
-
