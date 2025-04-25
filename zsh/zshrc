@@ -1,0 +1,50 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=10000
+SAVEHIST=1000
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/yetso/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
+
+export HOMEBREW_FORCE_BREWED_CURL=1
+export _ZO_RESOLVE_SYMLINKS=1
+export EDITOR="nvim"
+# export PATH=$PATH:$HOME/go/bin
+
+source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /home/catoul/dotfiles/wezterm/wezterm.sh
+
+alias cat='bat --theme="fly16"'
+alias ls='eza --all --header --binary --color=always --group-directories-first --icons=always --no-quotes'
+alias ll='eza --long --all --header --binary --color=always --group-directories-first --icons=always --no-quotes'
+alias lt='eza --long --header --tree --level=3 --color=always --group-directories-first --icons=always --ignore-glob=".git"'
+alias fastfetch='clear;command fastfetch'
+alias lg='lazygit'
+alias v='nvim'
+
+bindkey '\e[H' beginning-of-line
+bindkey '\e[F' end-of-line
+
+bindkey '\e[3~' delete-char
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}
+
+fastfetch
