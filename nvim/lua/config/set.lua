@@ -56,13 +56,13 @@ vim.opt.smartindent = true
 
 -- Tabs for nix files
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "nix",
-  callback = function()
-    vim.opt_local.expandtab = true     -- Use spaces instead of tabs
-    vim.opt_local.tabstop = 2          -- Number of spaces a <Tab> counts for
-    vim.opt_local.shiftwidth = 2       -- Number of spaces to use for (auto)indent
-    vim.opt_local.softtabstop = 2      -- Number of spaces a <Tab> counts for while editing
-  end,
+	pattern = "nix",
+	callback = function()
+		vim.opt_local.expandtab = true -- Use spaces instead of tabs
+		vim.opt_local.tabstop = 2  -- Number of spaces a <Tab> counts for
+		vim.opt_local.shiftwidth = 2 -- Number of spaces to use for (auto)indent
+		vim.opt_local.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
+	end,
 })
 
 vim.opt.nu = true
@@ -86,12 +86,14 @@ vim.opt.matchpairs:append("<:>")
 
 vim.diagnostic.config({
 	virtual_lines = { current_line = true },
-	signs = { text = {
-		[vim.diagnostic.severity.ERROR] = '',
-		[vim.diagnostic.severity.WARN] = '',
-		[vim.diagnostic.severity.INFO] = '',
-		[vim.diagnostic.severity.HINT] = '',
-	} }
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = '󰅜',
+			[vim.diagnostic.severity.WARN] = '',
+			[vim.diagnostic.severity.INFO] = '',
+			[vim.diagnostic.severity.HINT] = '',
+		}
+	}
 })
 
 vim.opt.guicursor = "n-v-c:block-Cursor,i:ver25-Cursor,r:hor20-Cursor"
