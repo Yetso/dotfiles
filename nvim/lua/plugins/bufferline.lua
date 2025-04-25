@@ -1,8 +1,9 @@
 return {
 	"akinsho/bufferline.nvim",
+	enabled = false,
 	event = "VeryLazy",
 	keys = {
-		{ "<leader>bd", function() Snacks.bufdelete() end },
+		{ "<leader>c", function() Snacks.bufdelete() end, desc = "[C]lose buffer" },
 		{ "<S-h>",      "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
 		{ "<S-l>",      "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
 		{ "<leader>1",  function() require("bufferline").go_to(1, true) end },
@@ -18,9 +19,7 @@ return {
 	opts = {
 		options = {
 			numbers = "ordinal",
-			-- stylua: ignore
 			close_command = function(n) Snacks.bufdelete(n) end,
-			-- stylua: ignore
 			right_mouse_command = function(n) Snacks.bufdelete(n) end,
 			diagnostics = "nvim_lsp",
 			always_show_bufferline = true,
@@ -32,4 +31,3 @@ return {
 		},
 	},
 }
-
