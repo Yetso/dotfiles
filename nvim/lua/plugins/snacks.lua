@@ -139,7 +139,7 @@ return {
 		bigfile = { enabled = false },
 	},
 	keys = {
-		{ "<leader>u",  function() Snacks.picker.undo({ win = { preview = { wo = { number = true } } } }) end, desc = "Lazygit" },
+		-- { "<leader>u",  function() Snacks.picker.undo({ win = { preview = { wo = { number = true } } } }) end, desc = "Snacks Undo" },
 		{ "<leader>lg", function() Snacks.lazygit() end,                                                       desc = "Lazygit" },
 		{ "<leader>gl", function() Snacks.lazygit.log() end,                                                   desc = "Lazygit [G]it [L]og" },
 		{
