@@ -1,3 +1,4 @@
+---@diagnostic disable: undefined-global
 local function is_git_repo()
 	local git_dir = vim.fn.finddir(".git", ".;")
 	return git_dir ~= ""
@@ -109,6 +110,7 @@ return {
 			sources = {
 				files = {
 					exclude = { "*.meta" },
+					follow = true,
 				},
 				explorer = {
 					exclude = { "*.meta" },
@@ -119,7 +121,7 @@ return {
 			win = {
 				input = {
 					keys = {
-						["<CR>"] = { "toggle_focus", mode = { "i", "n" } },
+						-- ["<CR>"] = { "toggle_focus", mode = { "i", "n" } },
 						["l"] = { "confirm" },
 						["/"] = false,
 					},
@@ -140,8 +142,8 @@ return {
 	},
 	keys = {
 		-- { "<leader>u",  function() Snacks.picker.undo({ win = { preview = { wo = { number = true } } } }) end, desc = "Snacks Undo" },
-		{ "<leader>lg", function() Snacks.lazygit() end,                                                       desc = "Lazygit" },
-		{ "<leader>gl", function() Snacks.lazygit.log() end,                                                   desc = "Lazygit [G]it [L]og" },
+		{ "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
+		{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit [G]it [L]og" },
 		{
 			"<leader>n",
 			function()
@@ -159,16 +161,16 @@ return {
 			"<C-p>",
 			function()
 				if is_git_repo() then
-					Snacks.picker.git_files({ focus = "input" })
+					Snacks.picker.git_files({ focus = "input", layout = {preset = "select"} })
 				else
-					Snacks.picker.files({ focus = "input" })
+					Snacks.picker.files({ focus = "input", layout = {preset = "select"} })
 				end
 			end,
 			desc = "Find Git Files"
 		},
-		{ "<leader>h",  function() Snacks.notifier.show_history() end,                       desc = "[H]istory" },
-		{ "<leader>ff", function() Snacks.picker.files({ focus = "input" }) end,             desc = "[F]ind [F]iles" },
-		{ "<leader>fg", function() Snacks.picker.grep({ focus = "input" }) end,              desc = "[F]ind in code" },
+		{ "<leader>h",  function() Snacks.notifier.show_history() end, desc = "[H]istory" },
+		{ "<leader>ff", function() Snacks.picker.files({ focus = "input", layout = {preset = "select"} }) end,             desc = "[F]ind [F]iles" },
+		{ "<leader>fg", function() Snacks.picker.grep({ focus = "input" }) end, desc = "[F]ind in code" },
 		-- { "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,desc = "[G]o to [R]eferences" },
 		-- { "<leader>gd", function() Snacks.picker.lsp_definitions() end,desc = "[G]o to [D]efinitions" },
 		{ "<leader>d",  function() Snacks.picker.diagnostics_buffer({ focus = "list" }) end, desc = "[G]o to [D]efinitions" },

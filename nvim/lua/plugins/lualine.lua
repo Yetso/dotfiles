@@ -16,11 +16,11 @@ return {
 			"mason"
 		},
 		sections = {
-			lualine_a = { 'mode' },
+			lualine_a = { "mode" },
 			lualine_b = {
 				{
 					-- Customize the filename part of lualine to be parent/filename
-					'filename',
+					"filename",
 					file_status = true, -- Displays file status (readonly status, modified status)
 					newfile_status = false, -- Display new file status (new file means no write after created)
 					path = 1, -- 0: Just the filename
@@ -29,13 +29,13 @@ return {
 					-- 3: Absolute path, with tilde as the home directory
 					-- 4: Filename and parent dir, with tilde as the home directory
 				},
-				{ 'diff' },
-				{
-					'diagnostics',
-					symbols = { error = '󰅜', warn = '', info = '', hint = '' },
-				},
 			},
 			lualine_c = {
+				{ "diff" },
+				{
+					"diagnostics",
+					symbols = { error = '󰅜', warn = '', info = '', hint = '' },
+				},
 			},
 
 			lualine_x = {
@@ -58,8 +58,8 @@ return {
 				{ "fileformat" },
 				{ "filetype" },
 			},
-			lualine_y = { 'progress' },
-			lualine_z = { 'location' }
+			lualine_y = { "progress" },
+			lualine_z = { "location" }
 		},
 	},
 }
