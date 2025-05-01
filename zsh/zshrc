@@ -12,17 +12,15 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 eval "$(starship init zsh)"
 eval "$(zoxide init zsh --cmd cd)"
 
-export HOMEBREW_FORCE_BREWED_CURL=1
 export _ZO_RESOLVE_SYMLINKS=1
 export EDITOR="nvim"
 # export PATH=$PATH:$HOME/go/bin
-
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export PROTON_ENABLE_WAYLAND=1
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # source /home/catoul/dotfiles/wezterm/wezterm.sh
 
 alias cat='bat --theme="fly16"'
