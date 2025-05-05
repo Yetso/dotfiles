@@ -29,7 +29,7 @@ return {
 				vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, bufopts)
 				vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
 				vim.keymap.set("n", "<leader>gr",
-					function() Snacks.picker.lsp_references({ focus = 'list', auto_confirm = false, layout = { preset = "vertical", layout = { width = 0.8 } } }) end,
+					function() Snacks.picker.lsp_references({ auto_confirm = false, layout = { preset = "vertical", layout = { width = 0.8 } } }) end,
 					bufopts)
 				vim.keymap.set("n", "<leader>gd", function() Snacks.picker.lsp_definitions() end, bufopts)
 				vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
