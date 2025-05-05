@@ -96,7 +96,7 @@ return {
 					end
 				end
 
-				local suffix = vim.bo[buf_id].modified and '+ ' or ''
+				local suffix = vim.bo[buf_id].modified and '[+]' or ''
 				return prefix .. MiniTabline.default_format(buf_id, label) .. suffix
 			end
 		},
