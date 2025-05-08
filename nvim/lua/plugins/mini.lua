@@ -10,11 +10,26 @@ vim.api.nvim_create_autocmd('BufEnter', {
 	desc = 'Update tabline based on the number of listed buffers',
 })
 
+local format_summary = function(data)
+	local summary = vim.b[data.buf].minidiff_summary
+	if not summary then
+		vim.b[data.buf].minidiff_summary_string = ""
+		return
+	end
+	local t = {}
+	if summary.add > 0 then table.insert(t, '%#GitSignsAdd#+' .. summary.add) end
+	if summary.change > 0 then table.insert(t, '%#GitSignsChange#~' .. summary.change) end
+	if summary.delete > 0 then table.insert(t, '%#GitSignsDelete#-' .. summary.delete) end
+	vim.b[data.buf].minidiff_summary_string = table.concat(t, ' ')
+end
+local au_opts = { pattern = 'MiniDiffUpdated', callback = format_summary }
+vim.api.nvim_create_autocmd('User', au_opts)
+
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-		vim.defer_fn(function ()
+		vim.defer_fn(function()
 			vim.o.showtabline = 0
-		end, 1)
+		end, 50)
 	end,
 })
 
@@ -110,35 +125,49 @@ return {
 	},
 	{
 		"echasnovski/mini.statusline",
-		enabled = false,
 		version = false,
+		config = function(_, opts)
+			require("mini.statusline").setup(opts)
+			vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { bg = "#1e1e1e", fg = "#cdd6f4" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { bg = "#000000", fg = "#ffffff" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = "#363636", fg = "#cdd6f4" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { bg = "#1e1e1e", fg = "#cdd6f4" })
+		end,
 		opts = {
 			content = {
 				active = function()
-					local diag_signs    = { ERROR = "󰅜", WARN = '', INFO = '', HINT = '' }
+					local diag_signs    = {
+						ERROR = '%#DiagnosticError#󰅜',
+						WARN = '%#DiagnosticWarn#',
+						INFO =
+						'%#DiagnosticInfo#',
+						HINT = '%#DiagnosticHint#',
+					}
 
 					local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-					local filename      = MiniStatusline.section_filename({ trunc_width = 0 })
-					-- local git           = MiniStatusline.section_git({ trunc_width = 40 })
-					local diff          = MiniStatusline.section_diff({ trunc_width = 75, icon = "󰊢" })
-					local diagnostics   = MiniStatusline.section_diagnostics({
+					local diff          = vim.b.minidiff_summary_string or ""
+					local filename      = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+					if filename == "" then
+						filename = "[No Name]"
+					end
+					local fileinfo    = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+					local diagnostics = MiniStatusline.section_diagnostics({
 						trunc_width = 75,
 						signs = diag_signs,
-						icon =
-						""
+						icon = ""
 					})
-					-- local lsp           = MiniStatusline.section_lsp({ trunc_width = 75 })
-					local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-					local location      = MiniStatusline.section_location({ trunc_width = 9999 })
+					diagnostics       = diagnostics .. '%#MiniStatuslineDevinfo#'
+					local line = vim.fn.line(".")
+					local percent = math.floor( line / vim.fn.line("$") * 100) .. "%%"
+					local location = line .. ':' .. vim.fn.col(".")
 
 					return MiniStatusline.combine_groups({
 						{ hl = mode_hl,                  strings = { mode } },
 						{ hl = 'MiniStatuslineFilename', strings = { filename } },
-						'%<', -- Mark general truncate point
 						{ hl = 'MiniStatuslineDevinfo',  strings = { diff, diagnostics } },
-						-- { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
 						'%=', -- End left alignment
 						{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+						{ hl = 'MiniStatuslineFilename', strings = { percent } },
 						{ hl = mode_hl,                  strings = { location } },
 					})
 				end,
