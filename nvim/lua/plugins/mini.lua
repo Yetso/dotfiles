@@ -160,12 +160,14 @@ return {
 					local line = vim.fn.line(".")
 					local percent = math.floor( line / vim.fn.line("$") * 100) .. "%%"
 					local location = line .. ':' .. vim.fn.col(".")
+					local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording() or ""
 
 					return MiniStatusline.combine_groups({
 						{ hl = mode_hl,                  strings = { mode } },
 						{ hl = 'MiniStatuslineFilename', strings = { filename } },
 						{ hl = 'MiniStatuslineDevinfo',  strings = { diff, diagnostics } },
 						'%=', -- End left alignment
+						{ hl = 'MiniStatuslineFileinfo', strings = { recording } },
 						{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
 						{ hl = 'MiniStatuslineFilename', strings = { percent } },
 						{ hl = mode_hl,                  strings = { location } },
