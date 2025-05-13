@@ -28,7 +28,6 @@ end
 
 
 ---@param bufnr number
----@return Promise
 local function customizeSelector(bufnr)
 	local function handleFallbackException(err, providerName)
 		if type(err) == 'string' and err:match('UfoFallbackException') then
@@ -73,6 +72,7 @@ return {
 		vim.o.foldlevel = 99
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true
+		vim.opt.foldopen:remove("hor")
 		vim.opt.fillchars = {
 			fold = ' ', foldopen = '', foldsep = ' ', foldclose = '',
 		}
