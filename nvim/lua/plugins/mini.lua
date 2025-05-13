@@ -25,14 +25,6 @@ end
 local au_opts = { pattern = 'MiniDiffUpdated', callback = format_summary }
 vim.api.nvim_create_autocmd('User', au_opts)
 
-vim.api.nvim_create_autocmd("VimEnter", {
-	callback = function()
-		vim.defer_fn(function()
-			vim.o.showtabline = 0
-		end, 50)
-	end,
-})
-
 local buffer_keys = {}
 for i = 1, 9 do
 	table.insert(buffer_keys, {
@@ -121,6 +113,10 @@ return {
 				return prefix .. MiniTabline.default_format(buf_id, label) .. suffix
 			end
 		},
+		config = function(_, opts)
+			require("mini.tabline").setup(opts)
+			vim.o.showtabline = 0
+		end,
 		keys = buffer_keys,
 	},
 	{
@@ -128,10 +124,11 @@ return {
 		version = false,
 		config = function(_, opts)
 			require("mini.statusline").setup(opts)
-			vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { bg = "#1e1e1e", fg = "#cdd6f4" })
+			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#181818", fg = "#cdcdcd" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { link = "Statusline" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { link = "Statusline" })
 			vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { bg = "#000000", fg = "#ffffff" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = "#363636", fg = "#cdd6f4" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { bg = "#1e1e1e", fg = "#cdd6f4" })
+			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = "#303030", fg = "#dddddd" })
 		end,
 		opts = {
 			content = {
@@ -139,35 +136,38 @@ return {
 					local diag_signs    = {
 						ERROR = '%#DiagnosticError#󰅜',
 						WARN = '%#DiagnosticWarn#',
-						INFO =
-						'%#DiagnosticInfo#',
+						INFO = '%#DiagnosticInfo#',
 						HINT = '%#DiagnosticHint#',
 					}
 
-					local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+					local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 1 })
 					local diff          = vim.b.minidiff_summary_string or ""
 					local filename      = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
 					if filename == "" then
 						filename = "[No Name]"
 					end
-					local fileinfo    = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+					local fileinfo    = MiniStatusline.section_fileinfo({ trunc_width = 9999 })
 					local diagnostics = MiniStatusline.section_diagnostics({
 						trunc_width = 75,
 						signs = diag_signs,
 						icon = ""
 					})
 					diagnostics       = diagnostics .. '%#MiniStatuslineDevinfo#'
-					local line = vim.fn.line(".")
-					local percent = math.floor( line / vim.fn.line("$") * 100) .. "%%"
-					local location = line .. ':' .. vim.fn.col(".")
 					local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording() or ""
+					local line        = vim.fn.line(".")
+					local percent     = math.floor(line / vim.fn.line("$") * 100) .. "%%"
+					local location    = line .. ':' .. vim.fn.col(".")
+					local lazyUpdate  = require("lazy.status")
+					local lazyScreen  = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
 
 					return MiniStatusline.combine_groups({
 						{ hl = mode_hl,                  strings = { mode } },
+						"%<",
 						{ hl = 'MiniStatuslineFilename', strings = { filename } },
 						{ hl = 'MiniStatuslineDevinfo',  strings = { diff, diagnostics } },
 						'%=', -- End left alignment
 						{ hl = 'MiniStatuslineFileinfo', strings = { recording } },
+						{ hl = 'MoonflyRed', strings = { lazyScreen } },
 						{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
 						{ hl = 'MiniStatuslineFilename', strings = { percent } },
 						{ hl = mode_hl,                  strings = { location } },
