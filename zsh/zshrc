@@ -26,7 +26,7 @@ source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zs
 alias cat='bat --theme="fly16"'
 alias ls='eza --all --header --binary --color=always --group-directories-first --icons=always --no-quotes'
 alias ll='eza --long --all --header --binary --color=always --group-directories-first --icons=always --no-quotes'
-alias lt='eza --long --header --tree --level=3 --color=always --group-directories-first --icons=always --ignore-glob=".git"'
+alias lt='eza --long --all --header --tree --level=3 --color=always --group-directories-first --icons=always --ignore-glob=".git"'
 alias fastfetch='clear;command fastfetch'
 alias lg='lazygit'
 alias v='nvim'
