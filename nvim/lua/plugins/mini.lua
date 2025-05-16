@@ -12,10 +12,11 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 local format_summary = function(data)
 	local summary = vim.b[data.buf].minidiff_summary
-	if not summary then
-		vim.b[data.buf].minidiff_summary_string = ""
+	if not summary then return end
+	if not (summary.add and summary.change and summary.delete) then
 		return
 	end
+
 	local t = {}
 	if summary.add > 0 then table.insert(t, '%#GitSignsAdd#+' .. summary.add) end
 	if summary.change > 0 then table.insert(t, '%#GitSignsChange#~' .. summary.change) end
@@ -153,12 +154,12 @@ return {
 						icon = ""
 					})
 					diagnostics       = diagnostics .. '%#MiniStatuslineDevinfo#'
-					local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording() or ""
 					local line        = vim.fn.line(".")
 					local percent     = math.floor(line / vim.fn.line("$") * 100) .. "%%"
 					local location    = line .. ':' .. vim.fn.col(".")
 					local lazyUpdate  = require("lazy.status")
 					local lazyScreen  = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
+					local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording() or ""
 
 					return MiniStatusline.combine_groups({
 						{ hl = mode_hl,                  strings = { mode } },
@@ -166,8 +167,8 @@ return {
 						{ hl = 'MiniStatuslineFilename', strings = { filename } },
 						{ hl = 'MiniStatuslineDevinfo',  strings = { diff, diagnostics } },
 						'%=', -- End left alignment
-						{ hl = 'MiniStatuslineFileinfo', strings = { recording } },
 						{ hl = 'MoonflyRed', strings = { lazyScreen } },
+						{ hl = 'MiniStatuslineFileinfo', strings = { recording } },
 						{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
 						{ hl = 'MiniStatuslineFilename', strings = { percent } },
 						{ hl = mode_hl,                  strings = { location } },

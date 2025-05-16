@@ -1,3 +1,4 @@
+vim.keymap.set({'n', 'v'}, '<space>', ',<Nop>', {noremap = true, silent = true })
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -22,7 +23,7 @@ vim.keymap.set('v', '>', '>gv<Esc>', { noremap = true, silent = true })
 vim.keymap.set('v', '<', '<gv<Esc>', { noremap = true, silent = true })
 
 -- delete without copying to buffer "
-vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { noremap = true, silent = true })
+-- vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { noremap = true, silent = true })
 vim.keymap.set('x', '<leader>p', '"_dP', { noremap = true, silent = true })
 
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
