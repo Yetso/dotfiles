@@ -7,7 +7,7 @@ bold-is-bright = true
 
 # Mouse
 mouse-hide-while-typing = true
-mouse-scroll-multiplier = 0.4
+mouse-scroll-multiplier = 1
 
 scrollback-limit = 100000000
 
@@ -34,6 +34,8 @@ quick-terminal-screen = macos-menu-bar
 macos-non-native-fullscreen = visible-menu
 
 macos-titlebar-style = transparent
+
+cursor-style = bar
 
 
 # Keybinds
