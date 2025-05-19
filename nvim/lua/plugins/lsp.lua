@@ -17,38 +17,13 @@ end, { desc = "Afficher les erreurs LSP avec une bordure" })
 ---@diagnostic disable: undefined-global
 return {
 	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = {
-			-- { "williamboman/mason.nvim" },
-			{ "mason-org/mason-lspconfig.nvim" },
-			{
-				"folke/lazydev.nvim",
-				ft = "lua", -- only load on lua files
-				opts = {
-					library = {
-						-- See the configuration section for more details
-						-- Load luvit types when the `vim.uv` word is found
-						{ path = "luvit-meta/library", words = { "vim%.uv" } },
-					},
-				},
-			},
-		},
-		config = function()
-			-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-				-- Create your keybindings here
-				-- local telescopeUi = require("telescope.builtin")
-		end,
-	},
-	{
-
-		"williamboman/mason.nvim",
+		"mason-org/mason.nvim",
 		cmd = { "Mason", "MasonInstall", "MasonUpdate" },
 		build = ":MasonUpdate",
 		opts = {
 			ensure_installed = {
 				"stylua",
-				-- "shfmt",
+				"lua-language-server",
 			},
 		},
 
@@ -74,5 +49,32 @@ return {
 				end
 			end)
 		end,
+	},
+	{
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			{
+				"folke/lazydev.nvim",
+				ft = "lua", -- only load on lua files
+				opts = {
+					library = {
+						-- See the configuration section for more details
+						-- Load luvit types when the `vim.uv` word is found
+						{ path = "luvit-meta/library", words = { "vim%.uv" } },
+					},
+				},
+			},
+		},
+		config = function()
+			require("mason").setup()
+			require("mason-lspconfig").setup()
+			-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+			-- Create your keybindings here
+			-- local telescopeUi = require("telescope.builtin")
+		end,
+	},
+	{
+		"mason-org/mason-lspconfig.nvim",
 	},
 }
