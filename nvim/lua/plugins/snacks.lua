@@ -129,8 +129,7 @@ return {
 				},
 				explorer = {
 					exclude = { "*.meta" },
-					-- git_status_open = true,
-					-- diagnostic_open = true,
+					ignored = true,
 				},
 			},
 			win = {
@@ -184,10 +183,11 @@ return {
 			desc = "Find Git Files"
 		},
 		{ "<leader>h",  function() Snacks.notifier.show_history() end, desc = "[H]istory" },
-		{ "<leader>ff", function() Snacks.picker.files({ focus = "input", layout = {preset = "select"} }) end,             desc = "[F]ind [F]iles" },
+		{ "<leader>ff", function() Snacks.picker.files({ focus = "input", layout = {preset = "select"} }) end, desc = "[F]ind [F]iles" },
 		{ "<leader>fg", function() Snacks.picker.grep({ focus = "input" }) end, desc = "[F]ind in code" },
 		-- { "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,desc = "[G]o to [R]eferences" },
 		-- { "<leader>gd", function() Snacks.picker.lsp_definitions() end,desc = "[G]o to [D]efinitions" },
 		{ "<leader>d",  function() Snacks.picker.diagnostics_buffer({ focus = "list" }) end, desc = "[G]o to [D]efinitions" },
+		{ "<C-t>",  function() Snacks.terminal() end, mode = { "n", "i", "t" }, desc = "[T]erminal" },
 	},
 }
