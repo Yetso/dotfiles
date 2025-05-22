@@ -31,10 +31,16 @@ alias fastfetch='clear;command fastfetch'
 alias lg='lazygit'
 alias v='nvim'
 
+function move_cursor_up {
+	print -n "\e[22J"
+	zle reset-prompt
+}
+zle -N move_cursor_up
+
 bindkey '\e[H' beginning-of-line
 bindkey '\e[F' end-of-line
-
 bindkey '\e[3~' delete-char
+bindkey '^l' move_cursor_up
 
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

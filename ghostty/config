@@ -45,4 +45,3 @@ cursor-style = bar
 # keybind = ctrl+l=goto_split:right
 keybind = alt+n=new_window
 keybind = alt+t=new_tab
-keybind = ctrl+l=csi:22J
