@@ -91,7 +91,13 @@ return {
 		quickfile = { enabled = true },
 		dashboard = { enabled = true },
 		indent = { enabled = true },
-		image = { enabled = true },
+		image = {
+			enabled = true,
+			doc = {
+				inline = false,
+				float = false,
+			},
+		},
 		input = {
 			enabled = true,
 		},
