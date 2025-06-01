@@ -12,5 +12,5 @@ return {
 	end,
 	config = function()
 		vim.cmd.colorscheme("moonfly")
-	end
+	end,
 }

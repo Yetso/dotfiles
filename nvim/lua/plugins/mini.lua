@@ -1,30 +1,40 @@
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd("BufEnter", {
 	callback = vim.schedule_wrap(function()
 		local n_listed_bufs = 0
 		for _, buf_id in ipairs(vim.api.nvim_list_bufs()) do
-			if vim.fn.buflisted(buf_id) == 1 then n_listed_bufs = n_listed_bufs + 1 end
+			if vim.fn.buflisted(buf_id) == 1 then
+				n_listed_bufs = n_listed_bufs + 1
+			end
 		end
 
 		vim.o.showtabline = n_listed_bufs > 1 and 2 or 0
 	end),
-	desc = 'Update tabline based on the number of listed buffers',
+	desc = "Update tabline based on the number of listed buffers",
 })
 
 local format_summary = function(data)
 	local summary = vim.b[data.buf].minidiff_summary
-	if not summary then return end
+	if not summary then
+		return
+	end
 	if not (summary.add and summary.change and summary.delete) then
 		return
 	end
 
 	local t = {}
-	if summary.add > 0 then table.insert(t, '%#GitSignsAdd#+' .. summary.add) end
-	if summary.change > 0 then table.insert(t, '%#GitSignsChange#~' .. summary.change) end
-	if summary.delete > 0 then table.insert(t, '%#GitSignsDelete#-' .. summary.delete) end
-	vim.b[data.buf].minidiff_summary_string = table.concat(t, ' ')
+	if summary.add > 0 then
+		table.insert(t, "%#GitSignsAdd#+" .. summary.add)
+	end
+	if summary.change > 0 then
+		table.insert(t, "%#GitSignsChange#~" .. summary.change)
+	end
+	if summary.delete > 0 then
+		table.insert(t, "%#GitSignsDelete#-" .. summary.delete)
+	end
+	vim.b[data.buf].minidiff_summary_string = table.concat(t, " ")
 end
-local au_opts = { pattern = 'MiniDiffUpdated', callback = format_summary }
-vim.api.nvim_create_autocmd('User', au_opts)
+local au_opts = { pattern = "MiniDiffUpdated", callback = format_summary }
+vim.api.nvim_create_autocmd("User", au_opts)
 
 local buffer_keys = {}
 for i = 1, 9 do
@@ -33,14 +43,26 @@ for i = 1, 9 do
 		function()
 			local buflist = vim.fn.getbufinfo({ buflisted = 1 })
 			if buflist[i] ~= nil then
-				vim.cmd('buffer ' .. buflist[i].bufnr)
+				vim.cmd("buffer " .. buflist[i].bufnr)
 			end
 		end,
 		desc = "Buffer " .. i,
 	})
 end
-table.insert(buffer_keys, { "<S-q>", function() Snacks.bufdelete() end, desc = "[B]uffer [C]lose" })
-table.insert(buffer_keys, { "<leader>bac", function() Snacks.bufdelete.other() end, desc = "[B]uffer [A]ll [C]lose" })
+table.insert(buffer_keys, {
+	"<S-q>",
+	function()
+		Snacks.bufdelete()
+	end,
+	desc = "[B]uffer [C]lose",
+})
+table.insert(buffer_keys, {
+	"<leader>bca",
+	function()
+		Snacks.bufdelete.other()
+	end,
+	desc = "[B]uffer [A]ll [C]lose",
+})
 table.insert(buffer_keys, { "H", "<cmd>bprevious<cr>", desc = "Prev Buffer" })
 table.insert(buffer_keys, { "L", "<cmd>bnext<cr>", desc = "Next Buffer" })
 
@@ -58,11 +80,10 @@ return {
 		end,
 	},
 	{
-		'echasnovski/mini.cursorword',
+		"echasnovski/mini.cursorword",
 		version = false,
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
-
 	},
 	{
 		"echasnovski/mini.diff",
@@ -93,7 +114,6 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		version = false,
 		opts = {},
-
 	},
 	{
 		"echasnovski/mini.tabline",
@@ -105,14 +125,14 @@ return {
 				local prefix = nil
 				for i, b in ipairs(buflist) do
 					if b.bufnr == buf_id then
-						prefix = ' ' .. i
+						prefix = " " .. i
 						break
 					end
 				end
 
-				local suffix = vim.bo[buf_id].modified and '[+]' or ''
+				local suffix = vim.bo[buf_id].modified and "[+]" or ""
 				return prefix .. MiniTabline.default_format(buf_id, label) .. suffix
-			end
+			end,
 		},
 		config = function(_, opts)
 			require("mini.tabline").setup(opts)
@@ -134,44 +154,46 @@ return {
 		opts = {
 			content = {
 				active = function()
-					local diag_signs    = {
-						ERROR = '%#DiagnosticError#󰅜',
-						WARN = '%#DiagnosticWarn#',
-						INFO = '%#DiagnosticInfo#',
-						HINT = '%#DiagnosticHint#',
+					local diag_signs = {
+						ERROR = "%#DiagnosticError#󰅜",
+						WARN = "%#DiagnosticWarn#",
+						INFO = "%#DiagnosticInfo#",
+						HINT = "%#DiagnosticHint#",
 					}
 
 					local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 1 })
-					local diff          = vim.b.minidiff_summary_string or ""
-					local filename      = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+					local diff = vim.b.minidiff_summary_string or ""
+					local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
 					if filename == "" then
 						filename = "[No Name]"
 					end
-					local fileinfo    = MiniStatusline.section_fileinfo({ trunc_width = 9999 })
+					local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 9999 })
 					local diagnostics = MiniStatusline.section_diagnostics({
 						trunc_width = 75,
 						signs = diag_signs,
-						icon = ""
+						icon = "",
 					})
-					diagnostics       = diagnostics .. '%#MiniStatuslineDevinfo#'
-					local line        = vim.fn.line(".")
-					local percent     = math.floor(line / vim.fn.line("$") * 100) .. "%%"
-					local location    = line .. ':' .. vim.fn.col(".")
-					local lazyUpdate  = require("lazy.status")
-					local lazyScreen  = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
-					local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording() or ""
+					diagnostics = diagnostics .. "%#MiniStatuslineDevinfo#"
+					local line = vim.fn.line(".")
+					local percent = math.floor(line / vim.fn.line("$") * 100) .. "%%"
+					local location = line .. ":" .. vim.fn.col(".")
+					local lazyUpdate = require("lazy.status")
+					local lazyScreen = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
+					local recording = vim.fn.reg_recording() ~= ""
+							and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording()
+						or ""
 
 					return MiniStatusline.combine_groups({
-						{ hl = mode_hl,                  strings = { mode } },
+						{ hl = mode_hl, strings = { mode } },
 						"%<",
-						{ hl = 'MiniStatuslineFilename', strings = { filename } },
-						{ hl = 'MiniStatuslineDevinfo',  strings = { diff, diagnostics } },
-						'%=', -- End left alignment
-						{ hl = 'MoonflyRed', strings = { lazyScreen } },
-						{ hl = 'MiniStatuslineFileinfo', strings = { recording } },
-						{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-						{ hl = 'MiniStatuslineFilename', strings = { percent } },
-						{ hl = mode_hl,                  strings = { location } },
+						{ hl = "MiniStatuslineFilename", strings = { filename } },
+						{ hl = "MiniStatuslineDevinfo", strings = { diff, diagnostics } },
+						"%=", -- End left alignment
+						{ hl = "MoonflyRed", strings = { lazyScreen } },
+						{ hl = "MiniStatuslineFileinfo", strings = { recording } },
+						{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+						{ hl = "MiniStatuslineFilename", strings = { percent } },
+						{ hl = mode_hl, strings = { location } },
 					})
 				end,
 			},

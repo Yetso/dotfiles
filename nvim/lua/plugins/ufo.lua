@@ -1,6 +1,6 @@
 local handler = function(virtText, lnum, endLnum, width, truncate)
 	local newVirtText = {}
-	local suffix = (' 󰁂 %d '):format(endLnum - lnum)
+	local suffix = (" 󰁂 %d "):format(endLnum - lnum)
 	local sufWidth = vim.fn.strdisplaywidth(suffix)
 	local targetWidth = width - sufWidth
 	local curWidth = 0
@@ -16,42 +16,44 @@ local handler = function(virtText, lnum, endLnum, width, truncate)
 			chunkWidth = vim.fn.strdisplaywidth(chunkText)
 			-- str width returned from truncate() may less than 2nd argument, need padding
 			if curWidth + chunkWidth < targetWidth then
-				suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
+				suffix = suffix .. (" "):rep(targetWidth - curWidth - chunkWidth)
 			end
 			break
 		end
 		curWidth = curWidth + chunkWidth
 	end
-	table.insert(newVirtText, { suffix, 'MoreMsg' })
+	table.insert(newVirtText, { suffix, "MoreMsg" })
 	return newVirtText
 end
-
 
 ---@param bufnr number
 local function customizeSelector(bufnr)
 	local function handleFallbackException(err, providerName)
-		if type(err) == 'string' and err:match('UfoFallbackException') then
-			return require('ufo').getFolds(bufnr, providerName)
+		if type(err) == "string" and err:match("UfoFallbackException") then
+			return require("ufo").getFolds(bufnr, providerName)
 		else
-			return require('promise').reject(err)
+			return require("promise").reject(err)
 		end
 	end
 
-	return require('ufo').getFolds(bufnr, 'lsp'):catch(function(err)
-		return handleFallbackException(err, 'treesitter')
-	end):catch(function(err)
-		return handleFallbackException(err, 'indent')
-	end)
+	return require("ufo")
+		.getFolds(bufnr, "lsp")
+		:catch(function(err)
+			return handleFallbackException(err, "treesitter")
+		end)
+		:catch(function(err)
+			return handleFallbackException(err, "indent")
+		end)
 end
 
 return {
-	'kevinhwang91/nvim-ufo',
-	dependencies = { 'kevinhwang91/promise-async' },
+	"kevinhwang91/nvim-ufo",
+	dependencies = { "kevinhwang91/promise-async" },
 	opts = {
 		fold_virt_text_handler = handler,
 		provider_selector = function(_, _, _)
 			return customizeSelector
-		end
+		end,
 		-- 	function(bufnr, _, buftype)
 		-- 	if buftype == "nofile" then
 		-- 		return ''
@@ -64,17 +66,19 @@ return {
 		-- 	end
 		-- 	return { 'lsp', 'treesitter' }
 		-- end
-
 	},
 	event = { "BufRead" },
 	init = function()
-		vim.o.foldcolumn = '1'
+		vim.o.foldcolumn = "1"
 		vim.o.foldlevel = 99
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true
 		vim.opt.foldopen:remove("hor")
 		vim.opt.fillchars = {
-			fold = ' ', foldopen = '', foldsep = ' ', foldclose = '',
+			fold = " ",
+			foldopen = "",
+			foldsep = " ",
+			foldclose = "",
 		}
-	end
+	end,
 }

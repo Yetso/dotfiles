@@ -10,8 +10,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local value = ev.data.params
-			.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
 		if not client or type(value) ~= "table" then
 			return
 		end
@@ -38,7 +37,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 		end, p)
 
 		-- local spinner = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" }
-		local spinner = { '◜', '◝', '◞', '◟' }
+		local spinner = { "◜", "◝", "◞", "◟" }
 
 		vim.notify(table.concat(msg, "\n"), vim.log.levels.INFO, {
 			id = "lsp_progress",
@@ -76,7 +75,7 @@ return {
 			left = { "mark", "sign" }, -- priority of signs on the left (high to low)
 			right = { "fold", "git" }, -- priority of signs on the right (high to low)
 			folds = {
-				open = true,  -- show open fold icons
+				open = true, -- show open fold icons
 				git_hl = false, -- use Git Signs hl for fold icons
 			},
 			git = {
@@ -112,14 +111,14 @@ return {
 			icons = {
 				tree = {
 					vertical = "│",
-					middle   = "├",
-					last     = "└",
+					middle = "├",
+					last = "└",
 				},
 				diagnostics = {
 					Error = "󰅜 ",
-					Warn  = " ",
-					Hint  = " ",
-					Info  = " ",
+					Warn = " ",
+					Hint = " ",
+					Info = " ",
 				},
 			},
 			sources = {
@@ -156,8 +155,20 @@ return {
 	},
 	keys = {
 		-- { "<leader>u",  function() Snacks.picker.undo({ win = { preview = { wo = { number = true } } } }) end, desc = "Snacks Undo" },
-		{ "<leader>lg", function() Snacks.lazygit() end, desc = "Lazygit" },
-		{ "<leader>gl", function() Snacks.lazygit.log() end, desc = "Lazygit [G]it [L]og" },
+		{
+			"<leader>lg",
+			function()
+				Snacks.lazygit()
+			end,
+			desc = "Lazygit",
+		},
+		{
+			"<leader>gl",
+			function()
+				Snacks.lazygit.log()
+			end,
+			desc = "Lazygit [G]it [L]og",
+		},
 		{
 			"<leader>n",
 			function()
@@ -169,25 +180,56 @@ return {
 					Snacks.picker.get({ source = "explorer" })[1]:focus()
 				end
 			end,
-			desc = "File Explorer"
+			desc = "File Explorer",
 		},
 		{
 			"<C-p>",
 			function()
 				if is_git_repo() then
-					Snacks.picker.git_files({ focus = "input", layout = {preset = "select"} })
+					Snacks.picker.git_files({ focus = "input", layout = { preset = "select" } })
 				else
-					Snacks.picker.files({ focus = "input", layout = {preset = "select"} })
+					Snacks.picker.files({ focus = "input", layout = { preset = "select" } })
 				end
 			end,
-			desc = "Find Git Files"
+			desc = "Find Git Files",
 		},
-		{ "<leader>h",  function() Snacks.notifier.show_history() end, desc = "[H]istory" },
-		{ "<leader>ff", function() Snacks.picker.files({ focus = "input", layout = {preset = "select"} }) end, desc = "[F]ind [F]iles" },
-		{ "<leader>fg", function() Snacks.picker.grep({ focus = "input" }) end, desc = "[F]ind in code" },
+		{
+			"<leader>h",
+			function()
+				Snacks.notifier.show_history()
+			end,
+			desc = "[H]istory",
+		},
+		{
+			"<leader>ff",
+			function()
+				Snacks.picker.files({ focus = "input", layout = { preset = "select" } })
+			end,
+			desc = "[F]ind [F]iles",
+		},
+		{
+			"<leader>fg",
+			function()
+				Snacks.picker.grep({ focus = "input" })
+			end,
+			desc = "[F]ind in code",
+		},
 		-- { "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,desc = "[G]o to [R]eferences" },
 		-- { "<leader>gd", function() Snacks.picker.lsp_definitions() end,desc = "[G]o to [D]efinitions" },
-		{ "<leader>d",  function() Snacks.picker.diagnostics_buffer({ focus = "list" }) end, desc = "[G]o to [D]efinitions" },
-		{ "<C-t>",  function() Snacks.terminal() end, mode = { "n", "i", "t" }, desc = "[T]erminal" },
+		{
+			"<leader>d",
+			function()
+				Snacks.picker.diagnostics_buffer({ focus = "list" })
+			end,
+			desc = "[G]o to [D]efinitions",
+		},
+		{
+			"<C-t>",
+			function()
+				Snacks.terminal()
+			end,
+			mode = { "n", "i", "t" },
+			desc = "[T]erminal",
+		},
 	},
 }
