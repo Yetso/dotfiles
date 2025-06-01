@@ -20,7 +20,7 @@ require("lazy").setup({
 	},
 	install = {
 		missing = false,
-		colorscheme = { "moonfly" }
+		colorscheme = { "moonfly" },
 	},
 	ui = {
 		border = "rounded",
@@ -29,13 +29,16 @@ require("lazy").setup({
 		enabled = true,
 		notify = false,
 	},
-	checker = { enabled = true, notify = false, },
+	checker = { enabled = true, notify = false },
 	performance = {
 		rtp = {
 			disabled_plugins = {
-				"gzip", "netrwPlugin",
-				"tarPlugin", "tohtml",
-				"tutor", "zipPlugin",
+				"gzip",
+				"netrwPlugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
 			},
 		},
 	},

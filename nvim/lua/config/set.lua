@@ -5,7 +5,7 @@ vim.g.maplocalleader = "\\"
 vim.g.have_nerd_font = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -30,7 +30,7 @@ vim.opt.splitbelow = true
 vim.opt.updatetime = 300
 vim.opt.timeoutlen = 500
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+vim.opt.inccommand = "split"
 
 vim.o.hlsearch = true
 vim.o.cursorline = true
@@ -38,13 +38,13 @@ vim.o.cursorline = true
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
 		vim.hl.on_yank()
 	end,
 	group = highlight_group,
-	pattern = '*',
+	pattern = "*",
 })
 
 -- Change vers le répertoire du premier fichier ouvert au démarrage
@@ -76,7 +76,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			target_dir = vim.fn.fnamemodify(abs_path, ":h")
 		end
 		vim.cmd("cd " .. vim.fn.fnameescape(target_dir))
-	end
+	end,
 })
 
 vim.opt.laststatus = 3
@@ -123,17 +123,17 @@ vim.diagnostic.config({
 	virtual_lines = { current_line = true },
 	signs = {
 		text = {
-			[vim.diagnostic.severity.ERROR] = '󰅜',
-			[vim.diagnostic.severity.WARN] = '',
-			[vim.diagnostic.severity.INFO] = '',
-			[vim.diagnostic.severity.HINT] = '',
-		}
-	}
+			[vim.diagnostic.severity.ERROR] = "󰅜",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+	},
 })
 
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve-t:ver25-Cursor,r:hor20-Cursor"
 
 -- print checkhealth with float window
-vim.g.health = { style = 'float' }
+vim.g.health = { style = "float" }
 
 vim.opt.winborder = "rounded"

@@ -1,23 +1,23 @@
 return {
-	'saghen/blink.cmp',
+	"saghen/blink.cmp",
 	event = "InsertEnter",
 
 	-- optional: provides snippets for the snippet source
-	dependencies = { 'rafamadriz/friendly-snippets' },
+	dependencies = { "rafamadriz/friendly-snippets" },
 
 	-- use a release tag to download pre-built binaries
-	version = '1.*',
+	version = "1.*",
 
 	opts = {
 		keymap = {
-			preset = 'enter',
-			['<Tab>'] = { 'select_next', 'fallback' },
-			['<S-Tab>'] = { 'select_prev', 'fallback' },
+			preset = "enter",
+			["<Tab>"] = { "select_next", "fallback" },
+			["<S-Tab>"] = { "select_prev", "fallback" },
 		},
 
 		completion = {
 			list = {
-				selection = { preselect = false, auto_insert = false }
+				selection = { preselect = false, auto_insert = false },
 			},
 			menu = {
 				border = nil,
@@ -26,7 +26,7 @@ return {
 				draw = {
 					columns = {
 						{ "kind_icon" },
-						{ "label",      "label_description", gap = 1 },
+						{ "label", "label_description", gap = 1 },
 						{ "kind" },
 						{ "source_name" },
 					},
@@ -36,7 +36,7 @@ return {
 				window = {
 					border = nil,
 					scrollbar = false,
-					winhighlight = 'Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc',
+					winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,EndOfBuffer:BlinkCmpDoc",
 				},
 				auto_show = true,
 				auto_show_delay_ms = 500,
@@ -45,9 +45,9 @@ return {
 		cmdline = {
 			completion = {
 				list = { selection = { preselect = false, auto_insert = true } },
-				menu = { auto_show = true }
+				menu = { auto_show = true },
 			},
 		},
 	},
-	opts_extend = { "sources.default" }
+	opts_extend = { "sources.default" },
 }

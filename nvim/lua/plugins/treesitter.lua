@@ -43,8 +43,8 @@ return {
 	config = function(_, opts)
 		vim.filetype.add({
 			extension = {
-				zsh = 'bash',
-			}
+				zsh = "bash",
+			},
 		})
 		require("nvim-treesitter.configs").setup(opts)
 	end,
