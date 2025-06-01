@@ -1,17 +1,19 @@
 -- Raccourci pour LSP
 local bufopts = { noremap = true, silent = true }
-vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, bufopts)
+-- vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, bufopts)
 vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, bufopts)
-vim.keymap.set("n", "<leader>gr",
-	function() Snacks.picker.lsp_references({ auto_confirm = false, layout = { preset = "vertical", layout = { width = 0.8 } } }) end,
-	bufopts)
-vim.keymap.set("n", "<leader>gd", function() Snacks.picker.lsp_definitions() end, bufopts)
+vim.keymap.set("n", "<leader>gr", function()
+	Snacks.picker.lsp_references({ auto_confirm = false, layout = { preset = "vertical", layout = { width = 0.8 } } })
+end, bufopts)
+vim.keymap.set("n", "<leader>gd", function()
+	Snacks.picker.lsp_definitions()
+end, bufopts)
 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, bufopts)
 vim.keymap.set("n", "E", function()
 	vim.diagnostic.open_float(nil, {
 		focusable = true,
-		border = "rounded"
+		border = "rounded",
 	})
 end, { desc = "Afficher les erreurs LSP avec une bordure" })
 ---@diagnostic disable: undefined-global
@@ -23,6 +25,9 @@ return {
 		opts = {
 			ensure_installed = {
 				"stylua",
+				-- "basedpyright",
+				"google-java-format",
+				"jdtls",
 				"lua-language-server",
 			},
 		},
@@ -62,6 +67,23 @@ return {
 						-- See the configuration section for more details
 						-- Load luvit types when the `vim.uv` word is found
 						{ path = "luvit-meta/library", words = { "vim%.uv" } },
+					},
+				},
+			},
+			{
+				"saghen/blink.cmp",
+				opts = {
+					sources = {
+						-- add lazydev to your completion providers
+						default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+						providers = {
+							lazydev = {
+								name = "LazyDev",
+								module = "lazydev.integrations.blink",
+								-- make lazydev completions top priority (see `:h blink.cmp`)
+								score_offset = 100,
+							},
+						},
 					},
 				},
 			},
