@@ -232,7 +232,17 @@ return {
 		{
 			"<C-t>",
 			function()
-				Snacks.terminal()
+				local terminal = Snacks.terminal.list()[1]
+
+				if terminal == nil then
+					Snacks.terminal()
+				elseif not vim.api.nvim_win_is_valid(terminal.win) then
+					Snacks.terminal()
+				else
+					vim.api.nvim_set_current_win(terminal.win)
+					vim.cmd("hide")
+					vim.cmd("stopinsert")
+				end
 			end,
 			mode = { "n", "i", "t" },
 			desc = "[T]erminal",
