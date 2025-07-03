@@ -18,14 +18,6 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { silent = true })
 -- dont move the cursor after a yanking
 vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 
--- dont move the cursor after an indent
-vim.keymap.set("v", ">", ">gv<Esc>", { noremap = true, silent = true })
-vim.keymap.set("v", "<", "<gv<Esc>", { noremap = true, silent = true })
-
--- delete without copying to buffer "
--- vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { noremap = true, silent = true })
-vim.keymap.set("x", "<leader>p", '"_dP', { noremap = true, silent = true })
-
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 -- Fonction pour vérifier si la fenêtre actuelle est flottante
@@ -51,4 +43,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	end,
 })
 
--- vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], {desc = "quit insert mode inside terminal"})
