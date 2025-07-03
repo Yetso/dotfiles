@@ -20,10 +20,14 @@ return {
 			lua = { "stylua" },
 			-- python = { "isort", "black" },
 			-- javascript = { "prettierd", "prettier", stop_after_first = true },
+			jsonc = {"jq"},
+			java = {"google-java-format"},
 		},
+		formatters = {
+			["google-java-format"] = {
+				append_args = {"--aosp"}
+			},
+		},
+
 	},
-	init = function()
-		-- If you want the formatexpr, here is the place to set it
-		vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-	end,
 }
