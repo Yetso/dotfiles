@@ -1,3 +1,32 @@
+vim.lsp.enable({
+	"jdtls",
+	"lua_ls",
+})
+local env = {
+	HOME = vim.uv.os_homedir(),
+	XDG_CACHE_HOME = os.getenv("XDG_CACHE_HOME"),
+}
+
+local function get_cache_dir()
+	return env.XDG_CACHE_HOME and env.XDG_CACHE_HOME or env.HOME .. "/.cache" .."/jdtls"
+end
+
+-- local function get_jdtls_cache_dir()
+-- 	return get_cache_dir() .. "/jdtls"
+-- end
+
+vim.lsp.config("jdtls", {
+	cmd = {
+		"jdtls",
+		"--jvm-arg=-javaagent:" .. env.HOME .. "/.local/share/nvim/mason/share/jdtls/lombok.jar",
+		"-configuration",
+		get_cache_dir() .. "/config",
+		"-data",
+		get_cache_dir() .. "/workspace",
+		-- get_jdtls_jvm_args(),
+	},
+})
+
 -- Raccourci pour LSP
 local bufopts = { noremap = true, silent = true }
 -- vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, bufopts)
@@ -26,8 +55,8 @@ return {
 			ensure_installed = {
 				"stylua",
 				-- "basedpyright",
-				"google-java-format",
-				"jdtls",
+				-- "google-java-format",
+				-- "jdtls",
 				"lua-language-server",
 			},
 		},
@@ -81,7 +110,7 @@ return {
 								name = "LazyDev",
 								module = "lazydev.integrations.blink",
 								-- make lazydev completions top priority (see `:h blink.cmp`)
-								score_offset = 100,
+								-- score_offset = 100,
 							},
 						},
 					},
@@ -90,13 +119,10 @@ return {
 		},
 		config = function()
 			require("mason").setup()
-			require("mason-lspconfig").setup()
+			-- require("mason-lspconfig").setup()
 			-- local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 			-- Create your keybindings here
 			-- local telescopeUi = require("telescope.builtin")
 		end,
-	},
-	{
-		"mason-org/mason-lspconfig.nvim",
 	},
 }
