@@ -25,13 +25,28 @@ vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { silent = true, desc = "Move line 
 vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move selection down" })
 vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move selection up" })
 
+-- Better indenting in visual mode
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
+
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 vim.keymap.set('n', 'gr', '<Nop>')
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Go to LSP definition" })
 
+vim.api.nvim_create_autocmd("CursorMoved", {
+	once = true,
+	callback = function()
+		vim.cmd("normal! zz")
+	end,
+})
+
 vim.keymap.set("n", "grf", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format buffer" })
+
+-- Quickly source current file / execute Lua code
+vim.keymap.set('n', '<leader>x', '<Cmd>:.lua<CR>', { desc = 'Lua: execute current line' })
+vim.keymap.set('v', '<leader>x', '<Cmd>:lua<CR>', { desc = 'Lua: execute current selection' })
 
 -- Fonction pour vérifier si la fenêtre actuelle est flottante
 local function is_floating_window()
@@ -55,4 +70,3 @@ vim.api.nvim_create_autocmd("TermOpen", {
 		end
 	end,
 })
-
