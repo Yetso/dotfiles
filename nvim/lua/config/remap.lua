@@ -18,6 +18,13 @@ vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { silent = true })
 -- dont move the cursor after a yanking
 vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 
+
+-- Move lines up/down
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { silent = true, desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { silent = true, desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { silent = true, desc = "Move selection down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move selection up" })
+
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 vim.keymap.set('n', 'gr', '<Nop>')
