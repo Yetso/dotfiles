@@ -47,6 +47,9 @@ return {
 				list = { selection = { preselect = false, auto_insert = true } },
 				menu = { auto_show = true },
 			},
+			keymap = {
+				preset = "inherit",
+			},
 		},
 	},
 	opts_extend = { "sources.default" },
