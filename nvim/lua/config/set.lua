@@ -28,12 +28,59 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.opt.updatetime = 300
-vim.opt.timeoutlen = 500
+vim.opt.timeoutlen = 800
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = "split"
 
 vim.o.hlsearch = true
 vim.o.cursorline = true
+vim.opt.laststatus = 3
+vim.opt.showcmd = false
+
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.smartindent = true
+
+-- vim.opt.textwidth = 100
+vim.opt.formatoptions:remove("t")
+
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.incsearch = true
+
+vim.opt.termguicolors = true
+
+vim.opt.sidescrolloff = 12
+vim.opt.scrolloff = 10
+
+vim.opt.confirm = true
+
+vim.opt.matchpairs:append("<:>")
+
+vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve-t:ver25-Cursor,r:hor20-Cursor"
+
+-- print checkhealth with float window
+vim.g.health = { style = "float" }
+
+vim.opt.winborder = "rounded"
+
+vim.diagnostic.config({
+	-- virtual_lines = { current_line = true },
+	signs = {
+		text = {
+			[vim.diagnostic.severity.ERROR] = "󰅜",
+			[vim.diagnostic.severity.WARN] = "",
+			[vim.diagnostic.severity.INFO] = "",
+			[vim.diagnostic.severity.HINT] = "",
+		},
+	},
+})
 
 -- Highlight when yanking (copying) text
 --  Try it with `yap` in normal mode
@@ -78,62 +125,3 @@ vim.api.nvim_create_autocmd("VimEnter", {
 		vim.cmd("cd " .. vim.fn.fnameescape(target_dir))
 	end,
 })
-
-vim.opt.laststatus = 3
-vim.opt.showcmd = false
-
-vim.opt.tabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.smartindent = true
-
-vim.opt.textwidth = 100
-vim.opt.formatoptions:remove("t")
-
--- Tabs for nix files
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "nix",
-	callback = function()
-		vim.opt_local.expandtab = true -- Use spaces instead of tabs
-		vim.opt_local.tabstop = 2 -- Number of spaces a <Tab> counts for
-		vim.opt_local.shiftwidth = 2 -- Number of spaces to use for (auto)indent
-		vim.opt_local.softtabstop = 2 -- Number of spaces a <Tab> counts for while editing
-	end,
-})
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
-
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = (os.getenv("HOME") or os.getenv("USERPROFILE")) .. "/.vim/undodir"
-vim.opt.undofile = true
-
-vim.opt.incsearch = true
-
-vim.opt.termguicolors = true
-
-vim.opt.sidescrolloff = 12
-vim.opt.scrolloff = 10
-
-vim.opt.confirm = true
-
-vim.opt.matchpairs:append("<:>")
-
-vim.diagnostic.config({
-	virtual_lines = { current_line = true },
-	signs = {
-		text = {
-			[vim.diagnostic.severity.ERROR] = "󰅜",
-			[vim.diagnostic.severity.WARN] = "",
-			[vim.diagnostic.severity.INFO] = "",
-			[vim.diagnostic.severity.HINT] = "",
-		},
-	},
-})
-
-vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve-t:ver25-Cursor,r:hor20-Cursor"
-
--- print checkhealth with float window
-vim.g.health = { style = "float" }
-
-vim.opt.winborder = "rounded"
