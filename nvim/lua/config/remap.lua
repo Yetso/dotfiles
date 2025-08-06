@@ -35,13 +35,6 @@ vim.keymap.set('n', 'gr', '<Nop>')
 
 vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Go to LSP definition" })
 
-vim.api.nvim_create_autocmd("CursorMoved", {
-	once = true,
-	callback = function()
-		vim.cmd("normal! zz")
-	end,
-})
-
 vim.keymap.set("n", "grf", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format buffer" })
 
 -- Quickly source current file / execute Lua code
