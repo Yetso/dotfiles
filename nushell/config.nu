@@ -24,7 +24,7 @@ alias lg = lazygit
 alias v = nvim
 # alias eza = {eza --icons always --binary --total-size --group-directories-first --header --no-quotes --all \'--color=always\' \'--ignore-glob=.DS_Store\' $it}
 
-^fastfetch;fastfetch
+^fastfetch
 
 
 
