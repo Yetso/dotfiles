@@ -15,7 +15,7 @@ shell-integration = zsh
 
 theme = moonfly
 
-background-opacity = 0.95
+# background-opacity = 0.95
 
 minimum-contrast = 1
 
