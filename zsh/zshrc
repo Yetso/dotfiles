@@ -3,6 +3,7 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=1000
 unsetopt beep
+setopt autocd
 bindkey -e
 # End of lines configured by zsh-newuser-install
 
@@ -73,4 +74,5 @@ function y() {
 }
 
 # Lancement de fastfetch
+sleep 0.2
 fastfetch
