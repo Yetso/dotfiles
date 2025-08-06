@@ -135,6 +135,13 @@ return {
 				explorer = {
 					exclude = { "*.meta" },
 					ignored = true,
+					win = {
+						list = {
+							keys = {
+								["<Esc>"] = { { "select_all", "select_all" } },
+							},
+						},
+					},
 				},
 			},
 			win = {
