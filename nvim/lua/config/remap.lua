@@ -20,6 +20,12 @@ vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
+vim.keymap.set('n', 'gr', '<Nop>')
+
+vim.keymap.set("n", "grd", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Go to LSP definition" })
+
+vim.keymap.set("n", "grf", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format buffer" })
+
 -- Fonction pour vérifier si la fenêtre actuelle est flottante
 local function is_floating_window()
 	local config = vim.api.nvim_win_get_config(0)
