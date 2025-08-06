@@ -2,6 +2,7 @@ vim.lsp.enable({
 	"jdtls",
 	"lua_ls",
 	"tinymist",
+	"jsonls",
 })
 
 
