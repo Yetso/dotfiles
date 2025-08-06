@@ -109,12 +109,12 @@ return {
 			},
 		},
 	},
-	{
-		"echasnovski/mini.move",
-		event = { "BufReadPre", "BufNewFile" },
-		version = false,
-		opts = {},
-	},
+	-- {
+	-- 	"echasnovski/mini.move",
+	-- 	event = { "BufReadPre", "BufNewFile" },
+	-- 	version = false,
+	-- 	opts = {},
+	-- },
 	{
 		"echasnovski/mini.tabline",
 		version = false,
