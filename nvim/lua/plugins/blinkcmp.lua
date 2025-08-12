@@ -10,25 +10,35 @@ return {
 
 	opts = {
 		keymap = {
-			preset = "enter",
-			["<Tab>"] = { "select_next", "fallback" },
-			["<S-Tab>"] = { "select_prev", "fallback" },
+			preset = "none",
+			["<C-j>"] = { "select_next", "fallback" },
+			["<C-k>"] = { "select_prev", "fallback" },
+			['<Up>'] = { 'select_prev', 'fallback' },
+			['<Down>'] = { 'select_next', 'fallback' },
+
+			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
+			['<C-e>'] = { 'hide', 'fallback' },
+
+			['<Tab>'] = { 'accept', 'fallback' },
+			['<C-CR>'] = { 'accept', 'fallback' },
 		},
 
 		completion = {
 			list = {
-				selection = { preselect = false, auto_insert = false },
+				selection = { preselect = true, auto_insert = false },
+			},
+			ghost_text = {
+				enabled = true,
 			},
 			menu = {
-				border = nil,
 				scrolloff = 1,
 				scrollbar = false,
 				draw = {
 					columns = {
 						{ "kind_icon" },
-						{ "label", "label_description", gap = 1 },
+						{ "label",    "label_description", gap = 1 },
 						{ "kind" },
-						{ "source_name" },
+						-- { "source_name" },
 					},
 				},
 			},
@@ -44,9 +54,9 @@ return {
 		},
 		cmdline = {
 			completion = {
-				list = { selection = { preselect = false, auto_insert = true } },
+			list = { selection = { preselect = true, auto_insert = false } },
 				menu = { auto_show = true },
-			},
+			 },
 			keymap = {
 				preset = "inherit",
 			},
