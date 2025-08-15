@@ -14,6 +14,7 @@ vim.keymap.set({ "n", "t" }, "<C-k>", "<Cmd>wincmd k<CR>", { desc = "Move focus 
 
 -- copy to system clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", '"+y', { silent = true })
+vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { silent = true })
 
 -- dont move the cursor after a yanking
 vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true, silent = true })
