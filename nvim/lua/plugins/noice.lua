@@ -1,5 +1,6 @@
 return {
 	"folke/noice.nvim",
+	-- event = "VeryLazy",
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		{
@@ -9,7 +10,6 @@ return {
 			-- },
 		},
 	},
-	event = "VeryLazy",
 	opts = {
 		notify = {
 			enabled = false,
