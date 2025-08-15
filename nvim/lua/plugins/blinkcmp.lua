@@ -1,6 +1,6 @@
 return {
 	"saghen/blink.cmp",
-	event = "InsertEnter",
+	event = "LspAttach",
 
 	-- optional: provides snippets for the snippet source
 	dependencies = { "rafamadriz/friendly-snippets" },
@@ -9,6 +9,12 @@ return {
 	version = "1.*",
 
 	opts = {
+		snippets = {
+			jump = function(direction)
+				require("blink.cmp").hide()
+				vim.snippet.jump(direction)
+			end,
+		},
 		keymap = {
 			preset = "none",
 			["<C-j>"] = { "select_next", "fallback" },
@@ -19,7 +25,8 @@ return {
 			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			['<C-e>'] = { 'hide', 'fallback' },
 
-			['<Tab>'] = { 'accept', 'fallback' },
+			['<Tab>'] = { 'snippet_forward', 'accept', 'fallback' },
+			['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 			['<C-CR>'] = { 'accept', 'fallback' },
 		},
 
@@ -32,7 +39,7 @@ return {
 			},
 			menu = {
 				scrolloff = 1,
-				scrollbar = false,
+				scrollbar = true,
 				draw = {
 					columns = {
 						{ "kind_icon" },
@@ -54,9 +61,9 @@ return {
 		},
 		cmdline = {
 			completion = {
-			list = { selection = { preselect = true, auto_insert = false } },
+				list = { selection = { preselect = true, auto_insert = false } },
 				menu = { auto_show = true },
-			 },
+			},
 			keymap = {
 				preset = "inherit",
 			},
