@@ -2,14 +2,14 @@
 #
 # Upstream: github.com/bluz71/vim-moonfly-colors
 
-background = "#000000"
-foreground = "#bdbdbd"
-selection-background = "#323437"
-selection-foreground = "#080808"
-cursor-color = "#8e8e8e"
+background = #000000
+foreground = #bdbdbd
+selection-background = #b2ceee
+selection-foreground = #000000
+cursor-color = #8e8e8e
 
 palette = 0=#323437
-palette = 1=#ff5454
+palette = 1=#ff5d5d
 palette = 2=#8cc85f
 palette = 3=#e3c78a
 palette = 4=#80a0ff

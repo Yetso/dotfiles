@@ -3,7 +3,7 @@ font-family = "CommitMono Nerd Font Mono"
 font-size = 13
 font-thicken = true
 # adjust-underline-position = 4
-bold-is-bright = true
+bold-is-bright = false
 
 # Mouse
 mouse-hide-while-typing = true
