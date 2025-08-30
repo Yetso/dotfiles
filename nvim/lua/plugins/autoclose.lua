@@ -1,6 +1,6 @@
 return {
 	"m4xshen/autoclose.nvim",
-	event = "InsertEnter",
+	event = "VeryLazy",
 	-- config = true,
 	opts = {
 		options = {

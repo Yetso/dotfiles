@@ -25,7 +25,10 @@ return {
 			['<C-space>'] = { 'show', 'show_documentation', 'hide_documentation' },
 			['<C-e>'] = { 'hide', 'fallback' },
 
-			['<Tab>'] = { 'snippet_forward', 'accept', 'fallback' },
+			['<C-n>'] = {'snippet_forward', 'fallback' },
+			['<C-p>'] = {'snippet_backward', 'fallback' },
+
+			['<Tab>'] = { 'accept', 'snippet_forward', 'fallback' },
 			['<S-Tab>'] = { 'snippet_backward', 'fallback' },
 			['<C-CR>'] = { 'accept', 'fallback' },
 		},
@@ -33,9 +36,6 @@ return {
 		completion = {
 			list = {
 				selection = { preselect = true, auto_insert = false },
-			},
-			ghost_text = {
-				enabled = true,
 			},
 			menu = {
 				scrolloff = 1,
