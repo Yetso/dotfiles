@@ -69,7 +69,7 @@ table.insert(buffer_keys, { "L", "<cmd>bnext<cr>", desc = "Next Buffer" })
 ---@diagnostic disable: undefined-global
 return {
 	{
-		"echasnovski/mini.icons",
+		"nvim-mini/mini.icons",
 		version = false,
 		opts = {},
 		init = function()
@@ -80,13 +80,13 @@ return {
 		end,
 	},
 	{
-		"echasnovski/mini.cursorword",
+		"nvim-mini/mini.cursorword",
 		version = false,
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 	},
 	{
-		"echasnovski/mini.diff",
+		"nvim-mini/mini.diff",
 		version = false,
 		event = { "BufReadPre", "BufNewFile" },
 		keys = {
@@ -109,14 +109,8 @@ return {
 			},
 		},
 	},
-	-- {
-	-- 	"echasnovski/mini.move",
-	-- 	event = { "BufReadPre", "BufNewFile" },
-	-- 	version = false,
-	-- 	opts = {},
-	-- },
 	{
-		"echasnovski/mini.tabline",
+		"nvim-mini/mini.tabline",
 		version = false,
 		event = "VeryLazy",
 		opts = {
@@ -141,7 +135,7 @@ return {
 		keys = buffer_keys,
 	},
 	{
-		"echasnovski/mini.statusline",
+		"nvim-mini/mini.statusline",
 		version = false,
 		config = function(_, opts)
 			require("mini.statusline").setup(opts)
