@@ -7,10 +7,9 @@ bold-is-bright = false
 
 # Mouse
 mouse-hide-while-typing = true
-mouse-scroll-multiplier = 1
+mouse-scroll-multiplier = 5
 
 scrollback-limit = 100000000
-
 shell-integration = zsh
 
 theme = moonfly
@@ -25,8 +24,9 @@ window-colorspace = display-p3
 quit-after-last-window-closed = true
 
 window-save-state = always
-window-width = 1000
-window-height = 100
+maximize = true
+# window-width = 1000
+# window-height = 100
 
 quick-terminal-position = center
 quick-terminal-screen = macos-menu-bar
