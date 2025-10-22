@@ -30,6 +30,15 @@ vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { silent = true, desc = "Move s
 vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
+-- inverse the mapping jump command
+vim.keymap.set('n', "'", "`", { noremap = true })
+vim.keymap.set('n', "`", "'", { noremap = true })
+
+-- M to delete a mark
+vim.keymap.set('n', 'M', function()
+	return ":delmarks " .. vim.fn.getcharstr() .. "<CR>"
+end, { expr = true, silent = true })
+
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 -- LSP mapping
@@ -44,10 +53,12 @@ vim.keymap.set("n", "glr", function() Snacks.picker.lsp_references({ focus = "li
 	{ noremap = true, silent = true, desc = "Go to LSP references" })
 
 vim.keymap.del('n', 'gri')
-vim.keymap.set("n", "gli", vim.lsp.buf.implementation, { noremap = true, silent = true, desc = "Go to LSP Implementation" })
+vim.keymap.set("n", "gli", vim.lsp.buf.implementation,
+	{ noremap = true, silent = true, desc = "Go to LSP Implementation" })
 
 vim.keymap.del('n', 'grt')
-vim.keymap.set("n", "glt", vim.lsp.buf.type_definition, { noremap = true, silent = true, desc = "Go to LSP Type definition" })
+vim.keymap.set("n", "glt", vim.lsp.buf.type_definition,
+	{ noremap = true, silent = true, desc = "Go to LSP Type definition" })
 
 vim.keymap.set("n", "gld", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Go to LSP Definition" })
 vim.keymap.set("n", "gqq", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format buffer" })
