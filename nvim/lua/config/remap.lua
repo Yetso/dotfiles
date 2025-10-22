@@ -78,6 +78,7 @@ end
 vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
 	callback = function()
+		vim.wo.scrolloff = 0
 		-- Exclure les fenêtres flottantes comme LazyGit
 		if not is_floating_window() then
 			vim.api.nvim_buf_set_keymap(
