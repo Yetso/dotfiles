@@ -21,6 +21,7 @@ return {
 			"c_sharp",
 			"csv",
 			"diff",
+			"go",
 			"java",
 			"json",
 			"lua",

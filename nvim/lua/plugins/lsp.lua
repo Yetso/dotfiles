@@ -17,6 +17,7 @@ return {
 						"stylua",
 						"tinymist",
 						"google-java-format",
+						"gopls",
 						"jdtls",
 						"json-lsp",
 						"typstyle",
