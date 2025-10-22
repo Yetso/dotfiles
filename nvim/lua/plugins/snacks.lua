@@ -131,10 +131,12 @@ return {
 			sources = {
 				files = {
 					exclude = { "*.meta" },
+					include = { ".gitignore" },
 					follow = true,
 				},
 				explorer = {
 					exclude = { "*.meta" },
+					include = { ".gitignore" },
 					ignored = true,
 					win = {
 						list = {
