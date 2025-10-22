@@ -122,6 +122,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			-- Si c'est un fichier, prendre son répertoire parent
 			target_dir = vim.fn.fnamemodify(abs_path, ":h")
 		end
-		vim.cmd("cd " .. vim.fn.fnameescape(target_dir))
+		vim.api.nvim_set_current_dir(target_dir)
 	end,
 })
