@@ -18,10 +18,7 @@ require("lazy").setup({
 	rocks = {
 		enabled = false,
 	},
-	install = {
-		missing = false,
-		colorscheme = { "moonfly" },
-	},
+	install = { colorscheme = { "moonfly" } },
 	ui = {
 		border = "rounded",
 	},
