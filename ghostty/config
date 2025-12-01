@@ -1,7 +1,8 @@
 # Fonts
-font-family = "CommitMono Nerd Font Mono"
-font-size = 13
-font-thicken = true
+font-family = "Cousine Nerd Font Mono"
+# font-family = "CommitMonoYetso"
+font-size = 12
+# font-thicken = true
 # adjust-underline-position = 4
 bold-is-bright = false
 
@@ -39,10 +40,14 @@ cursor-style = bar
 
 
 # Keybinds
-# keybind = ctrl+h=goto_split:left
-# keybind = ctrl+j=goto_split:bottom
-# keybind = ctrl+k=goto_split:top
-# keybind = ctrl+l=goto_split:right
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:down
+keybind = ctrl+shift+k=goto_split:up
+keybind = ctrl+shift+l=goto_split:right
+keybind = ctrl+shift+s>ctrl+shift+h=new_split:left
+keybind = ctrl+shift+s>ctrl+shift+j=new_split:down
+keybind = ctrl+shift+s>ctrl+shift+k=new_split:up
+keybind = ctrl+shift+s>ctrl+shift+l=new_split:right
 keybind = alt+n=new_window
 keybind = alt+t=new_tab
 keybind = ctrl+enter=unbind
