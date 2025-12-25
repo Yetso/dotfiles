@@ -70,7 +70,7 @@ return {
 	event = { "BufRead" },
 	init = function()
 		vim.o.foldcolumn = "0"
-		vim.o.signcolumn = "yes"
+		vim.o.signcolumn = "yes:2"
 		vim.o.foldlevel = 99
 		vim.o.foldlevelstart = 99
 		vim.o.foldenable = true

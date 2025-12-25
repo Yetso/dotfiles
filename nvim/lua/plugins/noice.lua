@@ -1,6 +1,5 @@
 return {
 	"folke/noice.nvim",
-	-- event = "VeryLazy",
 	dependencies = {
 		"MunifTanjim/nui.nvim",
 		{
@@ -10,6 +9,7 @@ return {
 			-- },
 		},
 	},
+	event = "VeryLazy",
 	opts = {
 		notify = {
 			enabled = false,
@@ -30,6 +30,9 @@ return {
 			long_message_to_split = true,
 			lsp_doc_border = true,
 		},
+		-- popupmenu = {
+		-- 	enabled = false,
+		-- },
 		-- routes = {
 		-- 	{
 		-- 		filter = {

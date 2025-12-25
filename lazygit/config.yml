@@ -6,6 +6,7 @@ gui:
   # Number from 0 to 1.0.
   sidePanelWidth: 0.333
   # If true, increase the height of the focused side window; creating an accordion effect.
+
   expandFocusedSidePanel: true
   # The weight of the expanded side panel, relative to the other panels. 2 means
 
@@ -27,8 +28,10 @@ gui:
   # If empty, do not show icons.
   nerdFontsVersion: "3"
   # Length of commit hash in commits view. 0 shows '*' if NF icons aren't on.
+
   commitHashLength: 7
   # Config relating to the spinner.
+
   spinner:
     # The frames of the spinner animation.
     frames:
@@ -37,9 +40,10 @@ gui:
       - '◞'
       - '◟'
     # The "speed" of the spinner in milliseconds.
-    rate: 150
 
+    rate: 150
   # Config relating to colors and styles.
+
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#color-attributes
   theme:
     # Border color of focused window
@@ -47,10 +51,10 @@ gui:
       - blue
       - bold
     # Background color of selected line.
+
     # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#highlighting-the-selected-line
     selectedLineBgColor:
       - black
-
 # Keybindings
 keybinding:
   universal:
@@ -61,29 +65,32 @@ keybinding:
   commits:
     moveDownCommit: <disabled>
     moveUpCommit: <disabled>
-
 # Config relating to git
 git:
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Custom_Pagers.md
-  paging:
-    # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
-    colorArg: always
+  pagers:
+    - # Value of the --color arg in the git diff command. Some pagers want this to be set to 'always' and some want it set to 'never'
+      colorArg: always
+      # e.g.
 
-    # e.g.
-    # diff-so-fancy
-    # delta --dark --paging=never
-    # ydiff -p cat -s --wrap --width={{columnWidth}}
-    pager: delta --dark --paging=never --line-numbers --tabs=4 --max-line-length=0 --wrap-max-lines=0
+      # diff-so-fancy
 
-    # If true, Lazygit will use whatever pager is specified in `$GIT_PAGER`, `$PAGER`, or your *git config*.
-    # If the pager ends with something like ` | less` we will strip that part out,
-    # because less doesn't play nice with our rendering approach.
-    # If the custom pager uses less under the hood, that will also break rendering
-    # (hence the `--paging=never` flag for the `delta` pager).
-    useConfig: false
+      # delta --dark --paging=never
 
-    # e.g. 'difft --color=always'
-    # externalDiffCommand: difft --color=always --display=inline
+      # ydiff -p cat -s --wrap --width={{columnWidth}}
+      pager: delta --dark --paging=never --line-numbers --tabs=4 --max-line-length=0 --wrap-max-lines=0
+      # If true, Lazygit will use whatever pager is specified in `$GIT_PAGER`, `$PAGER`, or your *git config*.
 
+      # If the pager ends with something like ` | less` we will strip that part out,
+
+      # because less doesn't play nice with our rendering approach.
+
+      # If the custom pager uses less under the hood, that will also break rendering
+
+      # (hence the `--paging=never` flag for the `delta` pager).
+      useConfig: false
+      # e.g. 'difft --color=always'
+
+      # externalDiffCommand: difft --color=always --display=inline
 os:
   editPreset: 'nvim'
