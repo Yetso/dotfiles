@@ -68,18 +68,18 @@
 --- * [Lua.workspace.library](https://luals.github.io/wiki/settings/#workspacelibrary)
 ---
 
-vim.lsp.config('lua_ls', {
-	settings = {
-		Lua = {
-			runtime = {
-				version = 'LuaJIT',
-			},
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-				},
-			},
-		},
-	},
-})
+-- vim.lsp.config('lua_ls', {
+-- 	settings = {
+-- 		Lua = {
+-- 			runtime = {
+-- 				version = 'LuaJIT',
+-- 			},
+-- 			workspace = {
+-- 				checkThirdParty = false,
+-- 				library = {
+-- 					vim.env.VIMRUNTIME,
+-- 				},
+-- 			},
+-- 		},
+-- 	},
+-- })

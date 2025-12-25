@@ -31,43 +31,53 @@ vim.keymap.set("v", "<", "<gv", { desc = "Indent left and reselect" })
 vim.keymap.set("v", ">", ">gv", { desc = "Indent right and reselect" })
 
 -- inverse the mapping jump command
-vim.keymap.set('n', "'", "`", { noremap = true })
-vim.keymap.set('n', "`", "'", { noremap = true })
+vim.keymap.set("n", "'", "`", { noremap = true })
+vim.keymap.set("n", "`", "'", { noremap = true })
 
 -- M to delete a mark
-vim.keymap.set('n', 'M', function()
+vim.keymap.set("n", "M", function()
 	return ":delmarks " .. vim.fn.getcharstr() .. "<CR>"
 end, { expr = true, silent = true })
 
 -- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
 
 -- LSP mapping
-vim.keymap.del('n', 'grn')
+vim.keymap.del("n", "grn")
 vim.keymap.set("n", "gln", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Go to LSP reName" })
 
-vim.keymap.del('n', 'gra')
+vim.keymap.del("n", "gra")
 vim.keymap.set("n", "gla", vim.lsp.buf.code_action, { noremap = true, silent = true, desc = "Go to LSP Action" })
 
-vim.keymap.del('n', 'grr')
-vim.keymap.set("n", "glr", function() Snacks.picker.lsp_references({ focus = "list" }) end,
-	{ noremap = true, silent = true, desc = "Go to LSP references" })
+vim.keymap.del("n", "grr")
+vim.keymap.set("n", "glr", function()
+	Snacks.picker.lsp_references({ focus = "list" })
+end, { noremap = true, silent = true, desc = "Go to LSP references" })
 
-vim.keymap.del('n', 'gri')
-vim.keymap.set("n", "gli", vim.lsp.buf.implementation,
-	{ noremap = true, silent = true, desc = "Go to LSP Implementation" })
+vim.keymap.del("n", "gri")
+vim.keymap.set(
+	"n",
+	"gli",
+	vim.lsp.buf.implementation,
+	{ noremap = true, silent = true, desc = "Go to LSP Implementation" }
+)
 
-vim.keymap.del('n', 'grt')
-vim.keymap.set("n", "glt", vim.lsp.buf.type_definition,
-	{ noremap = true, silent = true, desc = "Go to LSP Type definition" })
+vim.keymap.del("n", "grt")
+vim.keymap.set(
+	"n",
+	"glt",
+	vim.lsp.buf.type_definition,
+	{ noremap = true, silent = true, desc = "Go to LSP Type definition" }
+)
 
 vim.keymap.set("n", "gld", vim.lsp.buf.definition, { noremap = true, silent = true, desc = "Go to LSP Definition" })
 vim.keymap.set("n", "gqq", vim.lsp.buf.format, { noremap = true, silent = true, desc = "Format buffer" })
-vim.keymap.set("n", "gle", function() vim.diagnostic.open_float(nil, { focusable = true }) end,
-	{ noremap = true, silent = true, desc = "Print LSP messages" })
+vim.keymap.set("n", "gle", function()
+	vim.diagnostic.open_float(nil, { focusable = true })
+end, { noremap = true, silent = true, desc = "Print LSP messages" })
 
 -- Quickly source current file / execute Lua code
-vim.keymap.set('n', '<leader>x', '<Cmd>:.lua<CR>', { desc = 'Lua: execute current line' })
-vim.keymap.set('v', '<leader>x', '<Cmd>:lua<CR>', { desc = 'Lua: execute current selection' })
+vim.keymap.set("n", "<leader>x", "<Cmd>:.lua<CR>", { desc = "Lua: execute current line" })
+vim.keymap.set("v", "<leader>x", "<Cmd>:lua<CR>", { desc = "Lua: execute current selection" })
 -- Fonction pour vérifier si la fenêtre actuelle est flottante
 local function is_floating_window()
 	local config = vim.api.nvim_win_get_config(0)

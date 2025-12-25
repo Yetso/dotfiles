@@ -235,7 +235,7 @@ return {
 			function()
 				Snacks.picker.diagnostics_buffer({ focus = "list" })
 			end,
-			desc = "[G]o to [D]efinitions",
+			desc = "Go to [D]iagnosic window",
 		},
 		{
 			"<C-t>",

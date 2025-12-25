@@ -20,7 +20,7 @@ return {
 						"gopls",
 						"jdtls",
 						"json-lsp",
-						"typstyle",
+						-- "typstyle",
 					}
 				},
 			},
