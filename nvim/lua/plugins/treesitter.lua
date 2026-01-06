@@ -22,6 +22,7 @@ return {
 			"csv",
 			"diff",
 			"go",
+			"hyprlang",
 			"java",
 			"json",
 			"lua",
