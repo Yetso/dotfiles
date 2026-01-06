@@ -1,6 +1,13 @@
 -- vim.keymap.set("i", "<C-j>", [[pumvisible() ? "\<C-n>" : "\<C-j>"]], { expr = true })
 -- vim.keymap.set("i", "<C-k>", [[pumvisible() ? "\<C-p>" : "\<C-k>"]], { expr = true })
 
+vim.keymap.set({ "s", "i" }, "<ESC>", function()
+	if vim.snippet and vim.snippet.active() then
+		vim.snippet.stop()
+	end
+	return vim.api.nvim_replace_termcodes("<Esc>", true, false, true)
+end, { expr = true })
+
 return {
 	"saghen/blink.cmp",
 
@@ -25,11 +32,10 @@ return {
 			},
 		},
 		snippets = {
-			-- preset = "luasnip",
-			-- jump = function(direction)
-			-- 	require("blink.cmp").hide()
-			-- 	vim.snippet.jump(direction)
-			-- end,
+			jump = function(direction)
+				require("blink.cmp").hide()
+				vim.snippet.jump(direction)
+			end,
 		},
 		keymap = {
 			preset = "none",
