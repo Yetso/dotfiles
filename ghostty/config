@@ -1,6 +1,5 @@
 # Fonts
-font-family = "Cousine Nerd Font Mono"
-# font-family = "CommitMonoYetso"
+font-family = "Cousine Nerd Font"
 font-size = 12
 # font-thicken = true
 # adjust-underline-position = 4
