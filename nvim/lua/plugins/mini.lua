@@ -52,14 +52,14 @@ end
 table.insert(buffer_keys, {
 	"<S-q>",
 	function()
-		Snacks.bufdelete()
+		require("snacks").bufdelete()
 	end,
 	desc = "[B]uffer [C]lose",
 })
 table.insert(buffer_keys, {
 	"<leader>bca",
 	function()
-		Snacks.bufdelete.other()
+		require("snacks").bufdelete.other()
 	end,
 	desc = "[B]uffer [A]ll [C]lose",
 })

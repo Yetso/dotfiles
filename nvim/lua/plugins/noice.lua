@@ -2,12 +2,6 @@ return {
 	"folke/noice.nvim",
 	dependencies = {
 		"MunifTanjim/nui.nvim",
-		{
-			-- "rcarriga/nvim-notify",
-			-- opts = {
-			-- 	background_colour = "#000000",
-			-- },
-		},
 	},
 	event = "VeryLazy",
 	opts = {
@@ -30,26 +24,5 @@ return {
 			long_message_to_split = true,
 			lsp_doc_border = true,
 		},
-		-- popupmenu = {
-		-- 	enabled = false,
-		-- },
-		-- routes = {
-		-- 	{
-		-- 		filter = {
-		-- 			event = "msg_show",
-		-- 			any = {
-		-- 				{ find = "%d+L, %d+B written" },
-		-- 				{ find = "; after #%d+" },
-		-- 				{ find = "; before #%d+" },
-		-- 				{ find = "%d fewer lines" },
-		-- 				{ find = "%d more lines" },
-		-- 				{ find = "line less;" },
-		-- 				{ find = "lines yanked" },
-		-- 				{ find = "/" },
-		-- 			},
-		-- 		},
-		-- 		opts = { skip = true },
-		-- 	},
-		-- },
 	},
 }

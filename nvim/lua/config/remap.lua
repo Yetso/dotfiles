@@ -19,7 +19,6 @@ vim.keymap.set({ "n", "v" }, "<leader>p", '"+p', { silent = true })
 -- dont move the cursor after a yanking
 vim.keymap.set("v", "y", "ygv<Esc>", { noremap = true, silent = true })
 
-
 -- Move lines up/down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { silent = true, desc = "Move line down" })
 vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { silent = true, desc = "Move line up" })
@@ -39,8 +38,6 @@ vim.keymap.set("n", "M", function()
 	return ":delmarks " .. vim.fn.getcharstr() .. "<CR>"
 end, { expr = true, silent = true })
 
--- vim.keymap.set('n', '<leader>d', vim.diagnostic.setloclist, { desc = 'Open [D]iagnostic Quickfix list' })
-
 -- LSP mapping
 vim.keymap.del("n", "grn")
 vim.keymap.set("n", "gln", vim.lsp.buf.rename, { noremap = true, silent = true, desc = "Go to LSP reName" })
@@ -50,7 +47,7 @@ vim.keymap.set("n", "gla", vim.lsp.buf.code_action, { noremap = true, silent = t
 
 vim.keymap.del("n", "grr")
 vim.keymap.set("n", "glr", function()
-	Snacks.picker.lsp_references({ focus = "list" })
+	require("snacks").picker.lsp_references({ focus = "list" })
 end, { noremap = true, silent = true, desc = "Go to LSP references" })
 
 vim.keymap.del("n", "gri")
