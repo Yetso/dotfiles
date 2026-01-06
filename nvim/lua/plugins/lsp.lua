@@ -21,12 +21,12 @@ return {
 						"jdtls",
 						"json-lsp",
 						-- "typstyle",
-					}
+					},
 				},
 			},
 		},
 	},
 	{
 		"neovim/nvim-lspconfig",
-	}
+	},
 }
