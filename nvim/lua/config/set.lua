@@ -123,5 +123,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 			target_dir = vim.fn.fnamemodify(abs_path, ":h")
 		end
 		vim.api.nvim_set_current_dir(target_dir)
+		vim.o.scrolloff = 10
 	end,
 })
