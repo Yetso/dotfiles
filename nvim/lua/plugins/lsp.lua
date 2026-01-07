@@ -13,13 +13,14 @@ return {
 				"WhoIsSethDaniel/mason-tool-installer.nvim",
 				opts = {
 					ensure_installed = {
-						"lua_ls",
-						"stylua",
-						"tinymist",
 						"google-java-format",
 						"gopls",
 						"jdtls",
 						"json-lsp",
+						"lua_ls",
+						"pylsp",
+						"stylua",
+						"tinymist",
 						-- "typstyle",
 					},
 				},
