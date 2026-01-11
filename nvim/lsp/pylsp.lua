@@ -1,4 +1,3 @@
-
 vim.lsp.config("pylsp", {
 	settings = {
 		pylsp = {

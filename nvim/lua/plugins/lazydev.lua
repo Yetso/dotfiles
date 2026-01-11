@@ -1,9 +1,3 @@
-vim.filetype.add({
-	pattern = {
-		["hypr.*%.conf"] = "hyprlang",
-	},
-})
-
 return {
 	"folke/lazydev.nvim",
 	ft = "lua", -- only load on lua files
