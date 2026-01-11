@@ -63,6 +63,8 @@ vim.opt.confirm = true
 
 vim.opt.matchpairs:append("<:>")
 
+vim.opt.shortmess:append("c")
+
 vim.opt.guicursor = "n-v-c:block-Cursor,i-ci-ve-t:ver25-Cursor,r:hor20-Cursor"
 
 -- print checkhealth with float window

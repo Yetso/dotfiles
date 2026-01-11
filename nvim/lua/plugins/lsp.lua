@@ -1,3 +1,9 @@
+vim.filetype.add({
+	pattern = {
+		["hypr.*%.conf"] = "hyprlang",
+	},
+})
+
 return {
 	{
 		"mason-org/mason-lspconfig.nvim",
