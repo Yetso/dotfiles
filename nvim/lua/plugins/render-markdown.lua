@@ -1,10 +1,6 @@
-return {
-	"MeanderingProgrammer/render-markdown.nvim",
-	dependencies = {
-		"nvim-treesitter/nvim-treesitter",
-		"echasnovski/mini.icons",
-	},
-	---@module 'render-markdown'
-	opts = {},
-	ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
-}
+vim.pack.add({
+	"https://github.com/MeanderingProgrammer/render-markdown.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+})
+
+require("render-markdown").setup()

@@ -1,4 +1,7 @@
----@diagnostic disable: undefined-global
+vim.pack.add({
+	"https://github.com/folke/snacks.nvim",
+})
+
 local function is_git_repo()
 	local git_dir = vim.fn.finddir(".git", ".;")
 	return git_dir ~= ""
@@ -10,7 +13,8 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}
 	callback = function(ev)
 		local client = vim.lsp.get_client_by_id(ev.data.client_id)
-		local value = ev.data.params.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
+		local value = ev.data.params
+		.value --[[@as {percentage?: number, title?: string, message?: string, kind: "begin" | "report" | "end"}]]
 		if not client or type(value) ~= "table" then
 			return
 		end
@@ -50,209 +54,193 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	end,
 })
 
-return {
-	"folke/snacks.nvim",
-	priority = 1000,
-	lazy = false,
-	init = function()
-		vim.api.nvim_create_autocmd("User", {
-			pattern = "VeryLazy",
-			callback = function()
-				-- Setup some globals for debugging (lazy-loaded)
-				_G.dd = function(...)
-					Snacks.debug.inspect(...)
-				end
-				_G.bt = function()
-					Snacks.debug.backtrace()
-				end
-				vim.print = _G.dd -- Override print to use snacks for `:=` command
-			end,
-		})
-	end,
-	opts = {
-		statuscolumn = {
-			enabled = true,
-			left = { "sign", "mark" }, -- priority of signs on the left (high to low)
-			right = { "fold", "git" }, -- priority of signs on the right (high to low)
-			folds = {
-				open = true, -- show open fold icons
-				git_hl = false, -- use Git Signs hl for fold icons
-			},
-			git = {
-				patterns = { "GitSign", "MiniDiffSign" },
-			},
-			refresh = 500,
+require("snacks").setup({
+	statuscolumn = {
+		enabled = true,
+		left = { "sign", "mark" }, -- priority of signs on the left (high to low)
+		right = { "fold", "git" }, -- priority of signs on the right (high to low)
+		folds = {
+			open = true,     -- show open fold icons
+			git_hl = false,  -- use Git Signs hl for fold icons
 		},
-		git = { enabled = false },
-		lazygit = {
-			enabled = true,
-			configure = false,
+		git = {
+			patterns = { "GitSign", "MiniDiffSign" },
 		},
-		quickfile = { enabled = true },
-		dashboard = { enabled = true },
-		indent = { enabled = true },
-		image = {
-			enabled = true,
-			doc = {
-				inline = false,
-				float = false,
-			},
+		refresh = 500,
+	},
+	git = { enabled = false },
+	lazygit = {
+		enabled = true,
+		configure = false,
+	},
+	quickfile = { enabled = true },
+	dashboard = { enabled = false },
+	indent = { enabled = true },
+	image = {
+		enabled = true,
+		doc = {
+			inline = false,
+			float = false,
 		},
-		input = {
-			enabled = true,
-		},
-		notifier = {
-			enabled = true,
-			refresh = 100,
-		},
-		notify = { enabled = true },
+	},
+	input = {
+		enabled = true,
+	},
+	notifier = {
+		enabled = true,
+		refresh = 100,
+	},
+	notify = { enabled = true },
 
-		explorer = {
-			enabled = true,
-			replace_netrw = true,
-		},
-		picker = {
-			enabled = true,
-			focus = "list",
-			icons = {
-				tree = {
-					vertical = "│",
-					middle = "├",
-					last = "└",
-				},
-				diagnostics = {
-					Error = "󰅜 ",
-					Warn = " ",
-					Hint = " ",
-					Info = " ",
-				},
+	explorer = {
+		enabled = true,
+		replace_netrw = true,
+	},
+	picker = {
+		enabled = true,
+		focus = "list",
+		icons = {
+			tree = {
+				vertical = "│",
+				middle = "├",
+				last = "└",
 			},
-			sources = {
-				files = {
-					exclude = { "*.meta" },
-					include = { ".gitignore" },
-					follow = true,
-				},
-				explorer = {
-					exclude = { "*.meta" },
-					include = { ".gitignore" },
-					ignored = true,
-					win = {
-						list = {
-							keys = {
-								["<Esc>"] = { { "select_all", "select_all" } },
-							},
+			diagnostics = {
+				Error = "󰅜 ",
+				Warn = " ",
+				Hint = " ",
+				Info = " ",
+			},
+		},
+		sources = {
+			files = {
+				exclude = { "*.meta" },
+				include = { ".gitignore" },
+				follow = true,
+			},
+			explorer = {
+				exclude = { "*.meta" },
+				include = { ".gitignore" },
+				ignored = true,
+				win = {
+					list = {
+						keys = {
+							---@diagnostic disable-next-line: assign-type-mismatch
+							["<Esc>"] = { { "select_all", "select_all" } },
 						},
 					},
 				},
 			},
-			win = {
-				input = {
-					keys = {
-						-- ["<CR>"] = { "toggle_focus", mode = { "i", "n" } },
-						["l"] = { "confirm" },
-						["/"] = false,
-					},
+		},
+		win = {
+			input = {
+				keys = {
+					-- ["<CR>"] = { "toggle_focus", mode = { "i", "n" } },
+					["l"] = { "confirm" },
+					["/"] = false,
 				},
-				list = {
-					keys = {
-						["<C-p>"] = false,
-						["f"] = false,
-					},
+			},
+			list = {
+				keys = {
+					["<C-p>"] = false,
+					["f"] = false,
 				},
 			},
 		},
-
-		scroll = { enabled = false },
-		scope = { enabled = false },
-		words = { enabled = false },
-		bigfile = { enabled = false },
 	},
-	keys = {
-		-- { "<leader>u",  function() Snacks.picker.undo({ win = { preview = { wo = { number = true } } } }) end, desc = "Snacks Undo" },
-		{
-			"<leader>lg",
-			function()
-				Snacks.lazygit()
-			end,
-			desc = "Lazygit",
-		},
-		{
-			"<leader>gl",
-			function()
-				Snacks.lazygit.log()
-			end,
-			desc = "Lazygit [G]it [L]og",
-		},
-		{
-			"<leader>n",
-			function()
-				if Snacks.picker.get({ source = "explorer" })[1] == nil then
-					Snacks.picker.explorer()
-				elseif Snacks.picker.get({ source = "explorer" })[1]:is_focused() == false then
-					Snacks.picker.get({ source = "explorer" })[1]:focus()
-				end
-			end,
-			desc = "File Explorer",
-		},
-		{
-			"<C-p>",
-			function()
-				if is_git_repo() then
-					Snacks.picker.git_files({ focus = "input", layout = { preset = "select" } })
-				else
-					Snacks.picker.files({ focus = "input", layout = { preset = "select" } })
-				end
-			end,
-			desc = "Find Git Files",
-		},
-		{
-			"<leader>h",
-			function()
-				Snacks.notifier.show_history()
-			end,
-			desc = "[H]istory",
-		},
-		{
-			"<leader>ff",
-			function()
-				Snacks.picker.files({ focus = "input", layout = { preset = "select" } })
-			end,
-			desc = "[F]ind [F]iles",
-		},
-		{
-			"<leader>fg",
-			function()
-				Snacks.picker.grep({ focus = "input" })
-			end,
-			desc = "[F]ind in code",
-		},
-		-- { "<leader>gr", function() Snacks.picker.lsp_references({ focus = "list" }) end,desc = "[G]o to [R]eferences" },
-		-- { "<leader>gd", function() Snacks.picker.lsp_definitions() end,desc = "[G]o to [D]efinitions" },
-		{
-			"<leader>d",
-			function()
-				Snacks.picker.diagnostics_buffer({ focus = "list" })
-			end,
-			desc = "Go to [D]iagnosic window",
-		},
-		{
-			"<C-t>",
-			function()
-				local terminal = Snacks.terminal.list()[1]
 
-				if terminal == nil then
-					Snacks.terminal()
-				elseif not vim.api.nvim_win_is_valid(terminal.win) then
-					Snacks.terminal()
-				else
-					vim.api.nvim_set_current_win(terminal.win)
-					vim.cmd("hide")
-					vim.cmd("stopinsert")
-				end
-			end,
-			mode = { "n", "i", "t" },
-			desc = "[T]erminal",
-		},
-	},
-}
+	scroll = { enabled = false },
+	scope = { enabled = false },
+	words = { enabled = false },
+	bigfile = { enabled = false },
+})
+
+local ok, Snacks = pcall(require, "snacks")
+if not ok then
+	return
+end
+
+local opts = { noremap = true, silent = true }
+
+vim.keymap.set("n", "<leader>lg", function()
+	Snacks.lazygit()
+end, vim.tbl_extend("force", opts, { desc = "Lazygit" }))
+
+-- Lazygit log
+vim.keymap.set("n", "<leader>gl", function()
+	Snacks.lazygit.log()
+end, vim.tbl_extend("force", opts, { desc = "Lazygit [G]it [L]og" }))
+
+-- File explorer toggle / focus
+vim.keymap.set("n", "<leader>n", function()
+	local explorer = Snacks.picker.get({ source = "explorer" })[1]
+
+	if explorer == nil then
+		Snacks.picker.explorer()
+	elseif not explorer:is_focused() then
+		explorer:focus()
+	end
+end, vim.tbl_extend("force", opts, { desc = "File Explorer" }))
+
+-- Find files (git-aware)
+vim.keymap.set("n", "<C-p>", function()
+	if is_git_repo() then
+		Snacks.picker.git_files({
+			focus = "input",
+			layout = { preset = "select" },
+		})
+	else
+		Snacks.picker.files({
+			focus = "input",
+			layout = { preset = "select" },
+		})
+	end
+end, vim.tbl_extend("force", opts, { desc = "Find Git Files" }))
+
+-- Notification history
+vim.keymap.set("n", "<leader>h", function()
+	Snacks.notifier.show_history()
+end, vim.tbl_extend("force", opts, { desc = "[H]istory" }))
+
+-- Find files
+vim.keymap.set("n", "<leader>ff", function()
+	Snacks.picker.files({
+		focus = "input",
+		layout = { preset = "select" },
+	})
+end, vim.tbl_extend("force", opts, { desc = "[F]ind [F]iles" }))
+
+-- Live grep
+vim.keymap.set("n", "<leader>fg", function()
+	Snacks.picker.grep({ focus = "input" })
+end, vim.tbl_extend("force", opts, { desc = "[F]ind in code" }))
+
+-- Diagnostics (current buffer)
+vim.keymap.set("n", "<leader>d", function()
+	Snacks.picker.diagnostics_buffer({ focus = "list" })
+end, vim.tbl_extend("force", opts, { desc = "Go to [D]iagnostic window" }))
+
+-- Terminal toggle (normal / insert / terminal)
+vim.keymap.set({ "n", "i", "t" }, "<C-t>", function()
+	local terminal = Snacks.terminal.list()[1]
+
+	if terminal == nil then
+		Snacks.terminal()
+	elseif not vim.api.nvim_win_is_valid(terminal.win) then
+		Snacks.terminal()
+	else
+		vim.api.nvim_set_current_win(terminal.win)
+		vim.cmd("hide")
+		vim.cmd("stopinsert")
+	end
+end, vim.tbl_extend("force", opts, { desc = "[T]erminal" }))
+
+vim.keymap.set("n", "<leader>q", function()
+	Snacks.bufdelete()
+end, vim.tbl_extend("force", opts, { desc = "[B]uffer [C]lose" }))
+-- local buffer_keys = {}
+
+vim.keymap.set("n", "<leader>bca", function()
+	Snacks.bufdelete.other()
+end, vim.tbl_extend("force", opts, { desc = "[B]uffer [C]lose [A]ll" }))
+

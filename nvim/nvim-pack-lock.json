@@ -1,0 +1,114 @@
+{
+  "plugins": {
+    "autoclose.nvim": {
+      "rev": "3f86702b54a861a17d7994b2e32a7c648cb12fb1",
+      "src": "https://github.com/m4xshen/autoclose.nvim"
+    },
+    "blink.cmp": {
+      "rev": "b19413d214068f316c78978b08264ed1c41830ec",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": ">=1.0.1-0"
+    },
+    "friendly-snippets": {
+      "rev": "572f5660cf05f8cd8834e096d7b4c921ba18e175",
+      "src": "https://github.com/rafamadriz/friendly-snippets"
+    },
+    "lazydev.nvim": {
+      "rev": "5231c62aa83c2f8dc8e7ba957aa77098cda1257d",
+      "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "mason-lspconfig.nvim": {
+      "rev": "fe661093f4b05136437b531e7f959af2a2ae66c8",
+      "src": "https://github.com/mason-org/mason-lspconfig.nvim"
+    },
+    "mason.nvim": {
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "src": "https://github.com/mason-org/mason.nvim"
+    },
+    "mini.cursorword": {
+      "rev": "dda0f57d55bb1fa19423b7201b2ba892c7d2bb3c",
+      "src": "https://github.com/nvim-mini/mini.cursorword"
+    },
+    "mini.diff": {
+      "rev": "6010e588e9ed14724880f244d7fa3df8f0be3f46",
+      "src": "https://github.com/nvim-mini/mini.diff"
+    },
+    "mini.icons": {
+      "rev": "efc85e42262cd0c9e1fdbf806c25cb0be6de115c",
+      "src": "https://github.com/nvim-mini/mini.icons"
+    },
+    "mini.statusline": {
+      "rev": "3e96596ebe51b899874d8174409cdc4f3c749d9a",
+      "src": "https://github.com/nvim-mini/mini.statusline"
+    },
+    "mini.surround": {
+      "rev": "cc7b9d0a056b5fa6915ffac1cb91f29bf7c96f69",
+      "src": "https://github.com/nvim-mini/mini.surround"
+    },
+    "mini.tabline": {
+      "rev": "caf23615b9b99bacc79ecd60f61c4e6a8ec18c84",
+      "src": "https://github.com/nvim-mini/mini.tabline"
+    },
+    "noice.nvim": {
+      "rev": "7bfd942445fb63089b59f97ca487d605e715f155",
+      "src": "https://github.com/folke/noice.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-lspconfig": {
+      "rev": "92ee7d42320edfbb81f3cad851314ab197fa324a",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
+    "nvim-scrollview": {
+      "rev": "316c37c96e6ab7d15e18f878366d0497179e8891",
+      "src": "https://github.com/dstein64/nvim-scrollview"
+    },
+    "nvim-treesitter": {
+      "rev": "5a7e5638e7d220575b1c22c8a2e099b52231886e",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "render-markdown.nvim": {
+      "rev": "ae89236e2389836cf1c3787b2b80d5d8685cc13f",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "scrollEOF.nvim": {
+      "rev": "e462b9a07b8166c3e8011f1dcbc6bf68b67cd8d7",
+      "src": "https://github.com/Aasim-A/scrollEOF.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "fe7cfe9800a182274d0f868a74b7263b8c0c020b",
+      "src": "https://github.com/folke/snacks.nvim"
+    },
+    "tiny-inline-diagnostic.nvim": {
+      "rev": "c7b1488ad0b389763c34bd17a6264424b3da5a52",
+      "src": "https://github.com/rachartier/tiny-inline-diagnostic.nvim"
+    },
+    "typst-preview.nvim": {
+      "rev": "e123a7ab64e52d836e00dea9251e85b201f38966",
+      "src": "https://github.com/chomosuke/typst-preview.nvim",
+      "version": ">=1.0.1-0"
+    },
+    "undotree": {
+      "rev": "178d19e00a643f825ea11d581b1684745d0c4eda",
+      "src": "https://github.com/mbbill/undotree"
+    },
+    "vim-dadbod": {
+      "rev": "6d1d41da4873a445c5605f2005ad2c68c99d8770",
+      "src": "https://github.com/tpope/vim-dadbod"
+    },
+    "vim-dadbod-completion": {
+      "rev": "a8dac0b3cf6132c80dc9b18bef36d4cf7a9e1fe6",
+      "src": "https://github.com/kristijanhusak/vim-dadbod-completion"
+    },
+    "vim-dadbod-ui": {
+      "rev": "48c4f271da13d380592f4907e2d1d5558044e4e5",
+      "src": "https://github.com/kristijanhusak/vim-dadbod-ui"
+    },
+    "vim-moonfly-colors": {
+      "rev": "5b322b91fe0792d48ef7156af38739ae42fda7d1",
+      "src": "https://github.com/bluz71/vim-moonfly-colors"
+    }
+  }
+}

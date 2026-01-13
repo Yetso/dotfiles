@@ -36,177 +36,118 @@ end
 local au_opts = { pattern = "MiniDiffUpdated", callback = format_summary }
 vim.api.nvim_create_autocmd("User", au_opts)
 
-local buffer_keys = {}
-for i = 1, 9 do
-	table.insert(buffer_keys, {
-		"<leader>" .. i,
-		function()
-			local buflist = vim.fn.getbufinfo({ buflisted = 1 })
-			if buflist[i] ~= nil then
-				vim.cmd("buffer " .. buflist[i].bufnr)
-			end
-		end,
-		desc = "Buffer " .. i,
-	})
+vim.pack.add({
+	"https://github.com/nvim-mini/mini.icons",
+	"https://github.com/nvim-mini/mini.cursorword",
+	"https://github.com/nvim-mini/mini.surround",
+	"https://github.com/nvim-mini/mini.diff",
+	"https://github.com/nvim-mini/mini.tabline",
+	"https://github.com/nvim-mini/mini.statusline",
+})
+
+---@diagnostic disable-next-line: duplicate-set-field
+package.preload["nvim-web-devicons"] = function()
+	require("mini.icons").mock_nvim_web_devicons()
+	return package.loaded["nvim-web-devicons"]
 end
-table.insert(buffer_keys, {
-	"<leader>q",
-	function()
-		require("snacks").bufdelete()
-	end,
-	desc = "[B]uffer [C]lose",
+require("mini.surround").setup({
+	mappings = {
+		add = "sa", -- Add surrounding in Normal and Visual modes
+		delete = "sd", -- Delete surrounding
+		find = "", -- Find surrounding (to the right)
+		find_left = "", -- Find surrounding (to the left)
+		highlight = "", -- Highlight surrounding
+		replace = "", -- Replace surrounding
+
+		suffix_last = "", -- Suffix to search with "prev" method
+		suffix_next = "", -- Suffix to search with "next" method
+	},
 })
-table.insert(buffer_keys, {
-	"<leader>bca",
-	function()
-		require("snacks").bufdelete.other()
-	end,
-	desc = "[B]uffer [A]ll [C]lose",
+require("mini.diff").setup({
+	view = {
+		style = "sign",
+		signs = {
+			add = "▎",
+			change = "▎",
+			delete = "▁",
+		},
+	},
 })
-table.insert(buffer_keys, { "H", "<cmd>bprevious<cr>", desc = "Prev Buffer" })
-table.insert(buffer_keys, { "L", "<cmd>bnext<cr>", desc = "Next Buffer" })
 
----@diagnostic disable: undefined-global
-return {
-	{
-		"nvim-mini/mini.icons",
-		version = false,
-		opts = {},
-		config = function(_, opts)
-			require("mini.icons").setup(opts)
-			require("mini.icons").mock_nvim_web_devicons()
+require("mini.tabline").setup({
+	format = function(buf_id, label)
+		local buflist = vim.fn.getbufinfo({ buflisted = 1 })
+		local prefix = nil
+		for i, b in ipairs(buflist) do
+			if b.bufnr == buf_id then
+				prefix = " " .. i
+				break
+			end
+		end
+
+		local suffix = vim.bo[buf_id].modified and "[+]" or ""
+		return prefix .. MiniTabline.default_format(buf_id, label) .. suffix
+	end,
+})
+vim.o.showtabline = 0
+
+local opts = { noremap = true, silent = true }
+
+for i = 1, 9 do
+	vim.keymap.set("n", "<leader>" .. i, function()
+		local buflist = vim.fn.getbufinfo({ buflisted = 1 })
+		if buflist[i] ~= nil then
+			vim.cmd("buffer " .. buflist[i].bufnr)
+		end
+	end, vim.tbl_extend("force", opts, { desc = "Go to buffer " .. i }))
+end
+
+vim.keymap.set("n", "H", "<cmd>bprevious<cr>", vim.tbl_extend("force", opts, { desc = "Prev Buffer" }))
+vim.keymap.set("n", "L", "<cmd>bnext<cr>", vim.tbl_extend("force", opts, { desc = "Next Buffer" }))
+
+require("mini.statusline").setup({
+	content = {
+		active = function()
+			local diag_signs = {
+				ERROR = "%#DiagnosticError#󰅜",
+				WARN = "%#DiagnosticWarn#",
+				INFO = "%#DiagnosticInfo#",
+				HINT = "%#DiagnosticHint#",
+			}
+
+			local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 1 })
+			local diff = vim.b.minidiff_summary_string or ""
+			local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
+			if filename == "" then
+				filename = "[No Name]"
+			end
+			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 9999 })
+			local diagnostics = MiniStatusline.section_diagnostics({
+				trunc_width = 75,
+				signs = diag_signs,
+				icon = "",
+			})
+			diagnostics = diagnostics .. "%#MiniStatuslineDevinfo#"
+			local line = vim.fn.line(".")
+			local percent = math.floor(line / vim.fn.line("$") * 100) .. "%%"
+			local location = line .. ":" .. vim.fn.col(".")
+			-- local lazyUpdate = require("lazy.status")
+			-- local lazyScreen = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
+			local recording = vim.fn.reg_recording() ~= "" and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording()
+				or ""
+
+			return MiniStatusline.combine_groups({
+				{ hl = mode_hl, strings = { mode } },
+				"%<",
+				{ hl = "MiniStatuslineFilename", strings = { filename } },
+				{ hl = "MiniStatuslineDevinfo", strings = { diff, diagnostics } },
+				"%=", -- End left alignment
+				-- { hl = "MoonflyRed", strings = { lazyScreen } },
+				{ hl = "MiniStatuslineFileinfo", strings = { recording } },
+				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+				{ hl = "MiniStatuslineFilename", strings = { percent } },
+				{ hl = mode_hl, strings = { location } },
+			})
 		end,
 	},
-	{
-		"nvim-mini/mini.cursorword",
-		version = false,
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {},
-	},
-	{
-		"nvim-mini/mini.surround",
-		version = false,
-		event = { "BufReadPre", "BufNewFile" },
-		opts = {
-			mappings = {
-				add = "sa", -- Add surrounding in Normal and Visual modes
-				delete = "sd", -- Delete surrounding
-				find = "", -- Find surrounding (to the right)
-				find_left = "", -- Find surrounding (to the left)
-				highlight = "", -- Highlight surrounding
-				replace = "", -- Replace surrounding
-
-				suffix_last = "", -- Suffix to search with "prev" method
-				suffix_next = "", -- Suffix to search with "next" method
-			},
-		},
-	},
-	{
-		"nvim-mini/mini.diff",
-		version = false,
-		event = { "BufReadPre", "BufNewFile" },
-		keys = {
-			{
-				"<leader>g",
-				function()
-					require("mini.diff").toggle_overlay(0)
-				end,
-				desc = "Toggle mini.diff overlay",
-			},
-		},
-		opts = {
-			view = {
-				style = "sign",
-				signs = {
-					add = "▎",
-					change = "▎",
-					delete = "▁",
-				},
-			},
-		},
-	},
-	{
-		"nvim-mini/mini.tabline",
-		version = false,
-		event = "VeryLazy",
-		opts = {
-			format = function(buf_id, label)
-				local buflist = vim.fn.getbufinfo({ buflisted = 1 })
-				local prefix = nil
-				for i, b in ipairs(buflist) do
-					if b.bufnr == buf_id then
-						prefix = " " .. i
-						break
-					end
-				end
-
-				local suffix = vim.bo[buf_id].modified and "[+]" or ""
-				return prefix .. MiniTabline.default_format(buf_id, label) .. suffix
-			end,
-		},
-		config = function(_, opts)
-			require("mini.tabline").setup(opts)
-			vim.o.showtabline = 0
-		end,
-		keys = buffer_keys,
-	},
-	{
-		"nvim-mini/mini.statusline",
-		version = false,
-		config = function(_, opts)
-			require("mini.statusline").setup(opts)
-			vim.api.nvim_set_hl(0, "StatusLine", { bg = "#181818", fg = "#cdcdcd" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { link = "Statusline" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { link = "Statusline" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { bg = "#000000", fg = "#ffffff" })
-			vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = "#303030", fg = "#dddddd" })
-		end,
-		opts = {
-			content = {
-				active = function()
-					local diag_signs = {
-						ERROR = "%#DiagnosticError#󰅜",
-						WARN = "%#DiagnosticWarn#",
-						INFO = "%#DiagnosticInfo#",
-						HINT = "%#DiagnosticHint#",
-					}
-
-					local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 1 })
-					local diff = vim.b.minidiff_summary_string or ""
-					local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":.")
-					if filename == "" then
-						filename = "[No Name]"
-					end
-					local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 9999 })
-					local diagnostics = MiniStatusline.section_diagnostics({
-						trunc_width = 75,
-						signs = diag_signs,
-						icon = "",
-					})
-					diagnostics = diagnostics .. "%#MiniStatuslineDevinfo#"
-					local line = vim.fn.line(".")
-					local percent = math.floor(line / vim.fn.line("$") * 100) .. "%%"
-					local location = line .. ":" .. vim.fn.col(".")
-					local lazyUpdate = require("lazy.status")
-					local lazyScreen = lazyUpdate.has_updates() and lazyUpdate.updates() or ""
-					local recording = vim.fn.reg_recording() ~= ""
-							and "%#MoonflyRed#recording @ " .. vim.fn.reg_recording()
-						or ""
-
-					return MiniStatusline.combine_groups({
-						{ hl = mode_hl, strings = { mode } },
-						"%<",
-						{ hl = "MiniStatuslineFilename", strings = { filename } },
-						{ hl = "MiniStatuslineDevinfo", strings = { diff, diagnostics } },
-						"%=", -- End left alignment
-						{ hl = "MoonflyRed", strings = { lazyScreen } },
-						{ hl = "MiniStatuslineFileinfo", strings = { recording } },
-						{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-						{ hl = "MiniStatuslineFilename", strings = { percent } },
-						{ hl = mode_hl, strings = { location } },
-					})
-				end,
-			},
-		},
-	},
-}
+})
