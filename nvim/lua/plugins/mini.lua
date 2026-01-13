@@ -50,7 +50,7 @@ for i = 1, 9 do
 	})
 end
 table.insert(buffer_keys, {
-	"<S-q>",
+	"<leader>q",
 	function()
 		require("snacks").bufdelete()
 	end,
@@ -72,11 +72,9 @@ return {
 		"nvim-mini/mini.icons",
 		version = false,
 		opts = {},
-		init = function()
-			package.preload["nvim-web-devicons"] = function()
-				require("mini.icons").mock_nvim_web_devicons()
-				return package.loaded["nvim-web-devicons"]
-			end
+		config = function(_, opts)
+			require("mini.icons").setup(opts)
+			require("mini.icons").mock_nvim_web_devicons()
 		end,
 	},
 	{
