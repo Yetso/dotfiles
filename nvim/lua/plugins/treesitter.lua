@@ -47,10 +47,11 @@ return {
 		},
 	},
 	config = function(_, opts)
-		vim.api.nvim_create_autocmd({ "BufRead" }, {
+		require("nvim-treesitter").install(opts.ensure_installed)
+		vim.api.nvim_create_autocmd({ "FileType" }, {
 			callback = function(event)
 				local bufnr = event.buf
-				local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+				local filetype = vim.bo[bufnr].filetype
 
 				-- Skip if no filetype
 				if filetype == "" then
