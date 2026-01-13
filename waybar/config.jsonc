@@ -1,0 +1,145 @@
+{
+	"layer": "top", // Waybar at top layer
+	"position": "top", // Waybar position (top|bottom|left|right)
+	"height": 32, // Waybar height (to be removed for auto height)
+	"modules-left": ["clock#calendar", "clock" ],
+	"modules-center": [ "hyprland/workspaces" ],
+	"modules-right": [
+		"tray",
+		"pulseaudio",
+		"network",
+		"custom/notifications",
+		"custom/power"
+	],
+	"spacing": 0,
+	"reload_style_on_change": true,
+///////////////////
+///// Modules /////
+///////////////////
+	"clock#calendar": {
+		"timezone": "Europe/Brussels",
+		"format": " <span rise=\"-1pt\">{:%A %d/%m/%G}</span>",
+		"tooltip-format": "<span>{calendar}</span>",
+		"calendar": {
+			"mode": "month",
+			"mode-mon-col": 3,
+			"on-scroll": 1,
+			"on-click-right": "mode",
+			"format": {
+				"months": "<span color='#ffead3'><b>{}</b></span>",
+				"weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+				"today": "<span color='#ff6699'><b>{}</b></span>"
+			}
+		},
+		"actions": {
+			"on-click-right": "mode"
+		}
+	},
+	"clock": {
+		"timezone": "Europe/Brussels",
+		"format": " <span rise=\"-1pt\">{:%H:%M}</span>"
+	},
+	"hyprland/workspaces": {
+		"format": "{windows}",
+		"format-icons": {
+			"1": "1",
+			"2": "2",
+			"3": "3",
+			"4": "4",
+			"5": "5",
+			"6": "6",
+			"7": "7",
+			"8": "8",
+			"9": "9",
+			"10": "10"
+		},
+		"persistent-workspaces": {
+			"DP-2": [ 1, 2, 3, 4, 5 ],
+			"DP-3": [ 6, 7, 8, 9, 10 ]
+		},
+		"workspace-taskbar": {
+			// Enable the workspace taskbar. Default: false
+			"enable": true,
+			// If true, the active window will have an `active` class. Could cause higher CPU usage due to more frequent redraws. Default: false
+			"update-active-window": false,
+			// Format of the windows in the taskbar. Default: "{icon}". Allowed variables: {icon}, {title}
+			"format": "{icon}",
+			// Icon size in pixels. Default: 16
+			"icon-size": 16,
+			// Either the name of an installed icon theme or an array of themes (ordered by priority). If not set, the default icon theme is used.
+			// "icon-theme": "some_icon_theme",
+			// Orientation of the taskbar (see screenshots below). Default: "horizontal".
+			"orientation": "horizontal"
+			// List of regexes. A window will NOT be shown if its window class or title match one or more items. Default: []
+			// "ignore-list": [ "code", "Firefox - .*" ],
+			// Command to run when a window is clicked. Default: "" (switch to the workspace as usual). Allowed variables: {address}, {button}
+			// "on-click-window": "hyprctl dispatch focuswindow address:{address}"
+		}
+	},
+	"tray": {
+		"spacing": 4,
+		"show-passive-items": true
+	},
+	"pulseaudio": {
+		"format": "<span rise=\"1pt\">{icon}</span> {volume}%",
+		"rotate": 0,
+		"format-muted": "婢",
+		"tooltip-format": " {icon}  {desc} // {volume}% ",
+		"scroll-step": 5,
+		"on-click": "~/.config/waybar/scripts/launch_pavucontrol.sh",
+		"format-icons": {
+			"headphone": "",
+			"hands-free": "",
+			"headset": "",
+			"phone": "",
+			"portable": "",
+			"car": "",
+			"default": [
+				"",
+				"",
+				""
+			]
+		}
+	},
+	"network": {
+		"tooltip": true,
+		"format-wifi": " ",
+		"rotate": 0,
+		"format-ethernet": "{ifname}<span foreground='green'> 󰈀 </span>",
+		"tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
+		"format-linked": "󰈀 {ifname} (No IP)",
+		"format-disconnected": "<span foreground='red'> 󰖪 </span> ",
+		"tooltip-format-disconnected": "Disconnected",
+		"format-alt": "<span foreground='#99ffdd'> {bandwidthDownBytes}</span> <span foreground='#ffcc66'> {bandwidthUpBytes}</span>",
+		"interval": 2
+		// "interface": "wlp2*", // (Optional) To force the use of this interface
+	},
+	"custom/notifications": {
+		"tooltip": false,
+		"format": "<span rise=\"-1pt\">{text}</span>{icon}",
+		"format-icons": {
+			"notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+			"none": "",
+			"dnd-notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
+			"dnd-none": ""
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "swaync-client -t -sw",
+		"on-click-right": "swaync-client -d -sw",
+		"escape": true
+	},
+	"custom/power": {
+		"format": "",
+		"tooltip": false,
+		"menu": "on-click",
+		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
+		"menu-actions": {
+			"reboot": "hyprshutdown -t 'Restarting…' --post-cmd 'reboot'",
+			"shutdown": "hyprshutdown -t 'Shutting down…' --post-cmd 'shutdown -P 0'",
+			"logout": "hyprshutdown -t 'Logging out…'",
+			"timershutdown": "(sleep 30m && hyprshutdown -t 'Shutting down…' --post-cmd 'shutdown -P 0') &"
+		}
+	}
+}

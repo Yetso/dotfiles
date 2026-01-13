@@ -1,0 +1,105 @@
+* {
+    border: none;
+    border-radius: 0px;
+    font-family: "Cousine Nerd Font";
+    font-weight: bold;
+    font-size: 16px;
+    min-height: 16px;
+}
+
+@import "theme.css";
+
+window#waybar {
+    background: @bar-bg;
+}
+
+tooltip {
+    background: @main-bg;
+    color: @main-fg;
+    border-radius: 11px;
+    border-width: 1px;
+}
+
+#clock,
+#workspaces,
+#tray,
+#pulseaudio,
+#network,
+#custom-notifications,
+#custom-power {
+    color: @main-fg;
+    background: @main-bg;
+    opacity: 1;
+    margin: 5px 5px;
+	padding: 0px 5px;
+    border-radius: 9px;
+}
+
+#workspaces {
+	padding: 0px;
+}
+
+#workspaces button {
+    padding: 0px;
+    box-shadow: none;
+    text-shadow: none;
+    border-radius: 9px;
+    background: @wb-ina-bg;
+    color: @wb-act-fg;
+	margin: 1px 4px;
+	padding: 0px 10px;
+    animation: ws_active 8s ease-in-out 1;
+	transition: all 0.25s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button.active {
+    background: @wb-act-bg;
+	padding: 0px 16px;
+    animation: ws_active 8s ease-in-out 1;
+	transition: all 0.25s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#workspaces button:hover {
+    background: @cyan;
+    /* color: @wb-hvr-fg; */
+    animation: ws_hover 5s ease-in-out 1;
+    transition: all 0.2s cubic-bezier(.55,-0.68,.48,1.682);
+}
+
+#tray {
+    border-radius: 9px;
+	padding: 0px 8px;
+}
+
+#tray menu {
+    border-radius: 9px;
+}
+
+#tray menu * {
+    font-weight: normal;
+    font-size: 12px;
+    min-height: 16px;
+}
+
+#tray menu separator {
+    min-height: 2px;
+}
+
+#network {
+	font-size: 14px;
+}
+
+#custom-power {
+	margin: 3px 5px;
+	padding: 0px 8px 0px 4px;
+	color: #704B5C;
+	background-color: #ED8796;
+}
+
+menu,
+menuitem {
+    border-radius: 10px;
+}
+menu separator {
+	min-height: 2px;
+}

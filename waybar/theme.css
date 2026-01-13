@@ -1,0 +1,33 @@
+@define-color bar-bg		 #212337;
+
+@define-color main-bg		 #343A4C;
+@define-color main-fg		 #F5F5F5;
+
+@define-color wb-act-bg		 #a6adc8;
+@define-color wb-ina-bg		 #111222;
+@define-color wb-act-fg		 #313244;
+
+/* moonfly color palette */
+@define-color background	 #080808;
+@define-color foreground	 #bdbdbd;
+@define-color bold			 #eeeeee;
+@define-color cursor		 #9e9e9e;
+@define-color cursor-Text	 #080808;
+@define-color selection		 #b2ceee;
+@define-color selection-Text #080808;
+@define-color black			 #323437;
+@define-color red			 #ff5d5d;
+@define-color green			 #8cc85f;
+@define-color yellow		 #e3c78a;
+@define-color blue			 #80a0ff;
+@define-color purple 		 #cf87e8;
+@define-color cyan			 #79dac8;
+@define-color white			 #c6c6c6;
+@define-color black-bright	 #949494;
+@define-color red-bright	 #ff5189;
+@define-color green-bright	 #36c692;
+@define-color yellow-bright	 #c6c684;
+@define-color blue-bright	 #74b2ff;
+@define-color purple-bright	 #ae81ff;
+@define-color cyan-bright	 #85dc85;
+@define-color white-bright	 #e4e4e4;

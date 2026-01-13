@@ -1,0 +1,198 @@
+/*****----- Configuration -----*****/
+configuration {
+	modes: "drun";
+    show-icons: true;
+	me-select-entry: "";
+	me-accept-entry: "!MousePrimary"; 
+	kb-cancel: "MousePrimary";
+	hover-select: true;
+    display-drun: " ";
+	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]\n[<span weight='light' size='small'><i>{comment}</i></span>]";
+	sorting-method: "fzf";
+}
+
+/*****----- Global Properties -----*****/
+* {
+/* moonfly color palette */
+	background: #080808cc;
+	foreground: #bdbdbdFF;
+	// bold: #eeeeeeFF;
+	cursor: #9e9e9eFF;
+	// cursor-Text: #080808FF;
+	selection: #b2ceeeFF;
+	// selection-Text: #080808FF;
+	// black: #323437FF;
+	// red: #ff5d5dFF;
+	// green: #8cc85fFF;
+	// yellow: #e3c78aFF;
+	// blue: #80a0ffFF;
+	// purple: #cf87e8FF;
+	// cyan: #79dac8FF;
+	// white:          #c6c6c6;
+	// black-bright:   #949494;
+	// red-bright:     #ff5189;
+	// green-bright:   #36c692;
+	// yellow-bright:  #c6c684;
+	// blue-bright:    #74b2ff;
+	// purple-bright:  #ae81ff;
+	// cyan-bright:    #85dc85;
+	// white-bright:   #e4e4e4;
+    background-alt: #323437bb;
+    // active:         #98C379FF;
+    // urgent:         #E06C75FF;
+}
+
+* {
+    font: "Cousine Nerd Font 10";
+}
+/*****----- Main Window -----*****/
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       700px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @selection;
+    background-color:            @background;
+    cursor:                      "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     20px;
+    border:                      0px solid;
+    border-radius:               0px 0px 0px 0px;
+    border-color:                @selection;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+/*****----- Inputbar -----*****/
+inputbar {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     15px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @selection;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
+    children:                    [ "prompt", "entry" ];
+}
+
+prompt {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+textbox-prompt-colon {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "::";
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+}
+
+/*****----- Listview -----*****/
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       8;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     5px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                @selection;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      "default";
+}
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                @selection;
+    border-radius:               0px;
+    background-color:            @background-alt;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      0px;
+    padding:                     5px;
+    border:                      0px solid;
+    border-radius:               12px;
+    border-color:                @selection;
+    background-color:            transparent;
+    text-color:                  @foreground;
+    cursor:                      pointer;
+}
+element normal.normal,
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  @foreground;
+}
+element selected.normal {
+    background-color:            @selection;
+    text-color:                  @background;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        32px;
+    cursor:                      inherit;
+}
+element-text {
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     15px;
+    border:                      2px solid;
+    border-radius:               12px;
+    border-color:                @selection;
+    background-color:            @background;
+    text-color:                  @foreground;
+}
+textbox {
+    background-color:            @background;
+    text-color:                  @foreground;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+    highlight:                   none;
+}
