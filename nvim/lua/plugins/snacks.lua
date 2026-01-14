@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
 	end,
 })
 
+vim.o.statuscolumn = ""
 require("snacks").setup({
 	statuscolumn = {
 		enabled = true,

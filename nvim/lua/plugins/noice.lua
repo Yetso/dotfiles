@@ -5,7 +5,7 @@ vim.pack.add({
 
 require("noice").setup({
 	notify = {
-		enabled = false,
+		enabled = true,
 	},
 	lsp = {
 		progress = {
@@ -22,5 +22,19 @@ require("noice").setup({
 		command_palette = true,
 		long_message_to_split = true,
 		lsp_doc_border = true,
+	},
+	routes = {
+		{
+			filter = {
+				event = "msg_show",
+				any = {
+					{ find = "written" },
+					{ find = "more lines" },
+					{ find = "fewer lines" },
+					{ find = "lines yanked" },
+				},
+			},
+			opts = { skip = true },
+		},
 	},
 })
