@@ -73,5 +73,6 @@ vim.keymap.set("n", "gle", function()
 end, { noremap = true, silent = true, desc = "Print LSP messages" })
 
 -- Quickly source current file / execute Lua code
-vim.keymap.set("n", "<leader>x", "<Cmd>:.lua<CR>", { desc = "Lua: execute current line" })
-vim.keymap.set("v", "<leader>x", "<Cmd>:lua<CR>", { desc = "Lua: execute current selection" })
+vim.keymap.set("n", "<leader>x", ":.lua<CR>", { desc = "Lua: execute line" })
+
+vim.keymap.set("v", "<leader>x", ":lua<CR>", { desc = "Lua: execute selection" })
