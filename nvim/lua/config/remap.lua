@@ -75,26 +75,3 @@ end, { noremap = true, silent = true, desc = "Print LSP messages" })
 -- Quickly source current file / execute Lua code
 vim.keymap.set("n", "<leader>x", "<Cmd>:.lua<CR>", { desc = "Lua: execute current line" })
 vim.keymap.set("v", "<leader>x", "<Cmd>:lua<CR>", { desc = "Lua: execute current selection" })
--- Fonction pour vérifier si la fenêtre actuelle est flottante
-local function is_floating_window()
-	local config = vim.api.nvim_win_get_config(0)
-	return config.relative ~= ""
-end
-
--- Autocommand pour appliquer le remap uniquement si ce n'est pas LazyGit (ou autre fenêtre flottante)
-vim.api.nvim_create_autocmd("TermOpen", {
-	pattern = "*",
-	callback = function()
-		vim.wo.scrolloff = 0
-		-- Exclure les fenêtres flottantes comme LazyGit
-		if not is_floating_window() then
-			vim.api.nvim_buf_set_keymap(
-				0,
-				"t",
-				"<Esc>",
-				[[<C-\><C-n>]],
-				{ noremap = true, silent = true, desc = "quit insert mode inside terminal" }
-			)
-		end
-	end,
-})

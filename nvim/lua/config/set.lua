@@ -84,50 +84,7 @@ vim.diagnostic.config({
 	},
 })
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.hl.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
-})
 
--- Change vers le répertoire du premier fichier ouvert au démarrage
-vim.api.nvim_create_autocmd("VimEnter", {
-	pattern = "*",
-	callback = function()
-		if vim.fn.argc() < 1 then
-			return
-		end
-		local first_arg = vim.fn.argv(0)
-
-		-- Gérer le cas où argv retourne un array
-		if type(first_arg) == "table" then
-			first_arg = first_arg[1]
-		end
-
-		if type(first_arg) ~= "string" or first_arg == "" then
-			return
-		end
-		-- Convertir en chemin absolu
-		local abs_path = vim.fn.fnamemodify(first_arg, ":p")
-
-		local target_dir
-		if vim.fn.isdirectory(abs_path) == 1 then
-			-- Si c'est un dossier, utiliser directement
-			target_dir = abs_path
-		else
-			-- Si c'est un fichier, prendre son répertoire parent
-			target_dir = vim.fn.fnamemodify(abs_path, ":h")
-		end
-		vim.api.nvim_set_current_dir(target_dir)
-		vim.o.scrolloff = 10
-	end,
-})
 
 local function fold_virt_text(result, s, lnum, coloff)
 	if not coloff then

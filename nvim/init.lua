@@ -6,6 +6,10 @@ local ok, err = pcall(require, "config.remap")
 if not ok then
 	vim.notify("Error loading remaps" .. err, vim.log.levels.ERROR)
 end
+local ok, err = pcall(require, "config.autocmds")
+if not ok then
+	vim.notify("Error loading autocmds" .. err, vim.log.levels.ERROR)
+end
 
 local plugins = vim.api.nvim_get_runtime_file("lua/plugins/*.lua", true)
 
