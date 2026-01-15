@@ -84,7 +84,16 @@ vim.diagnostic.config({
 	},
 })
 
+vim.o.foldlevel = 99
+vim.opt.fillchars = {
+	fold = " ",
+	foldopen = "",
+	foldsep = " ",
+	foldclose = "",
+}
+vim.opt.foldopen:remove("hor")
 
+vim.opt.foldtext = "v:lua.custom_foldtext()"
 
 local function fold_virt_text(result, s, lnum, coloff)
 	if not coloff then
@@ -113,16 +122,12 @@ local function fold_virt_text(result, s, lnum, coloff)
 end
 
 function _G.custom_foldtext()
-	local start = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
+	local start = vim.fn.getline(vim.v.foldstart)
 	local end_str = vim.fn.getline(vim.v.foldend)
 	local end_ = vim.trim(end_str)
 	local result = {}
 	fold_virt_text(result, start, vim.v.foldstart - 1)
-	table.insert(result, { " ... ", "Delimiter" })
+	table.insert(result, { "  󰇘  ", "Visual" })
 	fold_virt_text(result, end_, vim.v.foldend - 1, #(end_str:match("^(%s+)") or ""))
 	return result
 end
-
-vim.opt.fillchars:append({ fold = " " })
-
-vim.opt.foldtext = "v:lua.custom_foldtext()"
