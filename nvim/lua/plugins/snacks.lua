@@ -56,27 +56,11 @@ vim.api.nvim_create_autocmd("LspProgress", {
 
 vim.o.statuscolumn = ""
 require("snacks").setup({
-	statuscolumn = {
-		enabled = true,
-		left = { "sign", "mark" }, -- priority of signs on the left (high to low)
-		right = { "fold", "git" }, -- priority of signs on the right (high to low)
-		folds = {
-			open = true,     -- show open fold icons
-			git_hl = false,  -- use Git Signs hl for fold icons
-		},
-		git = {
-			patterns = { "GitSign", "MiniDiffSign" },
-		},
-		refresh = 500,
-	},
-	git = { enabled = false },
-	lazygit = {
-		enabled = true,
-		configure = false,
-	},
-	quickfile = { enabled = true },
 	dashboard = { enabled = false },
-	indent = { enabled = true },
+	explorer = {
+		enabled = true,
+		replace_netrw = true,
+	},
 	image = {
 		enabled = true,
 		doc = {
@@ -84,18 +68,12 @@ require("snacks").setup({
 			float = false,
 		},
 	},
-	input = {
-		enabled = true,
-	},
+	indent = { enabled = true },
+	input = { enabled = true },
+	lazygit = { configure = false },
 	notifier = {
 		enabled = true,
 		refresh = 100,
-	},
-	notify = { enabled = true },
-
-	explorer = {
-		enabled = true,
-		replace_netrw = true,
 	},
 	picker = {
 		enabled = true,
@@ -149,11 +127,20 @@ require("snacks").setup({
 			},
 		},
 	},
-
-	scroll = { enabled = false },
-	scope = { enabled = false },
-	words = { enabled = false },
-	bigfile = { enabled = false },
+	quickfile = { enabled = true },
+	statuscolumn = {
+		enabled = true,
+		left = { "sign", "mark" }, -- priority of signs on the left (high to low)
+		right = { "fold", "git" }, -- priority of signs on the right (high to low)
+		folds = {
+			open = true,     -- show open fold icons
+			git_hl = false,  -- use Git Signs hl for fold icons
+		},
+		git = {
+			patterns = { "GitSign", "MiniDiffSign" },
+		},
+		refresh = 500,
+	},
 })
 
 local ok, Snacks = pcall(require, "snacks")
