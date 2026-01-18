@@ -43,18 +43,18 @@ tooltip {
     padding: 0px;
     box-shadow: none;
     text-shadow: none;
-    border-radius: 9px;
+    border-radius: 10px;
     background: @wb-ina-bg;
     color: @wb-act-fg;
 	margin: 1px 4px;
-	padding: 0px 10px;
+	padding: 0px 4px;
     animation: ws_active 8s ease-in-out 1;
-	transition: all 0.25s cubic-bezier(.55,-0.68,.48,1.682);
+	transition: all 0.2s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button.active {
     background: @wb-act-bg;
-	padding: 0px 16px;
+	padding: 0px 15px;
     animation: ws_active 8s ease-in-out 1;
 	transition: all 0.25s cubic-bezier(.55,-0.68,.48,1.682);
 }
