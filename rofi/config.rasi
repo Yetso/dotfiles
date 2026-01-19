@@ -4,7 +4,7 @@ configuration {
     show-icons: true;
 	me-select-entry: "";
 	me-accept-entry: "!MousePrimary"; 
-	kb-cancel: "MousePrimary";
+	kb-cancel: "Escape,MousePrimary";
 	hover-select: true;
     display-drun: " ";
 	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]\n[<span weight='light' size='small'><i>{comment}</i></span>]";
