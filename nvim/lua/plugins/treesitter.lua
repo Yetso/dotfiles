@@ -102,7 +102,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 		if not parser_installed then
 			-- If not installed, install parser synchronously
-			require("nvim-treesitter").install({ parser_name }):wait(30000)
+			require("nvim-treesitter").install({ parser_name }):wait(10000)
 		end
 
 		-- let's check again
