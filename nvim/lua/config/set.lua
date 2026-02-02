@@ -6,6 +6,8 @@ vim.g.have_nerd_font = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
+vim.cmd([[aunmenu PopUp.How-to\ disable\ mouse]])
+vim.cmd([[aunmenu PopUp.-2-]])
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
@@ -90,6 +92,13 @@ vim.opt.fillchars = {
 	foldopen = "",
 	foldsep = " ",
 	foldclose = "",
+	horiz = "━",
+	horizup = "┻",
+	horizdown = "┳",
+	vert = "┃",
+	vertleft = "┫",
+	vertright = "┣",
+	verthoriz = "╋",
 }
 vim.opt.foldopen:remove("hor")
 
