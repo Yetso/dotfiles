@@ -40,3 +40,5 @@ require("tiny-inline-diagnostic").setup({
 })
 
 vim.diagnostic.config({ virtual_text = false }) -- Disable default virtual text
+
+vim.lsp.document_color.enable(true, 0, {style = "virtual"}) -- add Color box before the colorText
