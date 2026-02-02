@@ -1,10 +1,7 @@
 * {
     border: none;
-    border-radius: 0px;
     font-family: "Cousine Nerd Font";
-    font-weight: bold;
-    font-size: 16px;
-    min-height: 16px;
+    min-height: 18px;
 }
 
 @import "theme.css";
@@ -13,48 +10,49 @@ window#waybar {
     background: @bar-bg;
 }
 
-tooltip {
-    background: @main-bg;
-    color: @main-fg;
-    border-radius: 11px;
-    border-width: 1px;
-}
-
-#clock,
+#clock.calendar,
+#clock.hour,
 #workspaces,
 #tray,
 #pulseaudio,
 #network,
 #custom-notifications,
 #custom-power {
-    color: @main-fg;
-    background: @main-bg;
-    opacity: 1;
-    margin: 5px 5px;
-	padding: 0px 5px;
+    font-size: 18px;
+	font-weight: bold;
     border-radius: 9px;
+	margin: 0px 5px;
+	padding: 0px 0px;
+}
+
+#clock.hour {
+	background-color: @yellow;
+	color: @black;
+	padding: 0px 5px;
+	margin: 4px 10px;
 }
 
 #workspaces {
-	padding: 0px;
+    border-radius: 9px;
+	background: @main-bg;
+	margin: 4px 5px;
+	padding: 0px 4px;
 }
 
 #workspaces button {
-    padding: 0px;
-    box-shadow: none;
-    text-shadow: none;
-    border-radius: 10px;
     background: @wb-ina-bg;
     color: @wb-act-fg;
 	margin: 1px 4px;
-	padding: 0px 4px;
+	padding: 0px 2px;
     animation: ws_active 8s ease-in-out 1;
 	transition: all 0.2s cubic-bezier(.55,-0.68,.48,1.682);
+	border-radius: 12px;
 }
 
 #workspaces button.active {
     background: @wb-act-bg;
-	padding: 0px 15px;
+	margin: 1px 4px;
+	padding: 0px 14px;
     animation: ws_active 8s ease-in-out 1;
 	transition: all 0.25s cubic-bezier(.55,-0.68,.48,1.682);
 }
@@ -66,40 +64,30 @@ tooltip {
     transition: all 0.2s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
-#tray {
-    border-radius: 9px;
-	padding: 0px 8px;
-}
-
-#tray menu {
-    border-radius: 9px;
-}
-
-#tray menu * {
-    font-weight: normal;
-    font-size: 12px;
-    min-height: 16px;
-}
-
-#tray menu separator {
-    min-height: 2px;
-}
-
-#network {
-	font-size: 14px;
-}
-
 #custom-power {
 	margin: 3px 5px;
 	padding: 0px 8px 0px 4px;
 	color: #704B5C;
-	background-color: #ED8796;
+	background-color: @red;
 }
 
+tooltip {
+	font-weight: normal;
+	background: @main-bg;
+	color: @main-fg;
+	border-width: 1px;
+}
+
+#tray,
+#tray menu,
 menu,
 menuitem {
-    border-radius: 10px;
+	font-weight: normal;
+	font-size: 13px;
 }
+
+#tray menu separator,
 menu separator {
 	min-height: 2px;
 }
+

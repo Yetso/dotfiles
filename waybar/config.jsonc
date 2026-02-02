@@ -2,7 +2,7 @@
 	"layer": "top", // Waybar at top layer
 	"position": "top", // Waybar position (top|bottom|left|right)
 	"height": 32, // Waybar height (to be removed for auto height)
-	"modules-left": ["clock#calendar", "clock" ],
+	"modules-left": ["clock#calendar", "clock#hour" ],
 	"modules-center": [ "hyprland/workspaces" ],
 	"modules-right": [
 		"tray",
@@ -18,7 +18,7 @@
 ///////////////////
 	"clock#calendar": {
 		"timezone": "Europe/Brussels",
-		"format": " <span rise=\"-1pt\">{:%A %d/%m/%G}</span>",
+		"format": " <span rise=\"-2pt\">{:%a %d %b}</span>",
 		"tooltip-format": "<span>{calendar}</span>",
 		"calendar": {
 			"mode": "month",
@@ -35,24 +35,13 @@
 			"on-click-right": "mode"
 		}
 	},
-	"clock": {
+	"clock#hour": {
 		"timezone": "Europe/Brussels",
-		"format": " <span rise=\"-1pt\">{:%H:%M}</span>"
+		"format": "<span rise=\"-1pt\"> </span><span rise=\"-2pt\">{:%H:%M}</span>",
+		"tooltip": false
 	},
 	"hyprland/workspaces": {
 		"format": "{windows}",
-		"format-icons": {
-			"1": "1",
-			"2": "2",
-			"3": "3",
-			"4": "4",
-			"5": "5",
-			"6": "6",
-			"7": "7",
-			"8": "8",
-			"9": "9",
-			"10": "10"
-		},
 		"persistent-workspaces": {
 			"DP-2": [ 1, 2, 3, 4, 5 ],
 			"DP-3": [ 6, 7, 8, 9, 10 ]
@@ -77,11 +66,12 @@
 		}
 	},
 	"tray": {
+		"icon-size": 18,
 		"spacing": 4,
 		"show-passive-items": true
 	},
 	"pulseaudio": {
-		"format": "<span rise=\"1pt\">{icon}</span> {volume}%",
+		"format": "<span rise=\"-1pt\">{icon} <span rise=\"-2pt\">{volume:3}%</span></span>",
 		"rotate": 0,
 		"format-muted": "婢",
 		"tooltip-format": " {icon}  {desc} // {volume}% ",
@@ -105,7 +95,7 @@
 		"tooltip": true,
 		"format-wifi": " ",
 		"rotate": 0,
-		"format-ethernet": "{ifname}<span foreground='green'> 󰈀 </span>",
+		"format-ethernet": "<span foreground='green'>󰈀</span>",
 		"tooltip-format": "Network: <big><b>{essid}</b></big>\nSignal strength: <b>{signaldBm}dBm ({signalStrength}%)</b>\nFrequency: <b>{frequency}MHz</b>\nInterface: <b>{ifname}</b>\nIP: <b>{ipaddr}/{cidr}</b>\nGateway: <b>{gwaddr}</b>\nNetmask: <b>{netmask}</b>",
 		"format-linked": "󰈀 {ifname} (No IP)",
 		"format-disconnected": "<span foreground='red'> 󰖪 </span> ",
@@ -116,7 +106,7 @@
 	},
 	"custom/notifications": {
 		"tooltip": false,
-		"format": "<span rise=\"-1pt\">{text}</span>{icon}",
+		"format": "<span rise=\"-2pt\">{text}</span>{icon}",
 		"format-icons": {
 			"notification": "<span foreground='red'><small><sup>⬤</sup></small></span>",
 			"none": "",
