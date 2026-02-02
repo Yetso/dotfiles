@@ -1,4 +1,3 @@
-vim.lsp.config("hyprls", {
+return {
 	root_markers = { "hyprland.conf", ".git" },
-})
-
+}

@@ -1,5 +1,5 @@
-vim.lsp.config("tinymist", {
+return {
 	settings = {
 		formatterMode = "typstyle",
 	},
-})
+}
