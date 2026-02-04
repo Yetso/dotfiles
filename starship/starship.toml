@@ -89,9 +89,33 @@ error_symbol = '[ 󱞩](bold red) '
 disabled = true
 
 [palettes.moonfly]
+bay = "#4d5d8d"
+black = "#080808"
+cinnamon = "#e9958e"
+coral = "#f09479"
+cranberry = "#e65e72"
+grey1 = "#373c4d"
+grey11 = "#1c1c1c"
+grey13 = "#212121"
+grey15 = "#262626"
+grey16 = "#292929"
+grey18 = "#2e2e2e"
+grey23 = "#3a3a3a"
+grey27 = "#444444"
+grey30 = "#4e4e4e"
+grey35 = "#585858"
+grey39 = "#626262"
+grey50 = "#808080"
+grey62 = "#9e9e9e"
+grey7 = "#121212"
+grey70 = "#b2b2b2"
+mineral = "#314940"
+orange = "#de935f"
+orchid = "#e196a2"
+slate = "#748999"
 background = "#000000"
-black = "#323437" #black (grey0)
-red = "#f07496" #red
+foreground = "#bdbdbd"
+red = "#ff5d5d" #red
 green = "#8cc85f" #green
 yellow = "#e3c78a" #yellow
 blue = "#80a0ff" #blue
@@ -99,16 +123,15 @@ violet = "#cf87e8" #purple (violet)
 cyan = "#79dac8" #cyan (turquoise)
 white = "#c6c6c6" #white
 brightblack = "#949494" #black (grey58)
-emerald = "#36c692" #green (emerald)
-khaki = "#c6c684" #yellow (khaki)
-sky = "#74b2ff" #blue (sky)
-purple = "#ae81ff" #purple
-lime = "#85dc85" #cyan (lime)
-brightwhite = "#e4e4e4" #white (grey89)
+brightred = "#ff5189" #red-bright (crimson)
+emerald = "#36c692" #green-bright (emerald)
+khaki = "#c6c684" #yellow-bright (khaki)
+sky = "#74b2ff" #blue-bright (sky)
+purple = "#ae81ff" #purple-bright
+lime = "#85dc85" #cyan-bright (lime)
+brightwhite = "#e4e4e4" #white-bright (grey89)
 fern = "#87d787"
 lavender = "#adadf3"
-orange = "#f09479"
-
 
 #add all nerd font icon for programming language
 [aws]
