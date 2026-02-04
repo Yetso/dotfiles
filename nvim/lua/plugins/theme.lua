@@ -12,9 +12,10 @@ vim.cmd.colorscheme("moonfly")
 local ok, _ = pcall(require, "mini.statusline")
 
 if ok then
-	vim.api.nvim_set_hl(0, "StatusLine", { bg = "#181818", fg = "#cdcdcd" })
+	local palette = require("moonfly").palette
+	vim.api.nvim_set_hl(0, "StatusLine", { bg = palette.grey11, fg = palette.grey77 })
 	vim.api.nvim_set_hl(0, "MiniStatuslineDevinfo", { link = "StatusLine" })
 	vim.api.nvim_set_hl(0, "MiniStatuslineFileinfo", { link = "StatusLine" })
-	vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { bg = "#000000", fg = "#ffffff" })
-	vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = "#303030", fg = "#dddddd" })
+	vim.api.nvim_set_hl(0, "MiniStatuslineInactive", { bg = palette.bg, fg = palette.white })
+	vim.api.nvim_set_hl(0, "MiniStatuslineFilename", { bg = palette.grey0, fg = palette.white })
 end
