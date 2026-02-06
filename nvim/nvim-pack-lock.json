@@ -5,7 +5,7 @@
       "src": "https://github.com/m4xshen/autoclose.nvim"
     },
     "blink.cmp": {
-      "rev": "bc54f81b6d92f91dac06c77c3ffccec5291e98cd",
+      "rev": "4b18c32adef2898f95cdef6192cbd5796c1a332d",
       "src": "https://github.com/saghen/blink.cmp",
       "version": ">=1.0.1-0"
     },
@@ -18,7 +18,7 @@
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "mason-lspconfig.nvim": {
-      "rev": "c953789db7fd28eafe5eb5659846d34b5024b3cc",
+      "rev": "ae609525ddf01c153c39305730b1791800ffe4fe",
       "src": "https://github.com/mason-org/mason-lspconfig.nvim"
     },
     "mason.nvim": {
@@ -58,15 +58,15 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-lspconfig": {
-      "rev": "3f58aeca0c6ece8a9fb8782ea3fcb6024f285be3",
+      "rev": "0480b120318ec8bab27b530ffab6ee76a8c4d806",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-scrollview": {
-      "rev": "ff8c8b76170f0062aa00f2609b48235e9cc3d131",
+      "rev": "41919ea2832f2eafcff361f6f4002449a36311d5",
       "src": "https://github.com/dstein64/nvim-scrollview"
     },
     "nvim-treesitter": {
-      "rev": "4967fa48b0fe7a7f92cee546c76bb4bb61bb14d5",
+      "rev": "70a9fecaf5aeae70c765d4c51a8038165a91aa06",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "render-markdown.nvim": {
