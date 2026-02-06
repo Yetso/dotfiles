@@ -16,6 +16,7 @@ local lsps = {
 	"markdown-oxide",
 	"stylua",
 	"tinymist",
+	"typescript-language-server",
 }
 
 require("mason").setup()
