@@ -75,6 +75,9 @@ require("mini.diff").setup({
 	},
 })
 
+local opts = { noremap = true, silent = true }
+vim.keymap.set("n", "<leader>g", "<cmd>lua MiniDiff.toggle_overlay()<cr>", vim.tbl_extend("force", opts, { desc = "Next Buffer" }))
+
 require("mini.tabline").setup({
 	format = function(buf_id, label)
 		local buflist = vim.fn.getbufinfo({ buflisted = 1 })
@@ -92,7 +95,6 @@ require("mini.tabline").setup({
 })
 vim.o.showtabline = 0
 
-local opts = { noremap = true, silent = true }
 
 for i = 1, 9 do
 	vim.keymap.set("n", "<leader>" .. i, function()
