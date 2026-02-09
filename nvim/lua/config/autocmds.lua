@@ -53,6 +53,11 @@ vim.api.nvim_create_autocmd("TermOpen", {
 	pattern = "*",
 	callback = function()
 		vim.wo.scrolloff = 0
+		vim.keymap.set("n", "<LeftRelease>", "<LeftRelease>i", {
+			buffer = true,
+			noremap = true,
+			silent = true,
+		})
 		-- Exclure les fenêtres flottantes comme LazyGit
 		local config = vim.api.nvim_win_get_config(0)
 		if config.relative == "" then
